@@ -5,25 +5,52 @@
     },
     "font-size": {
       "heading": {
-        "s": {
+        "xxs-2": {
           "value": "16px"
         },
-        "m": {
+        "xxs": {
           "value": "18px"
         },
-        "l": {
+        "xs": {
+          "value": "20px"
+        },
+        "s": {
           "value": "22px"
         },
-        "xl": {
+        "m": {
+          "value": "24px"
+        },
+        "l": {
           "value": "26px"
+        },
+        "xl": {
+          "value": "28px"
+        },
+        "xxl": {
+          "value": "30px"
+        },
+        "xxl-2": {
+          "value": "32px"
         }
       },
       "text": {
+        "xs": {
+          "value": "8px"
+        },
         "s": {
           "value": "10px"
         },
         "m": {
+          "value": "12px"
+        },
+        "l": {
           "value": "14px"
+        },
+        "xl": {
+          "value": "16px"
+        },
+        "xxl": {
+          "value": "18px"
         }
       }
     }

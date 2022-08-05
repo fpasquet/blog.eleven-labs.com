@@ -7,6 +7,7 @@ import {
 } from '../../constants/systemProps';
 import { SystemProps } from '../../types/SystemProps';
 import { systemClassNames } from './systemClassNames';
+import { typographyClassName } from './typographyClassName';
 
 export const systemClassName = <
   TProps extends SystemProps<unknown> & { className?: string }
@@ -25,5 +26,6 @@ export const systemClassName = <
       props,
       systemProps: paddingSystemProps,
       hasResponsiveProps: true
-    })
+    }),
+    typographyClassName(props, true)
   );
