@@ -1,0 +1,60 @@
+$textAlignList: ('left', 'center', 'right', 'justify');
+$textTransformList: ('capitalize', 'uppercase', 'lowercase');
+$textDecorationList: ('underline', 'dotted', 'wavy', 'overline');
+$fontWeightList: ('normal', 'bold', 'lighter');
+
+@mixin fontSize($prefixClassName, $sizeName, $size, $modifier) {
+  .#{$prefixClassName}-#{$sizeName}\@#{$modifier} {
+    font-size: $size;
+  }
+}
+
+@mixin textAlign($name, $modifier) {
+  .text-#{$name}\@#{$modifier} {
+    text-align: #{$name};
+  }
+}
+
+@mixin fontWeight($name, $modifier) {
+  .font-weight-#{$name}\@#{$modifier} {
+    font-weight: #{$name};
+  }
+}
+
+@mixin textTransform($name, $modifier) {
+  .text-transform-#{$name}\@#{$modifier} {
+    text-transform: #{$name};
+  }
+}
+
+@mixin textDecoration($name, $modifier) {
+  .text-decoration-#{$name}\@#{$modifier} {
+    text-decoration: if($name == underline, #{$name}, underline #{$name});
+  }
+}
+
+@each $modifier , $breakpoint in $breakpointPropList {
+  @include createMediaQueries($breakpoint, 'min') {
+    @each $sizeName, $size in $typographyHeadingList {
+      @include fontSize('heading', $sizeName, $size, $modifier);
+    }
+    @each $sizeName, $size in $typographyTextList {
+      @include fontSize('text', $sizeName, $size, $modifier);
+    }
+    @each $textAlign in $textAlignList {
+      @include textAlign($textAlign, $modifier);
+    }
+    @each $fontWeight in $fontWeightList {
+      @include fontWeight($fontWeight, $modifier);
+    }
+    @each $textTransform in $textTransformList {
+      @include textTransform($textTransform, $modifier);
+    }
+    @each $textDecoration in $textDecorationList {
+      @include textDecoration($textDecoration, $modifier);
+    }
+    .text-italic\@#{$modifier} {
+      font-style: italic;
+    }
+  }
+}

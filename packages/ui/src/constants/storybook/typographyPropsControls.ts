@@ -1,0 +1,22 @@
+import { createControls } from '../../helpers/storybookHelper';
+import {
+  fontWeightList,
+  textAlignList,
+  textDecorationList,
+  textTransformList
+} from '../cssProperties';
+import { typographySystemProps } from '../systemProps';
+
+export const typographyPropsControls = createControls({
+  category: 'Typography',
+  props: typographySystemProps,
+  options: {
+    textAlign: textAlignList,
+    weight: fontWeightList,
+    textDecoration: textDecorationList,
+    textTransform: textTransformList
+  },
+  type: {
+    italic: 'boolean'
+  }
+});

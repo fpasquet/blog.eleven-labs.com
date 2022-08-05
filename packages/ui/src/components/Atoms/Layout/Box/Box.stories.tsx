@@ -2,6 +2,7 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import { systemPropsControls } from '../../../../constants';
+import { Heading } from '../../Typography';
 import { Box } from './Box';
 
 export default {
@@ -11,7 +12,7 @@ export default {
     p: 'm',
     bg: 'primary-light',
     color: 'white',
-    children: <>I'm a div Box ;</>
+    children: <Heading textAlign="center">I'm a div Box ;</Heading>
   },
   parameters: {
     controls: { exclude: ['children'] }
