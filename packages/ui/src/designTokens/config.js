@@ -2,15 +2,13 @@ const StyleDictionaryPackage = require('style-dictionary');
 
 const capitalize = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
-const camelCase = str =>
-  str.replace(/([-_][a-z])/ig, ($1) =>
-    $1.toUpperCase()
-      .replace('-', '')
-      .replace('_', '')
+const camelCase = (str) =>
+  str.replace(/([-_][a-z])/gi, ($1) =>
+    $1.toUpperCase().replace('-', '').replace('_', '')
   );
 
-const getDesignTokensByCategory = (allProperties) => allProperties
-  .reduce((designTokens, prop) => {
+const getDesignTokensByCategory = (allProperties) =>
+  allProperties.reduce((designTokens, prop) => {
     const categoryName = prop.path[0];
     const thirdCategoryName = prop.path?.[2];
 
@@ -22,7 +20,7 @@ const getDesignTokensByCategory = (allProperties) => allProperties
       designTokens[subCategoryName].push({
         name: prop.path.slice(3).join('-'),
         path: prop.path.join('-'),
-        value: prop.value,
+        value: prop.value
       });
     } else if (!['typography'].includes(categoryName)) {
       if (!designTokens[categoryName]) {
@@ -31,7 +29,7 @@ const getDesignTokensByCategory = (allProperties) => allProperties
       designTokens[categoryName].push({
         name: prop.path.slice(1).join('-'),
         path: prop.path.join('-'),
-        value: prop.value,
+        value: prop.value
       });
     }
 
@@ -41,12 +39,20 @@ const getDesignTokensByCategory = (allProperties) => allProperties
 StyleDictionaryPackage.registerFormat({
   name: 'scss/variables',
   formatter: (dictionary) => {
-    let content = `:root {\n\t${dictionary.allProperties.map(prop => `--${prop.path.join('-')}: ${prop.value};`).join('\n\t')}\n}\n`;
+    let content = `:root {\n\t${dictionary.allProperties
+      .map((prop) => `--${prop.path.join('-')}: ${prop.value};`)
+      .join('\n\t')}\n}\n`;
     const designTokens = getDesignTokensByCategory(dictionary.allProperties);
 
     content += Object.entries(designTokens)
-      .map(([categoryName, values]) =>
-        `\n$${categoryName}List: (\n\t${values.map(({ name, path: variableName }) => `'${name}': var(--${variableName})`).join(',\n\t')}\n);`
+      .map(
+        ([categoryName, values]) =>
+          `\n$${categoryName}List: (\n\t${values
+            .map(
+              ({ name, path: variableName }) =>
+                `'${name}': var(--${variableName})`
+            )
+            .join(',\n\t')}\n);`
       )
       .join('\n');
 
@@ -61,19 +67,34 @@ StyleDictionaryPackage.registerFormat({
     let content = '';
 
     content += Object.entries(designTokens)
-      .map(([name, values]) => `export const ${name}NameList = [${values.map(({ name }) => `'${name}'`).join(', ')}] as const;`)
+      .map(
+        ([name, values]) =>
+          `export const ${name}NameList = [${values
+            .map(({ name }) => `'${name}'`)
+            .join(', ')}] as const;`
+      )
       .join('\n');
 
     content += '\n\n';
 
     content += Object.entries(designTokens)
-      .map(([name]) => `export type ${capitalize(name)}Type = typeof ${name}NameList[number];`)
+      .map(
+        ([name]) =>
+          `export type ${capitalize(
+            name
+          )}Type = typeof ${name}NameList[number];`
+      )
       .join('\n');
 
     content += '\n\n';
 
     content += Object.entries(designTokens)
-      .map(([name, values]) => `export const ${(camelCase(name))}VariableList = {${values.map(({ path, value }) => `'${path}': '${value}'`).join(', ')}};`)
+      .map(
+        ([name, values]) =>
+          `export const ${camelCase(name)}VariableList = {${values
+            .map(({ path, value }) => `'${path}': '${value}'`)
+            .join(', ')}};`
+      )
       .join('\n');
 
     return content;
@@ -81,31 +102,31 @@ StyleDictionaryPackage.registerFormat({
 });
 
 module.exports = {
-  "source": ["**/*.tokens.json"],
-  "platforms": {
-    "scss/designToken": {
-      "buildPath": "./src/styles/",
-      "files": [
+  source: ['**/*.tokens.json'],
+  platforms: {
+    'scss/designToken': {
+      buildPath: './src/styles/',
+      files: [
         {
-          "destination": "_designTokens.scss",
-          "format": "scss/variables",
-          "options": {
-            "outputReferences": true
+          destination: '_designTokens.scss',
+          format: 'scss/variables',
+          options: {
+            outputReferences: true
           }
         }
       ]
     },
-    "ts": {
-      "buildPath": "./src/",
-      "files": [
+    ts: {
+      buildPath: './src/',
+      files: [
         {
-          "destination": "types/designTokens.ts",
-          "format": "typescript",
-          "options": {
-            "outputReferences": true
+          destination: 'types/designTokens.ts',
+          format: 'typescript',
+          options: {
+            outputReferences: true
           }
         }
       ]
     }
   }
-}
+};

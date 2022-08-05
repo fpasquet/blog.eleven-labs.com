@@ -23,6 +23,8 @@
     "build:design-tokens": "style-dictionary build --config src/designTokens/config.js",
     "build:library": "vite build && tsc && rollup -c && rm -Rf dist/dts",
     "build": "yarn build:design-tokens && yarn build:library",
+    "build": "yarn build:design-tokens && yarn build:library",
+    "build": "yarn build:design-tokens && yarn build:library",
     "storybook": "yarn build:design-tokens && start-storybook -p 6006",
     "build:storybook": "yarn build:design-tokens && build-storybook"
   },

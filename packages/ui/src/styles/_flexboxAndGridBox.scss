@@ -1,0 +1,193 @@
+// Variables for flex and grid
+$alignItemsList: (
+  'start': 'flex-start',
+  'end': 'flex-end',
+  'center': 'center',
+  'baseline': 'baseline',
+  'stretch': 'stretch',
+);
+$alignContentList: (
+  'start': 'flex-start',
+  'end': 'flex-end',
+  'center': 'center',
+  'between': 'space-between',
+  'around': 'space-around',
+  'evenly': 'space-evenly',
+  'stretch': 'stretch',
+);
+$alignSelfList: (
+  'auto': 'auto',
+  'start': 'flex-start',
+  'end': 'flex-end',
+  'center': 'center',
+  'stretch': 'stretch',
+  'baseline': 'baseline'
+);
+$justifyContentList: (
+  'start': 'flex-start',
+  'end': 'flex-end',
+  'center': 'center',
+  'between': 'space-between',
+  'around': 'space-around',
+  'evenly': 'space-evenly',
+  'stretch': 'stretch',
+);
+
+// Variables for flex
+$flexDirectionList: (
+  'column': 'column',
+  'row': 'row',
+  'column-reverse': 'column-reverse',
+  'row-reverse': 'row-reverse',
+);
+$flexBasisList: ('auto', 0, 25, 33, 50, 75, 100);
+$flexWrapList: ('wrap', 'wrap-reverse', 'no-wrap');
+
+// Variables for grid
+$gridSize: 12;
+$gridJustifyItemsList: ('start', 'end', 'center', 'stretch');
+$gridJustifySelfList: ('auto', 'start', 'end', 'center', 'stretch');
+
+@mixin alignItems($name, $propertyCss, $modifier) {
+  .items-#{$name}\@#{$modifier} {
+    align-items: #{$propertyCss};
+  }
+}
+
+@mixin alignContent($name, $propertyCss, $modifier) {
+  .content-#{$name}\@#{$modifier} {
+    align-content: #{$propertyCss};
+  }
+}
+
+@mixin alignSelf($name, $propertyCss, $modifier) {
+  .self-#{$name}\@#{$modifier} {
+    align-self: #{$propertyCss};
+  }
+}
+
+@mixin justifyContent($name, $propertyCss, $modifier) {
+  .justify-#{$name}\@#{$modifier} {
+    justify-content: #{$propertyCss};
+  }
+}
+
+@mixin gap($name, $variableCss, $modifier) {
+  .gap-#{$name}\@#{$modifier} {
+    gap: #{$variableCss};
+  }
+}
+
+@mixin gapRow($name, $variableCss, $modifier) {
+  .gap-y-#{$name}\@#{$modifier} {
+    row-gap: #{$variableCss};
+  }
+}
+
+@mixin gapCol($name, $variableCss, $modifier) {
+  .gap-y-#{$name}\@#{$modifier} {
+    column-gap: #{$variableCss};
+  }
+}
+
+@mixin flexDirection($name, $propertyCss, $modifier) {
+  .flex-#{$name}\@#{$modifier} {
+    flex-direction: #{$propertyCss};
+  }
+}
+
+@mixin flexBasis($name, $modifier) {
+  .basis-#{$name}\@#{$modifier} {
+    flex-basis: #{if(type-of($name) == 'string', $name, $name * 1%)};
+  }
+}
+
+@mixin flexWrap($name, $modifier) {
+  .flex-wrap-#{$name}\@#{$modifier} {
+    flex-wrap: #{$name};
+  }
+}
+
+@mixin gridJustifySelf($name, $propertyCss, $modifier) {
+  .justify-self-#{$name}\@#{$modifier} {
+    justify-self: #{$propertyCss};
+  }
+}
+
+@mixin gridJustifyItems($name, $modifier) {
+  .justify-items-#{$name}\@#{$modifier} {
+    justify-items: #{$name};
+  }
+}
+
+@mixin gridTemplateColumns($size, $modifier) {
+  .grid-size-#{$size}\@#{$modifier} {
+    grid-template-columns: repeat(#{$size}, minmax(0, 1fr));
+  }
+}
+
+// Utilities for flex and grid
+@each $modifier , $breakpoint in $breakpointPropList {
+  @include createMediaQueries($breakpoint, 'min') {
+    @each $name, $propertyCss in $alignItemsList {
+      @include alignItems($name, $propertyCss, $modifier);
+    }
+    @each $name, $propertyCss in $alignContentList {
+      @include alignContent($name, $propertyCss, $modifier);
+    }
+    @each $name, $propertyCss in $alignSelfList {
+      @include alignSelf($name, $propertyCss, $modifier);
+    }
+    @each $name, $propertyCss in $justifyContentList {
+      @include justifyContent($name, $propertyCss, $modifier);
+    }
+    @each $name, $variableCss in $spacingList {
+      @include gap($name, $variableCss, $modifier);
+    }
+    @each $name, $variableCss in $spacingList {
+      @include gapRow($name, $variableCss, $modifier);
+    }
+    @each $name, $variableCss in $spacingList {
+      @include gapCol($name, $variableCss, $modifier);
+    }
+  }
+}
+
+// Utilities for flex
+@each $modifier , $breakpoint in $breakpointPropList {
+  @include createMediaQueries($breakpoint, 'min') {
+    .flex\@#{$modifier} {
+      display: flex;
+    }
+    .inline-flex\@#{$modifier} {
+      display: inline-flex;
+    }
+    @each $name, $propertyCss in $flexDirectionList {
+      @include flexDirection($name, $propertyCss, $modifier);
+    }
+    @each $name in $flexBasisList {
+      @include flexBasis($name, $modifier);
+    }
+    @each $name in $flexWrapList {
+      @include flexWrap($name, $modifier);
+    }
+  }
+}
+
+// Utilities for grid
+.grid {
+  display: grid;
+}
+@each $modifier , $breakpoint in $breakpointPropList {
+  @include createMediaQueries($breakpoint, 'min') {
+    @for $size from 1 through $gridSize {
+      @include gridTemplateColumns($size, $modifier);
+    }
+    @each $name in $gridJustifyItemsList {
+      @include gridJustifyItems($name, $modifier);
+    }
+    @each $name, $propertyCss in $gridJustifySelfList {
+      @include gridJustifySelf($name, $propertyCss, $modifier);
+    }
+  }
+}
