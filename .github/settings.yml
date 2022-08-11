@@ -1,0 +1,35 @@
+repository:
+  default_branch: master
+  allow_squash_merge: true
+  allow_merge_commit: true
+  allow_rebase_merge: true
+  delete_branch_on_merge: true
+
+labels:
+  - name: RFR
+    color: '#0e8a16'
+    description: Ready for Review
+  - name: WFC
+    color: '#1d76db'
+    description: Waiting for Changes
+  - name: WIP
+    color: '#d93f0b'
+    description: Work in Progress
+  - name: No Merge
+    color: '#b60205'
+    description: The pull request must not be merged at the moment
+  - name: dependencies
+    color: '#0052cc'
+    description: Pull requests that bump dependencies
+    oldName: Dependencies
+  - name: security
+    color: '#ee0701'
+    description: Pull requests that address a security vulnerability
+
+branches:
+  - name: master
+    protection:
+      required_pull_request_reviews:
+        required_approving_review_count: 2
+        dismiss_stale_reviews: true
+        require_code_owner_reviews: true

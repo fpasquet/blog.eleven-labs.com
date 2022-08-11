@@ -1,0 +1,75 @@
+name: deploy
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - '!dependabot/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start Deployment
+        uses: bobheadxi/deployments@v1
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: Preview
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - uses: actions/cache@v3
+        id: yarn-cache
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Install modules
+        run: yarn install --frozen-lockfile
+      - name: Build
+        run: |
+          yarn ui:build
+          yarn ui:storybook:build
+          yarn website:generate
+          mv packages/website/dist/ static
+          mv packages/ui/storybook-static/ static/storybook
+      - name: set vercels config
+        id: vercels_config
+        run: |
+          if [ "${{ github.event_name }}" == "push" ]
+          then
+              echo "::set-output name=vercel-args::--prod"
+          else
+              echo "::set-output name=vercel-args::"
+          fi
+      - name: Deploy to Vercel
+        uses: amondnet/vercel-action@v20
+        id: vercel-action
+        with:
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          working-directory: ./static
+          vercel-args: ${{ steps.vercels_config.outputs.vercel-args }}
+      - name: Update Deployment Status
+        uses: bobheadxi/deployments@v1
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          env: ${{ steps.deployment.outputs.env }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          env_url: ${{ steps.vercel-action.outputs.preview-url }}
