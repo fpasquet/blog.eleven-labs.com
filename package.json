@@ -1,0 +1,30 @@
+{
+  "private": true,
+  "version": "0.0.1",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "ui:storybook:start": "yarn workspace @eleven-labs/blog-ui storybook",
+    "ui:build": "yarn workspace @eleven-labs/blog-ui build",
+    "ui:storybook:build": "yarn workspace @eleven-labs/blog-ui build:storybook",
+    "website:start": "yarn ui:build && yarn workspace @eleven-labs/blog-website start",
+    "website:generate": "yarn ui:build && yarn workspace @eleven-labs/blog-website generate",
+    "prettier": "prettier \"packages/**/*.(md|json)\" --check",
+    "eslint": "eslint packages/** --ext .ts,.tsx",
+    "commit": "yarn cz"
+  },
+  "dependencies": {
+    "@typescript-eslint/parser": "^5.33.0",
+    "commitizen": "^4.2.5",
+    "cz-gitmoji": "^0.0.7",
+    "eslint": "^8.21.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1"
+  }
+}
