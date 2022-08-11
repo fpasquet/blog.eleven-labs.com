@@ -12,7 +12,11 @@
     "generate:authors-data": "yarn ts-node bin/generateAuthorsData",
     "generate:urls-data": "yarn ts-node bin/generateUrlsData",
     "generate:data": "yarn migrate && yarn generate:posts-data && yarn generate:authors-data && yarn generate:urls-data",
-    "generate": "mkdir -p dist && echo generate website done"
+    "build:staticRender": "vite build --ssr src/staticRender.tsx --outDir dist",
+    "generate:website": "yarn ts-node bin/pagesGenerator",
+    "copy-optimize-assets": "yarn ts-node bin/copyOptimizeAssets",
+    "generate": "yarn generate:data && yarn build:staticRender && yarn generate:website && yarn copy-optimize-assets",
+    "preview-prod": "yarn generate && npx serve"
   },
   "dependencies": {
     "@eleven-labs/blog-ui": "0.0.1",
@@ -33,6 +37,7 @@
     "date-fns": "^2.29.1",
     "github-directory-downloader": "^1.3.6",
     "gray-matter": "^4.0.3",
+    "i18next-browser-languagedetector": "^6.1.5",
     "jest": "^28.1.3",
     "markdown-it": "^13.0.1",
     "ts-jest": "^28.0.8",
