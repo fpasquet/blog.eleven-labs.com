@@ -10,7 +10,8 @@
     "migrate": "yarn ts-node bin/migrate",
     "generate:posts-data": "yarn ts-node bin/generatePostsData",
     "generate:authors-data": "yarn ts-node bin/generateAuthorsData",
-    "generate:data": "yarn migrate && yarn generate:posts-data && yarn generate:authors-data",
+    "generate:urls-data": "yarn ts-node bin/generateUrlsData",
+    "generate:data": "yarn migrate && yarn generate:posts-data && yarn generate:authors-data && yarn generate:urls-data",
     "generate": "mkdir -p dist && echo generate website done"
   },
   "dependencies": {
