@@ -8,6 +8,9 @@
     "ts-node": "ts-node --project ./tsconfig.node.json",
     "test": "jest",
     "migrate": "yarn ts-node bin/migrate",
+    "generate:posts-data": "yarn ts-node bin/generatePostsData",
+    "generate:authors-data": "yarn ts-node bin/generateAuthorsData",
+    "generate:data": "yarn migrate && yarn generate:posts-data && yarn generate:authors-data",
     "generate": "mkdir -p dist && echo generate website done"
   },
   "dependencies": {
