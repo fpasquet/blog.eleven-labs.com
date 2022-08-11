@@ -26,5 +26,7 @@ dist-ssr
 # Custom
 _authors
 _posts
+public/imgs/authors/
+public/imgs/posts/
 src/data
 build
