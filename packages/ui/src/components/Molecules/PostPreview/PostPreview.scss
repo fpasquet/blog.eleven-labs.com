@@ -1,0 +1,13 @@
+.post-preview {
+  &__metadata {
+    span {
+      &:not(:first-child) {
+        &::before {
+          margin-left: var(--spacing-xxs);
+          margin-right: var(--spacing-xxs);
+          content: '•';
+        }
+      }
+    }
+  }
+}

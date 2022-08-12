@@ -36,12 +36,8 @@ Overview.args = {};
 
 export const All: ComponentStory<typeof Heading> = () => (
   <>
-    {typographyHeadingNameList.map(size => (
-      <Heading
-        key={size}
-        mb="xs"
-        size={size}
-      >
+    {typographyHeadingNameList.map((size) => (
+      <Heading key={size} mb="xs" size={size}>
         Heading {size}
       </Heading>
     ))}
