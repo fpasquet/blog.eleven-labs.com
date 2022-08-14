@@ -20,13 +20,16 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build && tsc && rollup -c && rm -Rf dist/dts",
-    "storybook": "start-storybook -p 6006",
-    "build:storybook": "build-storybook"
+    "build:design-tokens": "style-dictionary build --config src/designTokens/config.js",
+    "build:library": "vite build && tsc && rollup -c && rm -Rf dist/dts",
+    "build": "yarn build:design-tokens && yarn build:library",
+    "storybook": "yarn build:design-tokens && start-storybook -p 6006",
+    "build:storybook": "yarn build:design-tokens && build-storybook"
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "style-dictionary": "^3.7.1"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
