@@ -1,0 +1,23 @@
+@mixin bg-color($name, $color) {
+  .bg-#{$name} {
+    background-color: #{$color};
+  }
+}
+
+@mixin font-color($name, $color) {
+  .color-#{$name} {
+    color: #{$color};
+  }
+}
+
+@mixin color-border($name, $color) {
+  .border-color-#{$name} {
+    border-color: #{$color};
+  }
+}
+
+@each $name, $color in $colorList {
+  @include bg-color($name, $color);
+  @include font-color($name, $color);
+  @include color-border($name, $color);
+}
