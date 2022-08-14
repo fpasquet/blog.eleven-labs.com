@@ -1,6 +1,5 @@
 {
   "private": true,
-  "version": "0.0.1",
   "workspaces": [
     "packages/*"
   ],
@@ -10,11 +9,12 @@
     "ui:storybook:build": "yarn workspace @eleven-labs/blog-ui build:storybook",
     "website:start": "yarn ui:build && yarn workspace @eleven-labs/blog-website start",
     "website:generate": "yarn ui:build && yarn workspace @eleven-labs/blog-website generate",
+    "start": "npx concurrently \"yarn ui:storybook:start\" \"yarn website:start --host\"",
     "prettier": "prettier \"packages/**/*.(md|json)\" --check",
     "eslint": "eslint packages/** --ext .ts,.tsx",
     "commit": "yarn cz"
   },
-  "dependencies": {
+  "devDependencies": {
     "@typescript-eslint/parser": "^5.33.0",
     "commitizen": "^4.2.5",
     "cz-gitmoji": "^0.0.7",

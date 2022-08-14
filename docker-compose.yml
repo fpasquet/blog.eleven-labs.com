@@ -1,0 +1,15 @@
+version: '3'
+services:
+  nginx:
+    build:
+      context: ./.docker/nginx
+    ports:
+      - 80:80
+    depends_on:
+      - node
+  node:
+    build:
+      context: ./.docker/node
+    volumes:
+      - .:/app
+    command: ['sh', '-c', 'yarn start']
