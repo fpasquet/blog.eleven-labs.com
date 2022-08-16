@@ -1,0 +1,25 @@
+// BREAKPOINTS (IN PX)
+$phoneLimit: 571;
+$tabletLimit: 1001;
+$desktopLimit: 1201;
+
+// 0              571px           1001px     1201px
+// |----------------|----------------|---------|------------------->
+//        xs               sm             md          lg
+
+$breakpointPropList: (
+  'xs': 0,
+  'sm': $phoneLimit,
+  'md': $tabletLimit,
+  'lg': $desktopLimit
+);
+
+@mixin createMediaQueries($breakpoint, $minOrMax) {
+  @if ($breakpoint == 0 or $breakpoint == -1) {
+    @content;
+  } @else {
+    @media screen and (#{$minOrMax}-width: $breakpoint *1px) {
+      @content;
+    }
+  }
+}

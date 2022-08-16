@@ -1,0 +1,51 @@
+[
+  {
+    "title": "Présentation de Protocol Buffers",
+    "date": "09 fév. 2021",
+    "readingTime": "24mn",
+    "authors": ["Q. Neyrat"],
+    "excerpt": "Une problématique assez récurrente dans nos applications est la manière de rendre notre donnée, qu’elle soit transmise ou stockée. Le format qu’on utilise souvent aujourd’hui est le JSON. Cependant certains langages le gèrent très mal tel que Java et Go. Google a donc développé un système pour palier à ce problème : Protocol Buffers."
+  },
+  {
+    "title": "Bien préparer l'arrivée de l'équipe de développement d'un prestataire sur son produit",
+    "date": "05 fév. 2021",
+    "readingTime": "14mn",
+    "authors": ["P. Brenot"],
+    "excerpt": "Suivant le cycle de vie du produit et de l'ambition de l'entreprise, il est courant de faire appel à une équipe de développement externe pour réaliser tout ou partie de la prochaine version du produit. La préparation de l'arrivée de la nouvelle équipe est souvent négligée mais pourtant cruciale. Cet article a pour objectif de tracer les grandes lignes de cette préparation en amont."
+  },
+  {
+    "title": "k9s - Une IHM Kubernetes dans son terminal",
+    "date": "02 fév. 2021",
+    "readingTime": "8mn",
+    "authors": ["R. Durand"],
+    "excerpt": "Présentation didactique d'un outil graphique d'administration et de monitoring de cluster Kubernetes depuis son terminal."
+  },
+  {
+    "title": "Une solution pour cartographier et optimiser votre parcours client : la Customer Journey Map",
+    "date": "28 jan. 2021",
+    "readingTime": "8mn",
+    "authors": ["D. Fert"],
+    "excerpt": "Créez une représentation visuelle et partagée de votre parcours client afin d'identifier les nouvelles fonctionnalités à développer sur votre site ou application."
+  },
+  {
+    "title": "Anémie du domaine",
+    "date": "24 jan. 2021",
+    "readingTime": "8mn",
+    "authors": ["B. Fereisen"],
+    "excerpt": "Souffrez-vous d'anémie métier ? Regardons ce qu'est une anémie du domaine et comment les choses peuvent changer."
+  },
+  {
+    "title": "Les meilleurs outils du développeur en Js/React en 2020",
+    "date": "20 jan. 2021",
+    "readingTime": "8mn",
+    "authors": ["R. Courbo"],
+    "excerpt": "Laissez-moi vous présenter quelques outils très pratiques, qui amélioreront grandement votre vie de développeur Js/React"
+  },
+  {
+    "title": "Construire le Story Mapping de votre Batmobile",
+    "date": "12 jan. 2021",
+    "readingTime": "8mn",
+    "authors": ["M. Charron"],
+    "excerpt": "À n'en pas douter, pour construire aussi bien sa Batmobile et toutes les fonctions qui vont avec, Bruce Wayne s'est servi du Story Mapping ! Pourquoi ne pas nous y mettre également en apprenant étape par étape comment procéder ?"
+  }
+]

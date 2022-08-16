@@ -1,0 +1,44 @@
+{
+  "color": {
+    "primary": {
+      "light": {
+        "value": "#3767B6"
+      },
+      "dark": {
+        "value": "#224579"
+      }
+    },
+    "grey": {
+      "ultra-light": {
+        "value": "#EDEDED"
+      },
+      "light": {
+        "value": "#C4C4C4"
+      },
+      "middle": {
+        "value": "#9B9B9B"
+      },
+      "middle-dark": {
+        "value": "#757575"
+      },
+      "dark": {
+        "value": "#333333"
+      }
+    },
+    "lavender": {
+      "value": "#E1EAF9"
+    },
+    "amaranth": {
+      "value": "#DD3156"
+    },
+    "yellow": {
+      "value": "#F3C93D"
+    },
+    "black": {
+      "value": "#000000"
+    },
+    "white": {
+      "value": "#FFFFFF"
+    }
+  }
+}
