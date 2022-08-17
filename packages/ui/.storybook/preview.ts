@@ -24,7 +24,7 @@ const customViewports = {
       height: '766px'
     },
     type: 'Desktop'
-  }
+  },
 };
 
 export const parameters = {
