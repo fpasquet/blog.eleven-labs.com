@@ -6,8 +6,6 @@ import { createDescription } from '../../../../helpers/storybookHelper';
 import { typographyTextNameList } from '../../../../types';
 import { Text } from './Text';
 
-console.log(systemPropsControls);
-
 export default {
   title: 'Components/Atoms/Typography/Text',
   component: Text,

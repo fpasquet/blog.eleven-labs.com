@@ -1,0 +1,14 @@
+@import '../../../styles/breakpoints';
+
+.footer {
+  &__contact-block {
+    @include createMediaQueries(map-get($breakpointPropList, 'md'), 'min') {
+      margin-left: 150px;
+    }
+  }
+  &__contact-item {
+    @include createMediaQueries(map-get($breakpointPropList, 'md'), 'min') {
+      margin-right: 80px;
+    }
+  }
+}
