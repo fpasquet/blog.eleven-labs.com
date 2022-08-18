@@ -1,0 +1,22 @@
+.progress-bar {
+  position: relative;
+  display: inline-block;
+  background: var(--color-grey-middle);
+  height: 3px;
+  border-radius: 6px;
+  overflow: hidden;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 30%;
+    background: var(--color-amaranth);
+    border-radius: 6px;
+  }
+  progress {
+    opacity: 0;
+    height: 0;
+  }
+}

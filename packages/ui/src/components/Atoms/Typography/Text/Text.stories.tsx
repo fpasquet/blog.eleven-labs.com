@@ -38,7 +38,7 @@ export const All: ComponentStory<typeof Text> = () => (
   <>
     {typographyTextNameList.map((size) => (
       <Text key={size} mb="xs" size={size}>
-        Heading {size}
+        Text {size}
       </Text>
     ))}
   </>

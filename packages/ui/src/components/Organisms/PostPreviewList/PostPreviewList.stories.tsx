@@ -8,6 +8,7 @@ export default {
   title: 'Components/Organisms/PostPreviewList',
   component: PostPreviewList,
   args: {
+    title: 'Tous nos articles',
     posts: PreviewPostsFixture.map((previewPost, index) => ({
       slug: `slug-${index}`,
       ...previewPost,
@@ -16,6 +17,7 @@ export default {
     }))
   },
   parameters: {
+    layout: 'full',
     viewport: {
       defaultViewport: 'extraSmallScreen'
     }
@@ -28,3 +30,12 @@ const Template: ComponentStory<typeof PostPreviewList> = (args) => (
 
 export const Overview = Template.bind({});
 Overview.args = {};
+
+export const PostPreviewListWithPagination = Template.bind({});
+PostPreviewListWithPagination.args = {
+  textNumberOfItems: '6/156 affichés',
+  percentageOfItemDisplayed: 26,
+  buttonProps: {
+    children: 'Afficher plus'
+  }
+};

@@ -6,6 +6,7 @@ $fontWeightList: ('normal', 'bold', 'lighter');
 @mixin fontSize($prefixClassName, $sizeName, $size, $modifier) {
   .#{$prefixClassName}-#{$sizeName}\@#{$modifier} {
     font-size: $size;
+    line-height: 1.25;
   }
 }
 

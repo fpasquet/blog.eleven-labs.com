@@ -1,22 +1,28 @@
 import './Divider.scss';
 
+import classNames from 'classnames';
 import React from 'react';
 
 import {
   omitSystemProps,
   systemClassName
 } from '../../../helpers/systemPropsHelper';
-import { ColorSystemProps, SpacingSystemProps } from '../../../types';
+import { SpacingSystemProps } from '../../../types';
 
 export interface DividerProps
-  extends Pick<ColorSystemProps, 'bg'>,
-    SpacingSystemProps {}
+  extends SpacingSystemProps,
+    React.HTMLAttributes<HTMLHRElement> {
+  variant?: 'primary' | 'secondary';
+}
 
 export const Divider: React.FC<DividerProps> = ({
-  bg = 'grey-light',
+  variant = 'primary',
   ...nativeProps
 }) =>
   React.createElement('hr', {
     ...omitSystemProps(nativeProps),
-    className: systemClassName({ className: 'divider', bg, ...nativeProps })
+    className: systemClassName<SpacingSystemProps>({
+      className: classNames('divider', `divider--${variant}`),
+      ...nativeProps
+    })
   });

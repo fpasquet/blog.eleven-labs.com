@@ -1,5 +1,12 @@
 .divider {
-  height: 1px;
   width: 100%;
   border: none;
+  &--primary {
+    height: 0.5px;
+    background-color: var(--color-grey-light);
+  }
+  &--secondary {
+    height: 2px;
+    background-color: var(--color-primary-light);
+  }
 }
