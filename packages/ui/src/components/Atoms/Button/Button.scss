@@ -1,0 +1,22 @@
+.button {
+  font-size: var(--typography-font-size-text-l);
+  padding: var(--spacing-xxs) var(--spacing-m);
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-weight: bold;
+  &--primary {
+    background-color: var(--color-amaranth);
+    color: var(--color-white);
+    border: none;
+  }
+  &--primary-ghost {
+    background-color: transparent;
+    border: 1px solid var(--color-amaranth);
+    color: var(--color-amaranth);
+  }
+  &--form {
+    background: var(--color-grey-middle-dark);
+    color: var(--color-white);
+    border: none;
+  }
+}
