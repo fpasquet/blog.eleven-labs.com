@@ -49,7 +49,9 @@ export const PostPreview: React.FC<PostPreviewProps> = ({
       </Text>
       <Text as="span" size={{ xs: 's', md: 'm' }}>
         {authors.map((author) => (
-          <Link {...authorLinkProps(author)}>{author}</Link>
+          <Link key={author} {...authorLinkProps(author)}>
+            {author}
+          </Link>
         ))}
       </Text>
     </Box>

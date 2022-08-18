@@ -3,7 +3,6 @@ import { generatePath } from 'react-router-dom';
 import { PATHS } from '../src/constants';
 import { getAuthorUrls } from './generateData/author/getAuthorUrls';
 import { createFileData } from './generateData/createFileData';
-import { getPaginatedHomeUrls } from './generateData/getPaginatedHomeUrls';
 import { getPostUrls } from './generateData/post/getPostUrls';
 
 const generateUrlsData = () => {
@@ -17,10 +16,6 @@ const generateUrlsData = () => {
           break;
         case 'HOME':
           currentUrls.push(generatePath(path, { lang: 'en' }));
-          break;
-        case 'PAGINATED_HOME':
-          const paginatedHomeUrls = getPaginatedHomeUrls(path);
-          currentUrls.push(...paginatedHomeUrls);
           break;
         case 'POST':
           const postUrls = getPostUrls(path);

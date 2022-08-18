@@ -2,13 +2,13 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import PreviewPostsFixture from '../../../fixtures/preview-posts.json';
+import { Box } from '../../Atoms/Layout/Box';
 import { PostPreviewList } from './PostPreviewList';
 
 export default {
   title: 'Components/Organisms/PostPreviewList',
   component: PostPreviewList,
   args: {
-    title: 'Tous nos articles',
     posts: PreviewPostsFixture.map((previewPost, index) => ({
       slug: `slug-${index}`,
       ...previewPost,
@@ -21,7 +21,14 @@ export default {
     viewport: {
       defaultViewport: 'extraSmallScreen'
     }
-  }
+  },
+  decorators: [
+    (Story) => (
+      <Box px="m" py="xl">
+        {Story()}
+      </Box>
+    )
+  ]
 } as ComponentMeta<typeof PostPreviewList>;
 
 const Template: ComponentStory<typeof PostPreviewList> = (args) => (
@@ -35,7 +42,5 @@ export const PostPreviewListWithPagination = Template.bind({});
 PostPreviewListWithPagination.args = {
   textNumberOfItems: '6/156 affichés',
   percentageOfItemDisplayed: 26,
-  buttonProps: {
-    children: 'Afficher plus'
-  }
+  loadMoreButtonLabel: 'Afficher plus'
 };

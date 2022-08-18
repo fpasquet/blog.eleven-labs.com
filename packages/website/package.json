@@ -16,7 +16,7 @@
     "generate:website": "yarn ts-node bin/pagesGenerator",
     "copy-optimize-assets": "yarn ts-node bin/copyOptimizeAssets",
     "generate": "yarn generate:data && yarn build:staticRender && yarn generate:website && yarn copy-optimize-assets",
-    "preview-prod": "yarn generate && npx serve"
+    "preview-prod": "yarn generate && npx serve dist"
   },
   "dependencies": {
     "@eleven-labs/blog-ui": "0.0.1",

@@ -1,5 +1,11 @@
 {
-  "welcome_to_home_page": "Welcome to home page",
+  "pages": {
+    "home": {
+      "post_preview_list_title": "All our articles",
+      "number_of_posts_displayed_label": "{{ numberOfPostsDisplayed }}/{{ numberOfPosts }} displayed",
+      "load_more_button_label": "Show more"
+    }
+  },
   "welcome_to_post_page": "Welcome to post page",
   "welcome_to_author_page": "Welcome to author page"
 }
