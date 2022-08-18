@@ -44,7 +44,7 @@ git clone git@github.com:fpasquet/blog.eleven-labs.com.git
 
 **2 - Run the project locally**
 ```bash
-nvm use
+nvm install
 yarn start
 ```
 

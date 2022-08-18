@@ -12,6 +12,7 @@
     "start": "npx concurrently \"yarn ui:storybook:start\" \"yarn website:start --host\"",
     "prettier": "prettier \"packages/**/*.(md|json)\" --check",
     "eslint": "eslint packages/** --ext .ts,.tsx",
+    "test": "yarn workspace @eleven-labs/blog-website test",
     "commit": "yarn cz"
   },
   "devDependencies": {
