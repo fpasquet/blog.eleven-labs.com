@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
+import { flexOrGridBoxSystemProps } from '../../../../constants/systemProps';
 import {
   classNamesWithMediaQueries,
   flexOrGridBoxClassName,
@@ -30,7 +31,7 @@ export const Grid: React.FC<GridProps> = ({
   ...nativeProps
 }) =>
   React.createElement(as, {
-    ...omitSystemProps(nativeProps),
+    ...omitSystemProps(nativeProps, Object.keys(flexOrGridBoxSystemProps)),
     className: classNames(
       'grid',
       ...classNamesWithMediaQueries<number>({

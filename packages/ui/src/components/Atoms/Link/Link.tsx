@@ -6,7 +6,7 @@ import {
 } from '../../../helpers/systemPropsHelper';
 import { SystemProps } from '../../../types/SystemProps';
 
-type LinkHTMLElementType = Pick<JSX.IntrinsicElements, 'a' | 'button'>;
+type LinkHTMLElementType = keyof Pick<JSX.IntrinsicElements, 'a' | 'button'>;
 
 export interface LinkProps extends SystemProps<LinkHTMLElementType> {
   children?: React.ReactNode;

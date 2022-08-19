@@ -8,7 +8,10 @@ import {
 } from '../../../../helpers/systemPropsHelper';
 import { SystemProps, TypographyTextType } from '../../../../types';
 
-type TextHTMLElementType = Pick<JSX.IntrinsicElements, 'span' | 'p' | 'div'>;
+type TextHTMLElementType = keyof Pick<
+  JSX.IntrinsicElements,
+  'span' | 'p' | 'div'
+>;
 
 export interface TextProps
   extends SystemProps<TextHTMLElementType, TypographyTextType> {

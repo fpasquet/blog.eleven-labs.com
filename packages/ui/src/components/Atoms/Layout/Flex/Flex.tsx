@@ -1,7 +1,11 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { FlexDirectionType, FlexWrapType } from '../../../../constants';
+import {
+  FlexDirectionType,
+  flexOrGridBoxSystemProps,
+  FlexWrapType
+} from '../../../../constants';
 import {
   classNamesWithMediaQueries,
   flexOrGridBoxClassName,
@@ -41,7 +45,7 @@ export const Flex: React.FC<FlexProps> = ({
   ...nativeProps
 }) =>
   React.createElement(as, {
-    ...omitSystemProps(nativeProps),
+    ...omitSystemProps(nativeProps, Object.keys(flexOrGridBoxSystemProps)),
     className: classNames(
       ...classNamesWithMediaQueries<boolean>({
         propValue: inline,

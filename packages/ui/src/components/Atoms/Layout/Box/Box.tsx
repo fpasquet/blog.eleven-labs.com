@@ -6,7 +6,7 @@ import {
 } from '../../../../helpers/systemPropsHelper';
 import { SystemProps } from '../../../../types';
 
-type BoxHTMLElementType = Pick<
+type BoxHTMLElementType = keyof Pick<
   JSX.IntrinsicElements,
   | 'address'
   | 'article'

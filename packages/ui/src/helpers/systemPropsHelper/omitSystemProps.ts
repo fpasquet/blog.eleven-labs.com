@@ -4,12 +4,17 @@ import {
 } from '../../constants/systemProps';
 
 export const omitSystemProps = <TProps = Record<string, unknown>>(
-  props: TProps
+  props: TProps,
+  additionalPropNames?: string[]
 ): Record<string, unknown> => {
   const systemPropNames = Object.keys({
     ...systemProps,
     ...typographySystemProps
   });
+  if (additionalPropNames) {
+    systemPropNames.push(...additionalPropNames);
+  }
+
   return typeof props === 'object'
     ? Object.keys(props).reduce<Record<string, unknown>>(
         (currentProps, propName) => {

@@ -10,7 +10,7 @@ import { systemClassNames } from './systemClassNames';
 import { typographyClassName } from './typographyClassName';
 
 export const systemClassName = <
-  TProps extends SystemProps<unknown> & { className?: string }
+  TProps extends SystemProps = SystemProps & { className?: string }
 >(
   props: TProps
 ): string =>

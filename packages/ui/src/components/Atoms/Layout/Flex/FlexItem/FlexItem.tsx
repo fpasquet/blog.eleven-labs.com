@@ -1,7 +1,10 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { FlexBasisType } from '../../../../../constants';
+import {
+  FlexBasisType,
+  flexOrGridItemSystemProps
+} from '../../../../../constants';
 import {
   classNamesWithMediaQueries,
   flexOrGridBoxItemClassName,
@@ -31,7 +34,7 @@ export const FlexItem: React.FC<FlexItemProps> = ({
   ...nativeProps
 }) =>
   React.createElement(as, {
-    ...omitSystemProps(nativeProps),
+    ...omitSystemProps(nativeProps, Object.keys(flexOrGridItemSystemProps)),
     className: classNames(
       ...classNamesWithMediaQueries<FlexBasisType>({
         propValue: basis,

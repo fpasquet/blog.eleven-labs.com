@@ -1,19 +1,24 @@
-import React from 'react';
+import { ComponentProps } from 'react';
 
 import { DefaultHTMLElementType } from '../DefaultHTMLElementType';
 import { ColorSystemProps } from './ColorSystemProps';
 import { SpacingSystemProps } from './SpacingSystemProps';
 import { TypographySystemProps } from './TypographySystemProps';
 
-export interface SystemProps<
-  HTMLElementType = DefaultHTMLElementType,
+export interface SystemPropsWithoutComponentProps<
+  HTMLElementType,
   TSize = unknown
 > extends ColorSystemProps,
     SpacingSystemProps,
-    TypographySystemProps<TSize>,
-    Omit<React.HTMLAttributes<HTMLElementType>, 'color'> {
+    TypographySystemProps<TSize> {
   /**
    * Generate component with a specific HTML tag (default: div)
    */
-  as?: keyof HTMLElementType;
+  as?: HTMLElementType;
 }
+
+export type SystemProps<
+  HTMLElementType extends keyof JSX.IntrinsicElements = keyof DefaultHTMLElementType,
+  TSize = unknown
+> = SystemPropsWithoutComponentProps<HTMLElementType, TSize> &
+  Omit<ComponentProps<HTMLElementType>, 'color'>;

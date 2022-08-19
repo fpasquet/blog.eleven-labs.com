@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
+import { flexOrGridItemSystemProps } from '../../../../../constants/systemProps';
 import {
   flexOrGridBoxItemClassName,
   omitSystemProps,
@@ -23,7 +24,7 @@ export const GridItem: React.FC<GridItemProps> = ({
   ...nativeProps
 }) =>
   React.createElement(as, {
-    ...omitSystemProps(nativeProps),
+    ...omitSystemProps(nativeProps, Object.keys(flexOrGridItemSystemProps)),
     className: classNames(
       flexOrGridBoxItemClassName(nativeProps),
       systemClassName(nativeProps)
