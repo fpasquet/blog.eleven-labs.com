@@ -1,6 +1,7 @@
 @import '../../../styles/breakpoints';
 
 .post-preview {
+  --max-height-post-preview-mask: 44px;
   &__metadata {
     span {
       &:not(:first-child) {
@@ -14,9 +15,9 @@
     }
   }
   &--mask {
-    max-height: 44px;
+    max-height: var(--max-height-post-preview-mask);
     @include createMediaQueries(map_get($breakpointPropList, 'md'), 'min') {
-      max-height: 24px;
+      --max-height-post-preview-mask: 24px;
     }
     mask-image: linear-gradient(#000, transparent);
   }

@@ -15,14 +15,11 @@ export interface DividerProps
   variant?: 'primary' | 'secondary';
 }
 
-export const Divider: React.FC<DividerProps> = ({
-  variant = 'primary',
-  ...nativeProps
-}) =>
+export const Divider: React.FC<DividerProps> = ({ variant, ...nativeProps }) =>
   React.createElement('hr', {
     ...omitSystemProps(nativeProps),
     className: systemClassName<SpacingSystemProps>({
-      className: classNames('divider', `divider--${variant}`),
+      className: classNames('divider', { [`divider--${variant}`]: variant }),
       ...nativeProps
     })
   });

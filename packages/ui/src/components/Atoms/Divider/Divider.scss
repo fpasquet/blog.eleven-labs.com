@@ -1,12 +1,14 @@
 .divider {
   width: 100%;
   border: none;
+  height: var(--height-divider, 0.5px);
+  background-color: var(--background-color-divider, var(--color-grey-light));
   &--primary {
-    height: 0.5px;
-    background-color: var(--color-grey-light);
+    --height-divider: 0.5px;
+    --background-color-divider: var(--color-grey-light);
   }
   &--secondary {
-    height: 2px;
-    background-color: var(--color-primary-light);
+    --height-divider: 2px;
+    --background-color-divider: --color-primary-light;
   }
 }

@@ -24,14 +24,14 @@ export interface ButtonProps
 
 export const Button: React.FC<ButtonProps> = ({
   as = 'button',
-  variant = 'primary',
+  variant,
   children,
   ...nativeProps
 }) =>
   React.createElement(as, {
     ...omitSystemProps(nativeProps),
     className: systemClassName<SpacingSystemProps>({
-      className: classNames('button', `button--${variant}`),
+      className: classNames('button', { [`button--${variant}`]: variant }),
       ...nativeProps
     }),
     children

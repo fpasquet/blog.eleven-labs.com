@@ -5,19 +5,23 @@
   text-transform: uppercase;
   font-weight: bold;
   cursor: pointer;
+  background-color: var(--background-color-button, var(--color-amaranth));
+  color: var(--color-button, var(--color-white));
+  border: var(--border-button, none);
+
   &--primary {
-    background-color: var(--color-amaranth);
-    color: var(--color-white);
-    border: none;
+    --background-color-button: var(--color-amaranth);
+    --color-button: var(--color-white);
+    --border-button: none;
   }
   &--primary-ghost {
-    background-color: transparent;
-    border: 1px solid var(--color-amaranth);
-    color: var(--color-amaranth);
+    --background-color-button: transparent;
+    --color-button: var(--color-amaranth);
+    --border-button: 1px solid var(--color-amaranth);
   }
   &--form {
-    background: var(--color-grey-middle-dark);
-    color: var(--color-white);
-    border: none;
+    --background-color-button: var(--color-grey-middle-dark);
+    --color-button: var(--color-white);
+    --border-button: none;
   }
 }
