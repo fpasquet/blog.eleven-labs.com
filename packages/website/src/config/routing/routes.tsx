@@ -19,10 +19,6 @@ export const routes: RouteObject[] = [
         element: <HomePage />
       },
       {
-        path: PATHS.PAGINATED_HOME,
-        element: <HomePage />
-      },
-      {
         path: PATHS.POST,
         element: <PostPage />
       },

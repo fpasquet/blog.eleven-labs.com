@@ -1,6 +1,6 @@
 export const AUTHORIZED_LANGUAGES = ['fr', 'en'];
 export const DEFAULT_LANGUAGE = 'fr';
-export const NUMBER_OF_ITEMS_PER_PAGE = 10;
+export const NUMBER_OF_ITEMS_PER_PAGE = 6;
 
 export const PATHS = {
   ROOT: '/',

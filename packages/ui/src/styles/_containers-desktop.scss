@@ -1,0 +1,5 @@
+.content-container {
+  @include createMediaQueries(map_get($breakpointPropList, 'md'), 'min') {
+    padding: 0 15%;
+  }
+}

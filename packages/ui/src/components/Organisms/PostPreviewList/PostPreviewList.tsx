@@ -1,41 +1,27 @@
 import React from 'react';
 
-import {
-  Box,
-  Button,
-  ButtonProps,
-  Divider,
-  Flex,
-  Heading,
-  ProgressBar,
-  Text
-} from '../../Atoms';
+import { Box, Button, Divider, Flex, ProgressBar, Text } from '../../Atoms';
 import { PostPreview, PostPreviewProps } from '../../Molecules/PostPreview';
 
 export interface PostPreviewListProps {
-  title: string;
   posts: ({ slug: string } & PostPreviewProps)[];
   textNumberOfItems?: string;
   percentageOfItemDisplayed?: number;
-  buttonProps?: ButtonProps;
+  loadMoreButtonLabel?: string;
 }
 
 export const PostPreviewList: React.FC<PostPreviewListProps> = ({
-  title,
   posts,
   textNumberOfItems,
   percentageOfItemDisplayed,
-  buttonProps
+  loadMoreButtonLabel
 }) => {
   const hasPagination =
-    textNumberOfItems && percentageOfItemDisplayed && buttonProps;
+    textNumberOfItems && percentageOfItemDisplayed && loadMoreButtonLabel;
   return (
-    <Box px="m" pb="xl">
-      <Heading size="m" my="l" as="p">
-        {title}
-      </Heading>
+    <>
       {posts.map((post, index) => (
-        <React.Fragment key={index}>
+        <React.Fragment key={post.slug}>
           <PostPreview
             hasMask={Boolean(hasPagination && index === posts.length - 1)}
             {...post}
@@ -45,14 +31,16 @@ export const PostPreviewList: React.FC<PostPreviewListProps> = ({
       ))}
       {hasPagination && (
         <>
-          <Divider variant="secondary" my="m" />
+          <Box px={{ md: 'xl' }}>
+            <Divider variant="secondary" my="m" />
+          </Box>
           <Flex direction="column" justifyContent="center" alignItems="center">
             <Text size={{ xs: 'l', md: 'xxl' }}>{textNumberOfItems}</Text>
             <ProgressBar value={percentageOfItemDisplayed} mt="xxs" />
-            <Button mt="s" {...buttonProps} />
+            <Button my="s">{loadMoreButtonLabel}</Button>
           </Flex>
         </>
       )}
-    </Box>
+    </>
   );
 };

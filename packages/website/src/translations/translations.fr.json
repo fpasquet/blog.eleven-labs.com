@@ -1,4 +1,11 @@
 {
+  "pages": {
+    "home": {
+      "post_preview_list_title": "Tous nos articles",
+      "number_of_posts_displayed_label": "{{ numberOfPostsDisplayed }}/{{ numberOfPosts }} affichés",
+      "load_more_button_label": "Afficher plus"
+    }
+  },
   "welcome_to_home_page": "Bienvenue sur la page d'accueil",
   "welcome_to_post_page": "Bienvenue sur la page article",
   "welcome_to_author_page": "Bienvenue sur la page auteur"

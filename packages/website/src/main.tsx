@@ -9,8 +9,8 @@ import { RootContainer } from './containers/RootContainer';
 const container = document.getElementById('root');
 
 if (container) {
-  ReactDOM.hydrateRoot(
-    container,
+  const root = ReactDOM.createRoot(container);
+  root.render(
     <React.StrictMode>
       <BrowserRouter>
         <RootContainer />
