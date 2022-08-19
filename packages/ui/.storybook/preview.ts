@@ -1,4 +1,5 @@
 import '../src/styles/common.scss';
+import { colorVariableList } from '../src/types';
 
 const customViewports = {
   extraSmallScreen: {
@@ -37,5 +38,12 @@ export const parameters = {
   },
   viewport: {
     viewports: customViewports
-  }
+  },
+  backgrounds: {
+    default: 'white',
+    values: Object.entries(colorVariableList).map(([name, value]) => ({
+      name: name.replace('color-', ''),
+      value
+    })),
+  },
 };
