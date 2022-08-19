@@ -1,6 +1,6 @@
 export * from './Layout';
 export * from './Typography';
-export * from './Svg';
+export * as Icons from './Icons';
 export * from './Divider';
 export * from './Link';
 export * from './Button';

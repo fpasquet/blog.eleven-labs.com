@@ -1,9 +1,10 @@
 import { TypographySystemProps } from '../../types/SystemProps';
 
 export const typographySystemProps: Record<
-  keyof Omit<TypographySystemProps<unknown>, 'size'>,
+  keyof TypographySystemProps,
   string[]
 > = {
+  size: ['font-size'],
   textAlign: ['text-align'],
   weight: ['font-weight'],
   italic: ['font-style'],

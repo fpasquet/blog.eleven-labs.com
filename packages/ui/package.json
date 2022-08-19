@@ -21,8 +21,9 @@
   ],
   "scripts": {
     "build:design-tokens": "style-dictionary build --config src/designTokens/config.js",
+    "build:icons": "svgr --typescript -d src/components/Atoms/Icons src/assets/svgs",
     "build:library": "vite build && tsc && rollup -c && rm -Rf dist/dts",
-    "build": "yarn build:design-tokens && yarn build:library",
+    "build": "yarn build:design-tokens && yarn build:icons && yarn build:library",
     "storybook": "yarn build:design-tokens && start-storybook -p 6006",
     "build:storybook": "yarn build:design-tokens && build-storybook"
   },
@@ -30,7 +31,6 @@
     "classnames": "^2.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-svg": "^15.1.4",
     "style-dictionary": "^3.7.1"
   },
   "devDependencies": {
@@ -44,11 +44,13 @@
     "@storybook/react": "^6.5.10",
     "@storybook/testing-library": "^0.0.13",
     "@storybook/theming": "^6.5.10",
+    "@svgr/cli": "^6.3.1",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.0",
     "babel-loader": "^8.2.5",
     "node-sass": "^7.0.1",
+    "postcss-normalize": "^10.0.1",
     "rollup": "^2.77.3",
     "rollup-plugin-dts": "^4.2.2",
     "rollup-plugin-esbuild": "^4.9.3",

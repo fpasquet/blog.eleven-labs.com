@@ -1,11 +1,16 @@
+@import '../../../styles/breakpoints';
+
 .choice-chip {
   padding: var(--spacing-xs) var(--spacing-l);
   background-color: var(--background-color-choice-chip, var(--color-white));
   color: var(--color-choice-chip, var(--color-amaranth));
   border-radius: 24px;
-  font-size: var(--typography-font-size-text-l);
+  font-size: var(--font-size-choice-chip, var(--typography-font-size-xxs));
   border: none;
   cursor: pointer;
+  @include createMediaQueries(map_get($breakpointPropList, 'md'), 'min') {
+    --font-size-choice-chip: var(--typography-font-size-s);
+  }
   &--is-active {
     --background-color-choice-chip: var(--color-amaranth);
     --color-choice-chip: var(--color-white);

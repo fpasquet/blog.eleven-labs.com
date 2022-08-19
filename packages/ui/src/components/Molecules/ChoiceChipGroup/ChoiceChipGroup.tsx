@@ -1,9 +1,9 @@
+import classNames from 'classnames';
 import * as React from 'react';
 
-import { SpacingSystemProps } from '../../../types/SystemProps';
-import { ChoiceChip, ChoiceChipProps, Flex } from '../../Atoms';
+import { ChoiceChip, ChoiceChipProps, Flex, FlexProps } from '../../Atoms';
 
-export interface ChoiceChipGroupProps extends SpacingSystemProps {
+export interface ChoiceChipGroupProps extends Omit<FlexProps, 'children'> {
   choices: ({ name: string; label: string } & Omit<
     ChoiceChipProps,
     'isActive' | 'children'
@@ -14,9 +14,15 @@ export interface ChoiceChipGroupProps extends SpacingSystemProps {
 export const ChoiceChipGroup: React.FC<ChoiceChipGroupProps> = ({
   choices,
   choiceActive,
+  className,
   ...nativeProps
 }) => (
-  <Flex gap={{ xs: 'xs', md: 'xl' }} alignItems="center" {...nativeProps}>
+  <Flex
+    gap={{ xs: 'xs', md: 'xl' }}
+    alignItems="center"
+    className={classNames('choiceChipGroup', className)}
+    {...nativeProps}
+  >
     {choices.map(({ name, label, ...choiceProps }) => (
       <ChoiceChip
         key={name}

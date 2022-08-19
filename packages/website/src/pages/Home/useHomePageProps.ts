@@ -9,12 +9,14 @@ import { generatePath, useNavigate, useParams } from 'react-router-dom';
 import { NUMBER_OF_ITEMS_PER_PAGE, PATHS } from '../../constants';
 import authorsData from '../../data/authors.json';
 import postsData from '../../data/posts.json';
+import { useLayoutTemplateProps } from '../../hooks/useTemplateProps';
 import { AuthorData, PostData } from '../../types';
 
-export const useHomePageData = (): HomePageProps => {
+export const useHomePageProps = (): HomePageProps => {
   const { lang = 'fr' } = useParams<{ lang?: string }>();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const layoutTemplateProps = useLayoutTemplateProps();
 
   const postsByLang = (postsData as PostData[]).filter(
     (post) => post.lang === lang
@@ -69,6 +71,7 @@ export const useHomePageData = (): HomePageProps => {
   );
 
   return {
+    ...layoutTemplateProps,
     postPreviewListTitle: t('pages.home.post_preview_list_title'),
     posts,
     textNumberOfItems: t('pages.home.number_of_posts_displayed_label', {

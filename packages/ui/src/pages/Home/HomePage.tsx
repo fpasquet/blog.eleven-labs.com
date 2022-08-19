@@ -6,9 +6,11 @@ import {
   PostPreviewList,
   PostPreviewListProps
 } from '../../components';
-import { LayoutTemplate } from '../../templates';
+import { LayoutTemplate, LayoutTemplateProps } from '../../templates';
 
-export interface HomePageProps extends PostPreviewListProps {
+export interface HomePageProps
+  extends LayoutTemplateProps,
+    PostPreviewListProps {
   postPreviewListTitle: string;
 }
 
@@ -17,10 +19,12 @@ export const HomePage: React.FC<HomePageProps> = ({
   posts,
   textNumberOfItems,
   percentageOfItemDisplayed,
-  loadMoreButtonLabel
+  loadMoreButtonLabel,
+  headerProps,
+  footerProps
 }) => (
-  <LayoutTemplate>
-    <Box px="m" pb="xl" className="content-container">
+  <LayoutTemplate headerProps={headerProps} footerProps={footerProps}>
+    <Box as="main" className="container-main">
       <Heading size="m" my="l" as="p">
         {postPreviewListTitle}
       </Heading>

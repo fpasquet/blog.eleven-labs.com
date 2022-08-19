@@ -1,4 +1,28 @@
 {
+  "categories": {
+    "all": "Tous",
+    "javascript": "JavaScript",
+    "php": "PHP",
+    "agile": "Agile",
+    "architecture": "Architecture",
+    "best_practices": "Bonnes pratiques"
+  },
+  "header": {
+    "title": "Eleven Labs",
+    "subtitle": "Le blog",
+    "intro_block": {
+      "title": "Ravi de te voir",
+      "description": "Explorons de<br />nouveaux savoirs"
+    },
+    "choice_category_label": "Quels articles veux-tu lire ?"
+  },
+  "footer": {
+    "intro_block": {
+      "title": "Découvrez Eleven Labs",
+      "description": "Notre site pour mieux nous connaître"
+    },
+    "link_to_eleven_labs_site": "J'y vais"
+  },
   "pages": {
     "home": {
       "post_preview_list_title": "Tous nos articles",

@@ -1,6 +1,5 @@
 .divider {
   width: 100%;
-  margin: 0;
   border: none;
   height: var(--height-divider, 0.5px);
   background-color: var(--background-color-divider, var(--color-grey-light));
@@ -10,6 +9,10 @@
   }
   &--secondary {
     --height-divider: 2px;
-    --background-color-divider: --color-primary-light;
+    --background-color-divider: var(--color-primary-light);
+  }
+  &--neutral {
+    --height-divider: 1px;
+    --background-color-divider: var(--color-white);
   }
 }

@@ -4,9 +4,9 @@ import React from 'react';
 import {
   omitSystemProps,
   systemClassName,
-  typographySizeClassName
+  typographyClassName
 } from '../../../../helpers/systemPropsHelper';
-import { SystemProps, TypographyTextType } from '../../../../types';
+import { SystemProps, TypographySystemProps } from '../../../../types';
 
 type TextHTMLElementType = keyof Pick<
   JSX.IntrinsicElements,
@@ -14,13 +14,13 @@ type TextHTMLElementType = keyof Pick<
 >;
 
 export interface TextProps
-  extends SystemProps<TextHTMLElementType, TypographyTextType> {
-  children: React.ReactNode;
+  extends SystemProps<TextHTMLElementType>,
+    TypographySystemProps {
+  children?: React.ReactNode;
 }
 
 export const Text: React.FC<TextProps> = ({
   as = 'p',
-  size = 'm',
   children,
   ...nativeProps
 }) =>
@@ -28,7 +28,7 @@ export const Text: React.FC<TextProps> = ({
     ...omitSystemProps(nativeProps),
     className: classNames(
       systemClassName(nativeProps),
-      typographySizeClassName<TypographyTextType>({ size, ...nativeProps })
+      typographyClassName(nativeProps)
     ),
     children
   });

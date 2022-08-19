@@ -1,8 +1,12 @@
+import './Header.scss';
+
 import React from 'react';
 
-import logoSvg from '../../../assets/svgs/logo.svg';
-import searchSvg from '../../../assets/svgs/search.svg';
-import { Box, Divider, Flex, Heading, Svg, Text } from '../../Atoms';
+import { Box, Divider, Flex, Heading, Icons, Text } from '../../Atoms';
+import {
+  ChoiceChipGroup,
+  ChoiceChipGroupProps
+} from '../../Molecules/ChoiceChipGroup';
 
 export interface HeaderProps {
   title: string;
@@ -11,35 +15,58 @@ export interface HeaderProps {
     title: string;
     description: string;
   };
+  choiceCategoryLabel: string;
+  choiceCategories: ChoiceChipGroupProps['choices'];
 }
 
 export const Header: React.FC<HeaderProps> = ({
   title,
   subtitle,
-  introBlock
+  introBlock,
+  choiceCategoryLabel,
+  choiceCategories
 }) => (
-  <Box as="header" bg="primary-light" color="white">
+  <Box as="header" bg="primary-light" color="white" className="header">
     <Flex
       justifyContent={{ xs: 'between' }}
       alignItems="center"
       py={{ xs: 's' }}
       px={{ xs: 'm', md: 'l' }}
     >
-      <Flex>
-        <Svg src={logoSvg} size="30px" />
-        <Box ml={{ xs: 'xxs' }}>
+      <Flex alignItems="center">
+        <Icons.Logo width="30px" height="30px" />
+        <Box ml={{ xs: 'xxs' }} size={{ xs: 'xxs', md: 'm' }}>
           <Text>{title}</Text>
           <Text weight="bold">{subtitle}</Text>
         </Box>
       </Flex>
-      <Svg src={searchSvg} size="18px" />
+      <Icons.Search width="18px" height="18px" />
     </Flex>
-    <Divider bg="white" />
-    <Box py={{ xs: 's' }} px={{ xs: 'm' }}>
-      <Text size={{ xs: 'l' }}>{introBlock.title}</Text>
-      <Heading mt={{ xs: 'xxs-2' }} size={{ xs: 'xl' }} weight="bold">
-        {introBlock.description}
-      </Heading>
-    </Box>
+    <Divider variant="neutral" />
+    <Flex
+      direction="column"
+      pt={{ xs: 's' }}
+      pb={{ xs: 'l' }}
+      justifyContent={{ md: 'center' }}
+      alignItems={{ md: 'center' }}
+    >
+      <Box>
+        <Box px={{ xs: 'm' }}>
+          <Text size={{ xs: 's', md: 'xl' }}>{introBlock.title}</Text>
+          <Heading
+            mt={{ xs: 'xxs-2' }}
+            size={{ xs: 'xl' }}
+            weight="bold"
+            dangerouslySetInnerHTML={{ __html: introBlock.description }}
+          />
+          <Text size={{ xs: 's', md: 'xxl-4' }} mt="s">
+            {choiceCategoryLabel}
+          </Text>
+        </Box>
+        <Box className="header__choice-chip-group">
+          <ChoiceChipGroup mt="s" px={{ xs: 'm' }} choices={choiceCategories} />
+        </Box>
+      </Box>
+    </Flex>
   </Box>
 );

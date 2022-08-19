@@ -1,10 +1,10 @@
 import { HomePage as HomePageUI } from '@eleven-labs/blog-ui';
 import React from 'react';
 
-import { useHomePageData } from './useHomePageData';
+import { useHomePageProps } from './useHomePageProps';
 
 export const HomePage: React.FC = () => {
-  const homePageData = useHomePageData();
+  const homePageProps = useHomePageProps();
 
-  return <HomePageUI {...homePageData} />;
+  return <HomePageUI {...homePageProps} />;
 };

@@ -9,12 +9,12 @@ import { TypographySystemProps } from '../../types/SystemProps';
 import { classNamesWithMediaQueries } from './classNamesWithMediaQueries';
 import { systemClassNames } from './systemClassNames';
 
-export const typographyClassName = <
-  TProps extends Omit<TypographySystemProps<unknown>, 'size'>
->(
-  { textAlign, weight, italic, ...props }: TProps,
-  isHeading?: boolean
-): string => {
+export const typographyClassName = <TProps extends TypographySystemProps>({
+  textAlign,
+  weight,
+  italic,
+  ...props
+}: TProps): string => {
   return classNames(
     ...systemClassNames({
       props,
@@ -36,15 +36,4 @@ export const typographyClassName = <
       withSuffixPropValue: true
     })
   );
-};
-
-export const typographySizeClassName = <TSize extends string>(
-  { size }: Pick<TypographySystemProps<TSize>, 'size'>,
-  isHeading?: boolean
-): string => {
-  return classNamesWithMediaQueries<TSize>({
-    propValue: size,
-    className: isHeading ? 'heading' : 'text',
-    withSuffixPropValue: true
-  }).join(' ');
 };

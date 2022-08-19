@@ -1,14 +1,18 @@
+import classNames from 'classnames';
 import * as React from 'react';
 
 import {
   omitSystemProps,
-  systemClassName
+  systemClassName,
+  typographyClassName
 } from '../../../helpers/systemPropsHelper';
-import { SystemProps } from '../../../types/SystemProps';
+import { SystemProps, TypographySystemProps } from '../../../types/SystemProps';
 
 type LinkHTMLElementType = keyof Pick<JSX.IntrinsicElements, 'a' | 'button'>;
 
-export interface LinkProps extends SystemProps<LinkHTMLElementType> {
+export interface LinkProps
+  extends SystemProps<LinkHTMLElementType>,
+    TypographySystemProps {
   children?: React.ReactNode;
 }
 
@@ -19,6 +23,9 @@ export const Link: React.FC<LinkProps> = ({
 }) =>
   React.createElement(as, {
     ...omitSystemProps(nativeProps),
-    className: systemClassName({ color: 'amaranth', ...nativeProps }),
+    className: classNames(
+      systemClassName({ color: 'amaranth', ...nativeProps }),
+      typographyClassName(nativeProps)
+    ),
     children
   });

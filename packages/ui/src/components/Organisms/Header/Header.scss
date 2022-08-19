@@ -1,0 +1,12 @@
+@import '../../../styles/breakpoints';
+
+.header {
+  &__choice-chip-group {
+    width: var(--width-header-choice-chip-group, 100vw);
+    overflow-x: var(--overflow-x-header-choice-chip-group, scroll);
+    @include createMediaQueries(map_get($breakpointPropList, 'md'), 'min') {
+      --width-header-choice-chip-group: 'auto';
+      --overflow-x-header-choice-chip-group: 'auto';
+    }
+  }
+}

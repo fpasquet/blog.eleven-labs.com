@@ -34,20 +34,20 @@ export const PostPreview: React.FC<PostPreviewProps> = ({
   >
     <Heading
       color="amaranth"
-      size={{ xs: 'xxs-2', md: 'xxs' }}
+      size={{ xs: 'xs', md: 's' }}
       mb={{ xs: 'xxs-2', md: 'xxs' }}
     >
       {hasMask ? title : <Link {...articleLinkProps}>{title}</Link>}
     </Heading>
-    <Text size={{ xs: 'l', md: 'xl' }}>{excerpt}</Text>
-    <Box className="post-preview__metadata" mt={{ xs: 'xs', md: 's' }}>
-      <Text as="span" size={{ xs: 's', md: 'm' }}>
-        {date}
-      </Text>
-      <Text as="span" size={{ xs: 's', md: 'm' }}>
-        {readingTime}
-      </Text>
-      <Text as="span" size={{ xs: 's', md: 'm' }}>
+    <Text size={{ xs: 'xxs', md: 'xs' }}>{excerpt}</Text>
+    <Box
+      className="post-preview__metadata"
+      mt={{ xs: 'xs', md: 's' }}
+      size={{ xs: 'xxs-3', md: 'xxs-2' }}
+    >
+      <Text as="span">{date}</Text>
+      <Text as="span">{readingTime}</Text>
+      <Text as="span">
         {authors.map((author) => (
           <Link key={author} {...authorLinkProps(author)}>
             {author}

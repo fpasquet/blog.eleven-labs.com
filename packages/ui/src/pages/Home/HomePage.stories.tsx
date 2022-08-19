@@ -1,6 +1,8 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import FooterStories from '../../components/Organisms/Footer/Footer.stories';
+import HeaderStories from '../../components/Organisms/Header/Header.stories';
 import PreviewPostsStories, {
   PostPreviewListWithPagination
 } from '../../components/Organisms/PostPreviewList/PostPreviewList.stories';
@@ -16,7 +18,9 @@ export default {
     percentageOfItemDisplayed:
       PostPreviewListWithPagination!.args!.percentageOfItemDisplayed,
     loadMoreButtonLabel:
-      PostPreviewListWithPagination!.args!.loadMoreButtonLabel
+      PostPreviewListWithPagination!.args!.loadMoreButtonLabel,
+    headerProps: HeaderStories.args,
+    footerProps: FooterStories.args
   },
   parameters: {
     layout: 'full',

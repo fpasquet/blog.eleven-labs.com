@@ -4,13 +4,16 @@ import {
   TextDecorationType,
   TextTransformType
 } from '../../constants';
+import { TypographyFontSizeType } from '../designTokens';
 import { TypeWithMediaQueriesType } from '../TypeWithMediaQueriesType';
 
-export interface TypographySystemProps<TSize> {
+export interface TypographySystemProps {
   /**
    * enum of font-size (including breakpoints modifiers)
    */
-  size?: TSize | TypeWithMediaQueriesType<TSize>;
+  size?:
+    | TypographyFontSizeType
+    | TypeWithMediaQueriesType<TypographyFontSizeType>;
   /**
    * text-align (including breakpoints modifiers)
    */

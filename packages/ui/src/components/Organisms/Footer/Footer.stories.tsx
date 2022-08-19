@@ -12,6 +12,10 @@ export default {
       title: 'Découvrez Eleven Labs',
       description: 'Notre site pour mieux nous connaître'
     },
+    buttonToElevenLabsSiteProps: {
+      // eslint-disable-next-line prettier/prettier
+      children: `J'y vais`
+    },
     contactTitle: 'Contact',
     contactList: [
       ...config.contact.addressList.map(({ name, address }) => ({

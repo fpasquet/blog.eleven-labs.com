@@ -1,18 +1,16 @@
-import './Footer.scss';
-
 import React from 'react';
 
-import circleSeparatorSvg from '../../../assets/svgs/circle_separator.svg';
-import languageSvg from '../../../assets/svgs/language.svg';
-import logoSvg from '../../../assets/svgs/logo.svg';
 import {
   Box,
+  Button,
+  ButtonProps,
   Divider,
   Flex,
+  FlexItem,
   Heading,
+  Icons,
   Link,
   LinkProps,
-  Svg,
   Text
 } from '../../Atoms';
 
@@ -21,7 +19,7 @@ export interface FooterProps {
     title: string;
     description: string;
   };
-  linkToElevenLabsSite: LinkProps;
+  buttonToElevenLabsSiteProps: Pick<ButtonProps, 'children'>;
   contactTitle: string;
   contactList: { title: string; description: React.ReactNode }[];
   languageLinks: {
@@ -33,7 +31,7 @@ export interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({
   introBlock,
-  linkToElevenLabsSite,
+  buttonToElevenLabsSiteProps,
   contactTitle,
   contactList,
   languageLinks
@@ -50,31 +48,38 @@ export const Footer: React.FC<FooterProps> = ({
       alignItems="center"
       pt={{ md: 'xl' }}
       pb={{ md: 'xl' }}
+      gap={{ md: 'xxl-3' }}
     >
-      <Box>
+      <FlexItem>
         <Flex
           justifyContent={{ xs: 'center', md: 'start' }}
           alignItems="center"
           pt={{ xs: 'l', md: '0' }}
           mb="xxs"
         >
-          <Svg src={logoSvg} size="45px" />
-          <Heading as="span" size="xl">
+          <Icons.Logo width="45px" height="45px" />
+          <Heading as="span" size={{ xs: 'xxl-4' }} weight="normal">
             Eleven Labs
           </Heading>
         </Flex>
-
-        <Text>{introBlock.title}</Text>
-        <Text weight="bold" mb="xl">
+        <Text size={{ xs: 'xxs-2' }}>{introBlock.title}</Text>
+        <Text size={{ xs: 'xxs' }} weight="bold" mb="s">
           {introBlock.description}
         </Text>
-      </Box>
-
-      <Box className="footer__contact-block">
-        <Heading mb="s">{contactTitle}</Heading>
-        <Flex direction={{ xs: 'column', md: 'row' }}>
+        <Button {...buttonToElevenLabsSiteProps} mb="xl" />
+      </FlexItem>
+      <FlexItem>
+        <Heading size={{ xs: 'l' }} mb="s">
+          {contactTitle}
+        </Heading>
+        <Flex direction={{ xs: 'column', md: 'row' }} gap={{ md: 'xl' }}>
           {contactList.map((contact) => (
-            <Box mb="m" className="footer__contact-item">
+            <Box
+              key={contact.title}
+              mb="m"
+              className="footer__contact-item"
+              size={{ xs: 'xxs' }}
+            >
               <Text weight="bold" mb="xxs-2">
                 {contact.title}
               </Text>
@@ -82,26 +87,29 @@ export const Footer: React.FC<FooterProps> = ({
             </Box>
           ))}
         </Flex>
-      </Box>
+      </FlexItem>
     </Flex>
-
-    <Divider bg="white" />
-
+    <Divider variant="neutral" />
     <Flex py="s" justifyContent="center" alignItems="center">
-      <Svg src={languageSvg} size="16px" mr="xxs-2" />
+      <Box mr="xxs-2">
+        <Icons.Language width="16px" height="16px" />
+      </Box>
       {languageLinks.map((languageLink, index) => (
-        <>
+        <React.Fragment key={languageLink.name}>
           <Link
             {...languageLink.linkProps}
             weight={languageLink.active ? 'bold' : undefined}
             color={!languageLink.active ? 'amaranth' : undefined}
+            size={{ xs: 'xs' }}
           >
             {languageLink.name}
           </Link>
-          {languageLinks.length - 1 !== index && (
-            <Svg src={circleSeparatorSvg} size="6px" mx="s" />
-          )}
-        </>
+          <Box mx="s">
+            {languageLinks.length - 1 !== index && (
+              <Icons.CircleSeparator width="6px" height="6px" />
+            )}
+          </Box>
+        </React.Fragment>
       ))}
     </Flex>
   </Box>

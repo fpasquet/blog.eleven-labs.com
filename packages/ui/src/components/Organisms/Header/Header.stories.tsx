@@ -12,7 +12,16 @@ export default {
     introBlock: {
       title: 'Ravi de te voir',
       description: 'Explorons de\nnouveaux savoirs'
-    }
+    },
+    choiceCategoryLabel: 'Quels articles veux-tu lire ?',
+    choiceCategories: [
+      { name: 'all', label: 'Tous' },
+      { name: 'javascript', label: 'Javascript' },
+      { name: 'php', label: 'PHP' },
+      { name: 'agile', label: 'Agile' },
+      { name: 'architecture', label: 'Architecture' },
+      { name: 'best-practices', label: 'Bonnes pratiques' }
+    ]
   },
   parameters: {
     layout: 'full',

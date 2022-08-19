@@ -1,10 +1,12 @@
+import classNames from 'classnames';
 import * as React from 'react';
 
 import {
   omitSystemProps,
-  systemClassName
+  systemClassName,
+  typographyClassName
 } from '../../../../helpers/systemPropsHelper';
-import { SystemProps } from '../../../../types';
+import { SystemProps, TypographySystemProps } from '../../../../types';
 
 type BoxHTMLElementType = keyof Pick<
   JSX.IntrinsicElements,
@@ -25,6 +27,7 @@ type BoxHTMLElementType = keyof Pick<
   | 'form'
   | 'header'
   | 'li'
+  | 'main'
   | 'nav'
   | 'ol'
   | 'pre'
@@ -35,7 +38,9 @@ type BoxHTMLElementType = keyof Pick<
   | 'ul'
 >;
 
-export interface BoxProps extends SystemProps<BoxHTMLElementType> {
+export interface BoxProps
+  extends SystemProps<BoxHTMLElementType>,
+    TypographySystemProps {
   children?: React.ReactNode;
 }
 
@@ -46,6 +51,9 @@ export const Box: React.FC<BoxProps> = ({
 }) =>
   React.createElement(as, {
     ...omitSystemProps(nativeProps),
-    className: systemClassName(nativeProps),
+    className: classNames(
+      systemClassName(nativeProps),
+      typographyClassName(nativeProps)
+    ),
     children
   });

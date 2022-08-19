@@ -4,54 +4,44 @@
       "value": "'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
     },
     "font-size": {
-      "heading": {
-        "xxs-2": {
-          "value": "16px"
-        },
-        "xxs": {
-          "value": "18px"
-        },
-        "xs": {
-          "value": "20px"
-        },
-        "s": {
-          "value": "22px"
-        },
-        "m": {
-          "value": "24px"
-        },
-        "l": {
-          "value": "26px"
-        },
-        "xl": {
-          "value": "28px"
-        },
-        "xxl": {
-          "value": "30px"
-        },
-        "xxl-2": {
-          "value": "32px"
-        }
+      "xxs-4": {
+        "value": "8px"
       },
-      "text": {
-        "xs": {
-          "value": "8px"
-        },
-        "s": {
-          "value": "10px"
-        },
-        "m": {
-          "value": "12px"
-        },
-        "l": {
-          "value": "14px"
-        },
-        "xl": {
-          "value": "16px"
-        },
-        "xxl": {
-          "value": "18px"
-        }
+      "xxs-3": {
+        "value": "10px"
+      },
+      "xxs-2": {
+        "value": "12px"
+      },
+      "xxs": {
+        "value": "14px"
+      },
+      "xs": {
+        "value": "16px"
+      },
+      "s": {
+        "value": "18px"
+      },
+      "m": {
+        "value": "20px"
+      },
+      "l": {
+        "value": "22px"
+      },
+      "xl": {
+        "value": "24px"
+      },
+      "xxl": {
+        "value": "26px"
+      },
+      "xxl-2": {
+        "value": "28px"
+      },
+      "xxl-3": {
+        "value": "30px"
+      },
+      "xxl-4": {
+        "value": "32px"
       }
     }
   }
