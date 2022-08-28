@@ -51,7 +51,7 @@
     "babel-loader": "^8.2.5",
     "node-sass": "^7.0.1",
     "postcss-normalize": "^10.0.1",
-    "rollup": "^2.77.3",
+    "rollup": "^2.78.1",
     "rollup-plugin-dts": "^4.2.2",
     "rollup-plugin-esbuild": "^4.9.3",
     "sass": "^1.54.4",
