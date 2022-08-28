@@ -10,7 +10,10 @@ export interface PostPreviewProps extends BoxProps {
   excerpt: React.ReactNode;
   date: string;
   readingTime: string;
-  authors: string[];
+  authors: {
+    username: string;
+    nameWithInitial: string;
+  }[];
   articleLinkProps: Omit<LinkProps, 'children'>;
   hasMask?: boolean;
 }
@@ -33,7 +36,7 @@ export const PostPreview: React.FC<PostPreviewProps> = ({
     <Text
       color="amaranth"
       size={{ xs: 'xs', md: 's' }}
-      mb={{ xs: 'xxs-2', md: 'xxs' }}
+      mb={{ xs: 'xxs-3', md: 'xxs' }}
     >
       {hasMask ? title : <Link {...articleLinkProps}>{title}</Link>}
     </Text>
@@ -46,8 +49,8 @@ export const PostPreview: React.FC<PostPreviewProps> = ({
       <Text as="span">{date}</Text>
       <Text as="span">{readingTime}</Text>
       {authors.map((author) => (
-        <Text key={author} as="span">
-          {author}
+        <Text key={author.username} as="span">
+          {author.nameWithInitial}
         </Text>
       ))}
     </Box>

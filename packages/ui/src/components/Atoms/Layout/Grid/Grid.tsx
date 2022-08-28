@@ -6,28 +6,31 @@ import {
   classNamesWithMediaQueries,
   flexOrGridBoxClassName,
   omitSystemProps,
-  systemClassName
+  systemClassName,
+  typographyClassName
 } from '../../../../helpers/systemPropsHelper';
 import {
   DefaultAllowedHTMLElementType,
   FlexOrGridBoxSystemProps,
   PolymorphicProps,
   SystemProps,
-  TypeWithMediaQueriesType
+  TypeWithMediaQueriesType,
+  TypographySystemProps
 } from '../../../../types';
 
 export type GridProps<C extends DefaultAllowedHTMLElementType = 'div'> = {
   /**
    * Defines size columns (including breakpoints modifiers)
    */
-  size?: number | TypeWithMediaQueriesType<number>;
+  gridSize?: number | TypeWithMediaQueriesType<number>;
   children?: React.ReactNode;
 } & PolymorphicProps<C> &
   SystemProps &
+  TypographySystemProps &
   FlexOrGridBoxSystemProps;
 
 export const Grid = <C extends DefaultAllowedHTMLElementType = 'div'>({
-  size = 12,
+  gridSize = 12,
   alignItems,
   justifyContent,
   children,
@@ -39,7 +42,7 @@ export const Grid = <C extends DefaultAllowedHTMLElementType = 'div'>({
     className: classNames(
       'grid',
       ...classNamesWithMediaQueries<number>({
-        propValue: size,
+        propValue: gridSize,
         className: 'grid-size',
         withSuffixPropValue: true
       }),
@@ -48,7 +51,8 @@ export const Grid = <C extends DefaultAllowedHTMLElementType = 'div'>({
         justifyContent,
         ...nativeProps
       }),
-      systemClassName(nativeProps)
+      systemClassName(nativeProps),
+      typographyClassName(nativeProps)
     ),
     children
   });

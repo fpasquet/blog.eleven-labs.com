@@ -56,7 +56,7 @@ export const Header: React.FC<HeaderProps> = ({
         <Box px={{ xs: 'm' }}>
           <Text size={{ xs: 's', md: 'xl' }}>{introBlock.title}</Text>
           <Heading
-            mt={{ xs: 'xxs-2' }}
+            mt={{ xs: 'xxs-3' }}
             size={{ xs: 'xl' }}
             weight="bold"
             dangerouslySetInnerHTML={{ __html: introBlock.description }}

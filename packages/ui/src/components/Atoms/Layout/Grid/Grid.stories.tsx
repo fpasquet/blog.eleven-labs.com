@@ -15,7 +15,7 @@ export default {
   args: {
     bg: 'grey-ultra-light',
     p: 'xxs',
-    size: { xs: 2, md: 3 },
+    gridSize: { xs: 2, md: 3 },
     gap: 'm',
     justifyContent: 'center',
     children: Array.from({ length: 6 }).map((v, index) => (

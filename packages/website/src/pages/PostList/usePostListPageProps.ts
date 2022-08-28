@@ -1,16 +1,12 @@
 import { PostListPageProps, PostPreviewListProps } from '@eleven-labs/blog-ui';
-import { format } from 'date-fns';
-import localeDateEn from 'date-fns/locale/en-US';
-import localeDateFr from 'date-fns/locale/fr';
-import { MouseEvent } from 'react';
 import { useTranslation } from 'react-i18next';
-import { generatePath, useNavigate, useParams } from 'react-router-dom';
+import { generatePath, Link, useParams } from 'react-router-dom';
 
 import { NUMBER_OF_ITEMS_PER_PAGE, PATHS } from '../../constants';
-import authorsData from '../../data/authors.json';
 import postsData from '../../data/posts.json';
+import { transformPostData } from '../../helpers/transformPostData';
 import { useLayoutTemplateProps } from '../../hooks/useTemplateProps';
-import { AuthorData, PostData } from '../../types';
+import { PostData } from '../../types';
 
 export const usePostListPageProps = (): PostListPageProps => {
   const { lang = 'fr', categoryName } = useParams<{
@@ -18,7 +14,6 @@ export const usePostListPageProps = (): PostListPageProps => {
     categoryName?: string;
   }>();
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const layoutTemplateProps = useLayoutTemplateProps();
 
   const postsByLang = (postsData as PostData[]).filter(
@@ -28,35 +23,16 @@ export const usePostListPageProps = (): PostListPageProps => {
   );
 
   const numberOfPosts = postsByLang.length;
-  const posts = postsByLang
+  const posts: PostListPageProps['posts'] = postsByLang
     .filter((post) => post?.lang === lang)
     .slice(0, NUMBER_OF_ITEMS_PER_PAGE + 1)
-    .map((post) => {
-      const authors = post.authors.map((username: string) =>
-        (authorsData as AuthorData[]).find(
-          (author) => author.username === username
-        )
-      );
-      const articlePath = generatePath(PATHS.POST, { lang, slug: post.slug });
-
-      return {
-        slug: 'post',
-        title: post.title,
-        excerpt: post.excerpt,
-        date: format(new Date(post.date), 'PP', {
-          locale: lang === 'fr' ? localeDateFr : localeDateEn
-        }),
-        readingTime: `${post.readingTimeInMinutes}mn`,
-        authors: authors.map((author) => author!.name),
-        articleLinkProps: {
-          href: articlePath,
-          onClick: (e: MouseEvent<HTMLAnchorElement>) => {
-            e.preventDefault();
-            navigate(articlePath);
-          }
-        }
-      };
-    });
+    .map((post) => ({
+      ...transformPostData(post, lang),
+      articleLinkProps: {
+        as: Link,
+        to: generatePath(PATHS.POST, { lang, slug: post.slug })
+      }
+    }));
 
   const numberOfPostsDisplayed = NUMBER_OF_ITEMS_PER_PAGE;
   const percentageOfItemDisplayed = Math.ceil(

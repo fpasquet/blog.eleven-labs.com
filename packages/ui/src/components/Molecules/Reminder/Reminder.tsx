@@ -1,0 +1,47 @@
+import './Reminder.scss';
+
+import classNames from 'classnames';
+import React from 'react';
+
+import { SpacingSystemProps } from '../../../types';
+import { Box, BoxProps, Text } from '../../Atoms';
+
+export const variantReminderList = [
+  'note',
+  'summary',
+  'info',
+  'tip',
+  'success',
+  'question',
+  'warning',
+  'failure',
+  'danger',
+  'bug',
+  'example',
+  'quote'
+] as const;
+
+export type VariantReminderType = typeof variantReminderList[number];
+
+export interface ReminderProps extends SpacingSystemProps, BoxProps {
+  variant: VariantReminderType;
+  title: string;
+  children: React.ReactNode;
+}
+
+export const Reminder: React.FC<ReminderProps> = ({
+  variant,
+  title,
+  children,
+  ...nativeProps
+}) => (
+  <Box
+    {...nativeProps}
+    className={classNames('reminder', `reminder--${variant}`)}
+  >
+    <Text className="reminder__title" p={{ xs: 'xxs' }}>
+      {title}
+    </Text>
+    <Text p={{ xs: 'xxs' }}>{children}</Text>
+  </Box>
+);

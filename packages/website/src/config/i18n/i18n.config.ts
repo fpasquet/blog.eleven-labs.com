@@ -19,7 +19,7 @@ export const i18nConfig = {
   react: {
     bindI18n: 'languageChanged',
     bindI18nStore: false,
-    useSuspense: true
+    useSuspense: false
   },
   detection: {
     order: ['path'],
