@@ -1,6 +1,5 @@
 {
   "spacing": {
-    "category": "spacings",
     "0": {
       "value": "0"
     },
@@ -29,7 +28,10 @@
       "value": "64px"
     },
     "xxl-2": {
-      "value": "120px"
+      "value": "128px"
+    },
+    "xxl-3": {
+      "value": "164px"
     }
   }
 }

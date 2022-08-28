@@ -1,24 +1,19 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { systemPropsControls } from '../../../../constants/storybook';
-import { createDescription } from '../../../../helpers/storybookHelper';
-import { typographyTextNameList } from '../../../../types';
+import {
+  systemPropsControls,
+  typographyPropsControls
+} from '../../../../constants/storybook';
+import { typographyFontSizeNameList } from '../../../../types';
 import { Text } from './Text';
-
-console.log(systemPropsControls);
 
 export default {
   title: 'Components/Atoms/Typography/Text',
   component: Text,
   argTypes: {
-    size: {
-      options: typographyTextNameList,
-      description: createDescription({
-        cssProperties: ['font-size']
-      })
-    },
-    ...systemPropsControls
+    ...systemPropsControls,
+    ...typographyPropsControls
   },
   args: {
     size: 'm',
@@ -36,7 +31,7 @@ Overview.args = {};
 
 export const All: ComponentStory<typeof Text> = () => (
   <>
-    {typographyTextNameList.map((size) => (
+    {typographyFontSizeNameList.map((size) => (
       <Text key={size} mb="xs" size={size}>
         Text {size}
       </Text>

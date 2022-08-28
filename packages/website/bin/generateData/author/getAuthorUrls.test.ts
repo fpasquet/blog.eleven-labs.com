@@ -6,7 +6,7 @@ import { getAuthorUrls } from './getAuthorUrls';
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   generatePath: (path: string, params?: ReactRouterDom.Params<string>) =>
-    `/${params!.lang}/authors/${params!.name}`
+    `/${params!.lang}/authors/${params!.authorUsername}`
 }));
 
 describe('Test method getPostUrls', () => {
@@ -28,6 +28,6 @@ describe('Test method getPostUrls', () => {
       '/fr/authors/username-4',
       '/fr/authors/username-5'
     ];
-    expect(getAuthorUrls('/:lang/authors/:name')).toEqual(expected);
+    expect(getAuthorUrls('/:lang/authors/:authorUsername')).toEqual(expected);
   });
 });

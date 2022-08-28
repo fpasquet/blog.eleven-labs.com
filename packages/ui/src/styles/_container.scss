@@ -1,0 +1,9 @@
+.container-main {
+  margin: var(--margin-container, 0 auto);
+  width: var(--width-container, auto);
+  padding-left: var(--spacing-m);
+  padding-right: var(--spacing-m);
+  @include createMediaQueries(map_get($breakpointPropList, 'md'), 'min') {
+    --width-container: 864px;
+  }
+}

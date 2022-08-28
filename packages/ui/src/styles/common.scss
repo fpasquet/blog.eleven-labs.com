@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&display=swap');
+@import-normalize;
+@import-sanitize;
 
 @import './designTokens';
 @import './reset';
@@ -8,4 +9,4 @@
 @import './spacing';
 @import './flexboxAndGridBox';
 @import './typography';
-@import './containers-desktop';
+@import './container';

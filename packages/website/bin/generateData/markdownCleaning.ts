@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import matter from 'gray-matter';
 
+import { CATEGORIES } from '../../src/constants';
 import { AuthorData, PostData } from '../../src/types';
 import { authorDataValidationSchema } from './author/authorDataValidationSchema';
 import { parseMarkdownByFilePath } from './parseMarkdownByFilePath';
@@ -63,7 +64,8 @@ export const markdownPostCleaning = async (
     title: string;
     excerpt?: string;
     authors: string[];
-    categories: string[];
+    categories?: string[];
+    tags?: string[];
   }>(filePath);
   const matchesSlug = data.permalink.match(/\/\w+\/([^/]+)\//);
   const matchesLangAndDate = filePath.match(/(\w{2})\/(\d{4}-\d{2}-\d{1,2})/);
@@ -74,6 +76,10 @@ export const markdownPostCleaning = async (
   const excerpt =
     data.excerpt || content.split('\n').filter((str) => str.length > 0)[0];
 
+  const validCategories = [...(data.categories || []), ...(data.tags || [])]
+    .map((keyword) => keyword.toLowerCase().trim())
+    .filter((keyword) => CATEGORIES.includes(keyword));
+
   const validatedData = await postDataValidationSchema.validate({
     lang,
     slug,
@@ -81,7 +87,7 @@ export const markdownPostCleaning = async (
     title: data.title,
     excerpt: excerpt,
     authors: data.authors,
-    categories: data.categories,
+    categories: validCategories,
     isDraft: false
   });
 

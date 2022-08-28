@@ -31,11 +31,11 @@ export const PostPreviewList: React.FC<PostPreviewListProps> = ({
       ))}
       {hasPagination && (
         <>
-          <Box px={{ md: 'xl' }}>
-            <Divider variant="secondary" my="m" />
+          <Box my="m" px={{ md: 'xl' }}>
+            <Divider variant="secondary" />
           </Box>
           <Flex direction="column" justifyContent="center" alignItems="center">
-            <Text size={{ xs: 'l', md: 'xxl' }}>{textNumberOfItems}</Text>
+            <Text size={{ xs: 'xxs', md: 's' }}>{textNumberOfItems}</Text>
             <ProgressBar value={percentageOfItemDisplayed} mt="xxs" />
             <Button my="s">{loadMoreButtonLabel}</Button>
           </Flex>

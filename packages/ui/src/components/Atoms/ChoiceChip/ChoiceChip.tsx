@@ -7,28 +7,30 @@ import {
   omitSystemProps,
   systemClassName
 } from '../../../helpers/systemPropsHelper';
-import { SpacingSystemProps } from '../../../types/SystemProps';
+import {
+  PolymorphicProps,
+  SpacingSystemProps
+} from '../../../types/SystemProps';
 
-type ChoiceChipHTMLElementType = Pick<JSX.IntrinsicElements, 'button' | 'a'>;
+type ChoiceChipElementType =
+  | keyof Pick<JSX.IntrinsicElements, 'a' | 'button'>
+  | React.ForwardRefExoticComponent<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 
-export interface ChoiceChipProps
-  extends SpacingSystemProps,
-    React.HTMLAttributes<ChoiceChipHTMLElementType> {
-  /**
-   * Generate component with a specific HTML tag (default: button)
-   */
-  as?: keyof ChoiceChipHTMLElementType;
+export type ChoiceChipProps<
+  C extends ChoiceChipElementType = ChoiceChipElementType
+> = {
   isActive?: boolean;
-  children: React.ReactNode;
-}
+  children?: React.ReactNode;
+} & PolymorphicProps<C> &
+  SpacingSystemProps;
 
-export const ChoiceChip: React.FC<ChoiceChipProps> = ({
-  as = 'button',
+export const ChoiceChip = <C extends ChoiceChipElementType = 'button'>({
+  as,
   isActive = false,
   children,
   ...nativeProps
-}) =>
-  React.createElement(as, {
+}: ChoiceChipProps<C>): ReturnType<React.FC<C>> =>
+  React.createElement(as || 'button', {
     ...omitSystemProps(nativeProps),
     className: systemClassName<SpacingSystemProps>({
       className: classNames('choice-chip', {

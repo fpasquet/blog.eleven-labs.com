@@ -1,29 +1,31 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { flexOrGridItemSystemProps } from '../../../../../constants/systemProps';
+import { flexOrGridItemSystemProps } from '../../../../../constants';
 import {
   flexOrGridBoxItemClassName,
   omitSystemProps,
   systemClassName
 } from '../../../../../helpers/systemPropsHelper';
 import {
+  DefaultAllowedHTMLElementType,
   FlexOrGridBoxItemSystemProps,
+  PolymorphicProps,
   SystemProps
 } from '../../../../../types';
 
-export interface GridItemProps
-  extends SystemProps,
-    FlexOrGridBoxItemSystemProps {
-  children: React.ReactNode;
-}
+export type GridItemProps<C extends DefaultAllowedHTMLElementType = 'div'> = {
+  children?: React.ReactNode;
+} & PolymorphicProps<C> &
+  SystemProps &
+  FlexOrGridBoxItemSystemProps;
 
-export const GridItem: React.FC<GridItemProps> = ({
+export const GridItem = <C extends DefaultAllowedHTMLElementType = 'div'>({
   children,
-  as = 'div',
+  as,
   ...nativeProps
-}) =>
-  React.createElement(as, {
+}: GridItemProps<C>): ReturnType<React.FC<C>> =>
+  React.createElement(as || 'div', {
     ...omitSystemProps(nativeProps, Object.keys(flexOrGridItemSystemProps)),
     className: classNames(
       flexOrGridBoxItemClassName(nativeProps),

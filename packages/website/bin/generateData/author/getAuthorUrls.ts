@@ -16,7 +16,7 @@ export const getAuthorUrls = (path: string): string[] => {
         const authorUrlsByLang = langsByAuthor.map((lang) =>
           generatePath(path, {
             lang,
-            name: author.username
+            authorUsername: author.username
           })
         );
         currentAuthorUrls.push(...authorUrlsByLang);

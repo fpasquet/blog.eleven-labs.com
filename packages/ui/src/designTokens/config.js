@@ -7,18 +7,20 @@ const camelCase = (str) =>
     $1.toUpperCase().replace('-', '').replace('_', '')
   );
 
+const pascalCase = (str) => capitalize(camelCase(str));
+
 const getDesignTokensByCategory = (allProperties) =>
   allProperties.reduce((designTokens, prop) => {
     const categoryName = prop.path[0];
-    const thirdCategoryName = prop.path?.[2];
+    const secondCategoryName = prop.path?.[1];
 
-    if (categoryName === 'typography' && thirdCategoryName) {
-      const subCategoryName = `${categoryName}${capitalize(thirdCategoryName)}`;
+    if (categoryName === 'typography' && secondCategoryName !== 'font-family') {
+      const subCategoryName = `${categoryName}${pascalCase(secondCategoryName)}`;
       if (!designTokens[subCategoryName]) {
         designTokens[subCategoryName] = [];
       }
       designTokens[subCategoryName].push({
-        name: prop.path.slice(3).join('-'),
+        name: prop.path.slice(2).join('-'),
         path: prop.path.join('-'),
         value: prop.value
       });

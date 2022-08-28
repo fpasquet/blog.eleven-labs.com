@@ -1,0 +1,28 @@
+@import '../../../styles/breakpoints';
+
+.footer {
+  --height-image-footer: 86px;
+  position: relative;
+  margin-top: var(--height-image-footer);
+  &::before {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: var(--height-image-footer);
+    top: calc(var(--height-image-footer) * -1);
+    left: 0;
+    background-image: var(--background-image-footer, url('../../../assets/imgs/footer_mobile.png'));
+    background-size: cover;
+    @include createMediaQueries(map_get($breakpointPropList, 'md'), 'min') {
+      --height-image-footer: 224px;
+      --background-image-footer: url('../../../assets/imgs/footer_desktop.png');
+    }
+  }
+  &__circle-separator {
+    &::before {
+      vertical-align: middle;
+      content: '•';
+      font-size: var(--typography-font-size-xl);
+    }
+  }
+}

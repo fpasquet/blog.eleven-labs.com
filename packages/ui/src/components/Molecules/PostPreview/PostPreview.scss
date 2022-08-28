@@ -8,8 +8,9 @@
         &::before {
           margin-left: var(--spacing-xxs);
           margin-right: var(--spacing-xxs);
+          vertical-align: middle;
           content: '•';
-          font-size: 12px;
+          font-size: var(--typography-font-size-xxs-2);
         }
       }
     }

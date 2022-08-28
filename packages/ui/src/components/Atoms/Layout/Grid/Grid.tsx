@@ -9,28 +9,32 @@ import {
   systemClassName
 } from '../../../../helpers/systemPropsHelper';
 import {
+  DefaultAllowedHTMLElementType,
   FlexOrGridBoxSystemProps,
+  PolymorphicProps,
   SystemProps,
   TypeWithMediaQueriesType
 } from '../../../../types';
 
-export interface GridProps extends SystemProps, FlexOrGridBoxSystemProps {
+export type GridProps<C extends DefaultAllowedHTMLElementType = 'div'> = {
   /**
    * Defines size columns (including breakpoints modifiers)
    */
   size?: number | TypeWithMediaQueriesType<number>;
-  children: React.ReactNode;
-}
+  children?: React.ReactNode;
+} & PolymorphicProps<C> &
+  SystemProps &
+  FlexOrGridBoxSystemProps;
 
-export const Grid: React.FC<GridProps> = ({
+export const Grid = <C extends DefaultAllowedHTMLElementType = 'div'>({
   size = 12,
   alignItems,
   justifyContent,
   children,
-  as = 'div',
+  as,
   ...nativeProps
-}) =>
-  React.createElement(as, {
+}: GridProps<C>): ReturnType<React.FC<C>> =>
+  React.createElement(as || 'div', {
     ...omitSystemProps(nativeProps, Object.keys(flexOrGridBoxSystemProps)),
     className: classNames(
       'grid',

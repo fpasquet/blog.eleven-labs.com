@@ -4,34 +4,29 @@ import React from 'react';
 import {
   omitSystemProps,
   systemClassName,
-  typographySizeClassName
+  typographyClassName
 } from '../../../../helpers/systemPropsHelper';
-import { SystemProps, TypographyHeadingType } from '../../../../types';
+import { TypographyProps } from '../TypographyProps';
 
 type HeadingHTMLElementType = keyof Pick<
   JSX.IntrinsicElements,
   'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'p' | 'div'
 >;
 
-export interface HeadingProps
-  extends SystemProps<HeadingHTMLElementType, TypographyHeadingType> {
-  children: React.ReactNode;
-}
+export type HeadingProps<C extends HeadingHTMLElementType = 'h1'> =
+  TypographyProps<C>;
 
-export const Heading: React.FC<HeadingProps> = ({
-  as = 'h1',
+export const Heading = <C extends HeadingHTMLElementType = 'h1'>({
+  as,
+  weight = 'bold',
   children,
-  size = 'l',
   ...nativeProps
-}) =>
-  React.createElement(as, {
+}: HeadingProps<C>): ReturnType<React.FC<C>> =>
+  React.createElement(as || 'h1', {
     ...omitSystemProps(nativeProps),
     className: classNames(
       systemClassName(nativeProps),
-      typographySizeClassName<TypographyHeadingType>(
-        { size, ...nativeProps },
-        true
-      )
+      typographyClassName({ ...nativeProps, weight })
     ),
     children
   });

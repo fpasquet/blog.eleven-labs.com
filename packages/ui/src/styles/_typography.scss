@@ -3,8 +3,8 @@ $textTransformList: ('capitalize', 'uppercase', 'lowercase');
 $textDecorationList: ('underline', 'dotted', 'wavy', 'overline');
 $fontWeightList: ('normal', 'bold', 'lighter');
 
-@mixin fontSize($prefixClassName, $sizeName, $size, $modifier) {
-  .#{$prefixClassName}-#{$sizeName}\@#{$modifier} {
+@mixin fontSize($sizeName, $size, $modifier) {
+  .size-#{$sizeName}\@#{$modifier} {
     font-size: $size;
     line-height: 1.25;
   }
@@ -36,11 +36,8 @@ $fontWeightList: ('normal', 'bold', 'lighter');
 
 @each $modifier , $breakpoint in $breakpointPropList {
   @include createMediaQueries($breakpoint, 'min') {
-    @each $sizeName, $size in $typographyHeadingList {
-      @include fontSize('heading', $sizeName, $size, $modifier);
-    }
-    @each $sizeName, $size in $typographyTextList {
-      @include fontSize('text', $sizeName, $size, $modifier);
+    @each $sizeName, $size in $typographyFontSizeList {
+      @include fontSize($sizeName, $size, $modifier);
     }
     @each $textAlign in $textAlignList {
       @include textAlign($textAlign, $modifier);

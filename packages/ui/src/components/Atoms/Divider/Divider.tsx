@@ -12,7 +12,7 @@ import { SpacingSystemProps } from '../../../types';
 export interface DividerProps
   extends SpacingSystemProps,
     React.HTMLAttributes<HTMLHRElement> {
-  variant?: 'primary' | 'secondary';
+  variant?: 'primary' | 'secondary' | 'neutral';
 }
 
 export const Divider: React.FC<DividerProps> = ({ variant, ...nativeProps }) =>

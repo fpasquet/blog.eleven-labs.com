@@ -9,6 +9,10 @@
   }
   &--secondary {
     --height-divider: 2px;
-    --background-color-divider: --color-primary-light;
+    --background-color-divider: var(--color-primary-light);
+  }
+  &--neutral {
+    --height-divider: 1px;
+    --background-color-divider: var(--color-white);
   }
 }

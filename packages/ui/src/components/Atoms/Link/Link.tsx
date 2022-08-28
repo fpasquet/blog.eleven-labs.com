@@ -1,24 +1,47 @@
+import './Link.scss';
+
+import classNames from 'classnames';
 import * as React from 'react';
 
 import {
   omitSystemProps,
-  systemClassName
+  systemClassName,
+  typographyClassName
 } from '../../../helpers/systemPropsHelper';
-import { SystemProps } from '../../../types/SystemProps';
+import {
+  PolymorphicProps,
+  SpacingSystemProps,
+  TypographySystemProps
+} from '../../../types';
 
-type LinkHTMLElementType = keyof Pick<JSX.IntrinsicElements, 'a' | 'button'>;
+type LinkElementType =
+  | keyof Pick<JSX.IntrinsicElements, 'a' | 'button'>
+  | React.ForwardRefExoticComponent<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 
-export interface LinkProps extends SystemProps<LinkHTMLElementType> {
+export type LinkProps<C extends LinkElementType = LinkElementType> = {
+  active?: boolean;
   children?: React.ReactNode;
-}
+} & PolymorphicProps<C> &
+  SpacingSystemProps &
+  TypographySystemProps;
 
-export const Link: React.FC<LinkProps> = ({
-  as = 'a',
+export const Link = <C extends LinkElementType = 'a'>({
+  as,
+  active,
   children,
   ...nativeProps
-}) =>
-  React.createElement(as, {
-    ...omitSystemProps(nativeProps),
-    className: systemClassName({ color: 'amaranth', ...nativeProps }),
+}: LinkProps<C>): ReturnType<React.FC<C>> =>
+  React.createElement(
+    as || 'a',
+    {
+      ...omitSystemProps(nativeProps),
+      ...nativeProps,
+      className: classNames(
+        'link',
+        { [`link--active`]: active },
+        systemClassName<SpacingSystemProps>(nativeProps),
+        typographyClassName(nativeProps)
+      )
+    },
     children
-  });
+  );

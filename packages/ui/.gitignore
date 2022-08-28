@@ -25,5 +25,6 @@ dist-ssr
 
 # Custom
 storybook-static
+src/components/Atoms/Icons
 src/styles/_designTokens.scss
 src/types/designTokens.ts

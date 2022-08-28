@@ -10,10 +10,14 @@ export const data = {
   urlsData
 };
 
-export const staticRender = (options: { url: string; lang: string }) => {
+export const staticRender = (options: {
+  url: string;
+  lang: string;
+  inlineCss?: string;
+}) => {
   return ReactDOMServer.renderToStaticMarkup(
     <StaticRouter location={options.url}>
-      <HtmlTemplate>
+      <HtmlTemplate inlineCss={options.inlineCss}>
         <RootContainer lang={options.lang} />
       </HtmlTemplate>
     </StaticRouter>

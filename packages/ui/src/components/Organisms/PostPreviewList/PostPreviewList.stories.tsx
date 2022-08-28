@@ -9,11 +9,9 @@ export default {
   title: 'Components/Organisms/PostPreviewList',
   component: PostPreviewList,
   args: {
-    posts: PreviewPostsFixture.map((previewPost, index) => ({
-      slug: `slug-${index}`,
+    posts: PreviewPostsFixture.map((previewPost) => ({
       ...previewPost,
-      articleLinkProps: {},
-      authorLinkProps: () => ({})
+      articleLinkProps: {}
     }))
   },
   parameters: {

@@ -14,8 +14,7 @@
     "generate:data": "yarn migrate && yarn generate:posts-data && yarn generate:authors-data && yarn generate:urls-data",
     "build:staticRender": "vite build --ssr src/staticRender.tsx --outDir dist",
     "generate:website": "yarn ts-node bin/pagesGenerator",
-    "copy-optimize-assets": "yarn ts-node bin/copyOptimizeAssets",
-    "generate": "yarn generate:data && yarn build:staticRender && yarn generate:website && yarn copy-optimize-assets",
+    "generate": "yarn generate:data && yarn build:staticRender && yarn generate:website",
     "preview-prod": "yarn generate && npx serve dist"
   },
   "dependencies": {
