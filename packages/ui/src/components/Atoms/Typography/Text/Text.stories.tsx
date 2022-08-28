@@ -1,14 +1,20 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { systemPropsControls } from '../../../../constants/storybook';
+import {
+  systemPropsControls,
+  typographyPropsControls
+} from '../../../../constants/storybook';
 import { typographyFontSizeNameList } from '../../../../types';
 import { Text } from './Text';
 
 export default {
   title: 'Components/Atoms/Typography/Text',
   component: Text,
-  argTypes: systemPropsControls,
+  argTypes: {
+    ...systemPropsControls,
+    ...typographyPropsControls
+  },
   args: {
     size: 'm',
     children: 'Example Text'

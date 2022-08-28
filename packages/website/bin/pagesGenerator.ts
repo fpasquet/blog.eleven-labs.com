@@ -2,6 +2,8 @@ import * as cliProgress from 'cli-progress';
 import * as fs from 'fs';
 import * as path from 'path';
 
+import { getCssContent } from './helpers';
+
 const rootDir = process.cwd();
 
 (async () => {
@@ -9,7 +11,11 @@ const rootDir = process.cwd();
     staticRender,
     data: { urlsData }
   }: {
-    staticRender: (options: { url: string; lang: string }) => string;
+    staticRender: (options: {
+      url: string;
+      lang: string;
+      inlineCss?: string;
+    }) => string;
     data: { urlsData: string[] };
   } = await import('../dist/staticRender.js');
   const progressBar = new cliProgress.SingleBar(
@@ -27,9 +33,11 @@ const rootDir = process.cwd();
       );
 
       const matchLang = url.match(/^\/(fr|en)/);
+      const cssContent = getCssContent();
       const htmlContent = await staticRender({
         url,
-        lang: matchLang?.[1] || 'fr'
+        lang: matchLang?.[1] || 'fr',
+        inlineCss: cssContent
       });
 
       const dirPath = path.dirname(filePath);

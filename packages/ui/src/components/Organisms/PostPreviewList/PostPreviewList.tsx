@@ -21,7 +21,7 @@ export const PostPreviewList: React.FC<PostPreviewListProps> = ({
   return (
     <>
       {posts.map((post, index) => (
-        <React.Fragment key={index}>
+        <React.Fragment key={post.slug}>
           <PostPreview
             hasMask={Boolean(hasPagination && index === posts.length - 1)}
             {...post}

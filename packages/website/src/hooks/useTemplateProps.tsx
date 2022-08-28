@@ -1,15 +1,23 @@
 import { LayoutTemplateProps } from '@eleven-labs/blog-ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { generatePath, Link, useParams } from 'react-router-dom';
 
 import { contact } from '../config/website';
-import { CATEGORIES } from '../constants';
+import { AUTHORIZED_LANGUAGES, CATEGORIES, PATHS } from '../constants';
+import postsData from '../data/posts.json';
+import { PostData } from '../types';
 
 export const useLayoutTemplateProps = (): Pick<
   LayoutTemplateProps,
   'headerProps' | 'footerProps'
 > => {
+  const { lang = 'fr', categoryName } = useParams<{
+    lang?: string;
+    categoryName?: string;
+  }>();
   const { t } = useTranslation();
+
   return {
     headerProps: {
       title: t('header.title'),
@@ -19,11 +27,28 @@ export const useLayoutTemplateProps = (): Pick<
         description: t('header.intro_block.description')
       },
       choiceCategoryLabel: t('header.choice_category_label'),
+      choiceCategoryActive: categoryName,
       choiceCategories: [
-        { name: 'all', label: t('categories.all') },
-        ...CATEGORIES.map((name) => ({
-          name,
-          label: t(`categories.${name}`)
+        {
+          as: Link,
+          name: 'all',
+          label: t('categories.all'),
+          to: generatePath(PATHS.HOME, { lang })
+        },
+        ...CATEGORIES.filter((currentCategoryName) =>
+          (postsData as PostData[]).find(
+            (post) =>
+              post.lang === lang &&
+              post.categories.includes(currentCategoryName)
+          )
+        ).map((currentCategoryName) => ({
+          as: Link,
+          name: currentCategoryName,
+          label: t(`categories.${currentCategoryName}`),
+          to: generatePath(PATHS.CATEGORY, {
+            lang,
+            categoryName: currentCategoryName
+          })
         }))
       ]
     },
@@ -32,10 +57,10 @@ export const useLayoutTemplateProps = (): Pick<
         title: t('footer.intro_block.title'),
         description: t('footer.intro_block.description')
       },
-      buttonToElevenLabsSiteProps: {
-        children: t('footer.link_to_eleven_labs_site')
+      elevenLabsSiteLink: {
+        label: t('footer.link_to_eleven_labs_site')
       },
-      contactTitle: 'Contact',
+      contactTitle: t('footer.contact.title'),
       contactList: [
         ...contact.addressList.map(({ name, address }) => ({
           title: name,
@@ -52,11 +77,16 @@ export const useLayoutTemplateProps = (): Pick<
           description: contact.phoneNumber
         }
       ],
-      languageLinks: ['Français', 'English'].map((languageName) => ({
-        active: languageName === 'Français',
-        name: languageName,
-        linkProps: {}
-      }))
+      languageLinks: AUTHORIZED_LANGUAGES.map((currentLang) => {
+        const languagePath = generatePath(PATHS.HOME, { lang: currentLang });
+        return {
+          as: Link,
+          active: currentLang === lang,
+          name: currentLang,
+          label: t(`languages.${currentLang}`),
+          to: languagePath
+        };
+      })
     }
   };
 };

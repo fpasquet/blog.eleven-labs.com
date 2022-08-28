@@ -3,8 +3,8 @@ import { RouteObject } from 'react-router';
 
 import { PATHS } from '../../constants';
 import { AuthorPage } from '../../pages/Author';
-import { HomePage } from '../../pages/Home';
 import { PostPage } from '../../pages/Post';
+import { PostListPage } from '../../pages/PostList';
 
 export const routes: RouteObject[] = [
   {
@@ -12,11 +12,11 @@ export const routes: RouteObject[] = [
     children: [
       {
         index: true,
-        element: <HomePage />
+        element: <PostListPage />
       },
       {
         path: PATHS.HOME,
-        element: <HomePage />
+        element: <PostListPage />
       },
       {
         path: PATHS.POST,
@@ -25,6 +25,10 @@ export const routes: RouteObject[] = [
       {
         path: PATHS.AUTHOR,
         element: <AuthorPage />
+      },
+      {
+        path: PATHS.CATEGORY,
+        element: <PostListPage />
       }
     ]
   }

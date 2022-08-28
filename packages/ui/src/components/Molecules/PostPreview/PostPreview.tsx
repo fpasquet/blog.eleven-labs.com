@@ -3,7 +3,7 @@ import './PostPreview.scss';
 import classNames from 'classnames';
 import React from 'react';
 
-import { Box, BoxProps, Heading, Link, LinkProps, Text } from '../../Atoms';
+import { Box, BoxProps, Link, LinkProps, Text } from '../../Atoms';
 
 export interface PostPreviewProps extends BoxProps {
   title: string;
@@ -11,8 +11,7 @@ export interface PostPreviewProps extends BoxProps {
   date: string;
   readingTime: string;
   authors: string[];
-  articleLinkProps: LinkProps;
-  authorLinkProps: (authorName: string) => LinkProps;
+  articleLinkProps: Omit<LinkProps, 'children'>;
   hasMask?: boolean;
 }
 
@@ -23,7 +22,6 @@ export const PostPreview: React.FC<PostPreviewProps> = ({
   readingTime,
   authors,
   articleLinkProps,
-  authorLinkProps,
   hasMask,
   ...boxProps
 }) => (
@@ -32,13 +30,13 @@ export const PostPreview: React.FC<PostPreviewProps> = ({
     className={classNames('post-preview', { 'post-preview--mask': hasMask })}
     {...boxProps}
   >
-    <Heading
+    <Text
       color="amaranth"
       size={{ xs: 'xs', md: 's' }}
       mb={{ xs: 'xxs-2', md: 'xxs' }}
     >
       {hasMask ? title : <Link {...articleLinkProps}>{title}</Link>}
-    </Heading>
+    </Text>
     <Text size={{ xs: 'xxs', md: 'xs' }}>{excerpt}</Text>
     <Box
       className="post-preview__metadata"
@@ -47,13 +45,11 @@ export const PostPreview: React.FC<PostPreviewProps> = ({
     >
       <Text as="span">{date}</Text>
       <Text as="span">{readingTime}</Text>
-      <Text as="span">
-        {authors.map((author) => (
-          <Link key={author} {...authorLinkProps(author)}>
-            {author}
-          </Link>
-        ))}
-      </Text>
+      {authors.map((author) => (
+        <Text key={author} as="span">
+          {author}
+        </Text>
+      ))}
     </Box>
   </Box>
 );

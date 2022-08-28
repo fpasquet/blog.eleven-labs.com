@@ -1,14 +1,18 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { spacingSystemPropsControls } from '../../../constants';
+import {
+  spacingSystemPropsControls,
+  typographyPropsControls
+} from '../../../constants';
 import { Link } from './Link';
 
 export default {
   title: 'Components/Atoms/Link',
   component: Link,
   argTypes: {
-    ...spacingSystemPropsControls
+    ...spacingSystemPropsControls,
+    ...typographyPropsControls
   },
   args: {
     children: 'Link Label'

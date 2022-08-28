@@ -1,3 +1,4 @@
+export * from './PolymorphicProps';
 export * from './ColorSystemProps';
 export * from './MarginSystemProps';
 export * from './PaddingSystemProps';

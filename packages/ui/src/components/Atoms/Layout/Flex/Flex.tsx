@@ -13,12 +13,14 @@ import {
   systemClassName
 } from '../../../../helpers/systemPropsHelper';
 import {
+  DefaultAllowedHTMLElementType,
   FlexOrGridBoxSystemProps,
+  PolymorphicProps,
   SystemProps,
   TypeWithMediaQueriesType
 } from '../../../../types';
 
-export interface FlexProps extends SystemProps, FlexOrGridBoxSystemProps {
+export type FlexProps<C extends DefaultAllowedHTMLElementType = 'div'> = {
   /**
    * Defines a flex container, inline-flex or flex (including breakpoints modifiers)
    */
@@ -31,42 +33,47 @@ export interface FlexProps extends SystemProps, FlexOrGridBoxSystemProps {
    * Can flex items wrap onto multiple lines (including breakpoints modifiers)
    */
   wrap?: FlexWrapType | TypeWithMediaQueriesType<FlexWrapType>;
-  children: React.ReactNode;
-}
+  children?: React.ReactNode;
+} & PolymorphicProps<C> &
+  SystemProps &
+  FlexOrGridBoxSystemProps;
 
-export const Flex: React.FC<FlexProps> = ({
+export const Flex = <C extends DefaultAllowedHTMLElementType = 'div'>({
   inline = false,
   direction,
   alignItems,
   justifyContent,
   wrap,
-  as = 'div',
+  as,
   children,
   ...nativeProps
-}) =>
-  React.createElement(as, {
-    ...omitSystemProps(nativeProps, Object.keys(flexOrGridBoxSystemProps)),
-    className: classNames(
-      ...classNamesWithMediaQueries<boolean>({
-        propValue: inline,
-        className: inline ? 'inline-flex' : 'flex'
-      }),
-      ...classNamesWithMediaQueries<FlexDirectionType>({
-        propValue: direction,
-        className: 'flex',
-        withSuffixPropValue: true
-      }),
-      ...classNamesWithMediaQueries<FlexWrapType>({
-        propValue: wrap,
-        className: 'flex',
-        withSuffixPropValue: true
-      }),
-      flexOrGridBoxClassName({
-        alignItems,
-        justifyContent,
-        ...nativeProps
-      }),
-      systemClassName(nativeProps)
-    ),
+}: FlexProps<C>): ReturnType<React.FC<C>> =>
+  React.createElement(
+    as || 'div',
+    {
+      ...omitSystemProps(nativeProps, Object.keys(flexOrGridBoxSystemProps)),
+      className: classNames(
+        ...classNamesWithMediaQueries<boolean>({
+          propValue: inline,
+          className: inline ? 'inline-flex' : 'flex'
+        }),
+        ...classNamesWithMediaQueries<FlexDirectionType>({
+          propValue: direction,
+          className: 'flex',
+          withSuffixPropValue: true
+        }),
+        ...classNamesWithMediaQueries<FlexWrapType>({
+          propValue: wrap,
+          className: 'flex',
+          withSuffixPropValue: true
+        }),
+        flexOrGridBoxClassName({
+          alignItems,
+          justifyContent,
+          ...nativeProps
+        }),
+        systemClassName(nativeProps)
+      )
+    },
     children
-  });
+  );

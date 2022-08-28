@@ -8,10 +8,8 @@ import {
 import { SystemProps } from '../../types/SystemProps';
 import { systemClassNames } from './systemClassNames';
 
-export const systemClassName = <
-  TProps extends SystemProps = SystemProps & { className?: string }
->(
-  props: TProps
+export const systemClassName = <TProps extends SystemProps = SystemProps>(
+  props: TProps & { className?: string }
 ): string =>
   classNames(
     props.className,

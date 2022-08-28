@@ -7,6 +7,10 @@
     "architecture": "Architecture",
     "best_practices": "Bonnes pratiques"
   },
+  "languages": {
+    "fr": "Français",
+    "en": "English"
+  },
   "header": {
     "title": "Eleven Labs",
     "subtitle": "Le blog",
@@ -21,11 +25,15 @@
       "title": "Découvrez Eleven Labs",
       "description": "Notre site pour mieux nous connaître"
     },
+    "contact": {
+      "title": "Contact"
+    },
     "link_to_eleven_labs_site": "J'y vais"
   },
   "pages": {
-    "home": {
+    "post_list": {
       "post_preview_list_title": "Tous nos articles",
+      "post_preview_list_category_title": "Nos articles {{ categoryName }}",
       "number_of_posts_displayed_label": "{{ numberOfPostsDisplayed }}/{{ numberOfPosts }} affichés",
       "load_more_button_label": "Afficher plus"
     }

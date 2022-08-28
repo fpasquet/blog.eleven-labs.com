@@ -1,7 +1,8 @@
 import { generatePath } from 'react-router-dom';
 
-import { PATHS } from '../src/constants';
+import { AUTHORIZED_LANGUAGES, PATHS } from '../src/constants';
 import { getAuthorUrls } from './generateData/author/getAuthorUrls';
+import { getCategoryUrls } from './generateData/category/getCategoryUrls';
 import { createFileData } from './generateData/createFileData';
 import { getPostUrls } from './generateData/post/getPostUrls';
 
@@ -15,7 +16,13 @@ const generateUrlsData = () => {
           currentUrls.push(generatePath(path));
           break;
         case 'HOME':
-          currentUrls.push(generatePath(path, { lang: 'en' }));
+          currentUrls.push(
+            ...AUTHORIZED_LANGUAGES.map((lang) => generatePath(path, { lang }))
+          );
+          break;
+        case 'CATEGORY':
+          const categoryUrls = getCategoryUrls(path);
+          currentUrls.push(...categoryUrls);
           break;
         case 'POST':
           const postUrls = getPostUrls(path);

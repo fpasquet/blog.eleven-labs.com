@@ -1,16 +1,15 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import FooterStories from '../../components/Organisms/Footer/Footer.stories';
-import HeaderStories from '../../components/Organisms/Header/Header.stories';
 import PreviewPostsStories, {
   PostPreviewListWithPagination
 } from '../../components/Organisms/PostPreviewList/PostPreviewList.stories';
-import { HomePage } from './HomePage';
+import LayoutTemplateStories from '../../templates/LayoutTemplate/LayoutTemplate.stories';
+import { PostListPage } from './PostListPage';
 
 export default {
-  title: 'Pages/Home',
-  component: HomePage,
+  title: 'Pages/PostList',
+  component: PostListPage,
   args: {
     postPreviewListTitle: 'Tous nos articles',
     posts: PreviewPostsStories!.args!.posts,
@@ -19,8 +18,7 @@ export default {
       PostPreviewListWithPagination!.args!.percentageOfItemDisplayed,
     loadMoreButtonLabel:
       PostPreviewListWithPagination!.args!.loadMoreButtonLabel,
-    headerProps: HeaderStories.args,
-    footerProps: FooterStories.args
+    ...LayoutTemplateStories.args
   },
   parameters: {
     layout: 'full',
@@ -28,10 +26,10 @@ export default {
       defaultViewport: 'extraSmallScreen'
     }
   }
-} as ComponentMeta<typeof HomePage>;
+} as ComponentMeta<typeof PostListPage>;
 
-const Template: ComponentStory<typeof HomePage> = (args) => (
-  <HomePage {...args} />
+const Template: ComponentStory<typeof PostListPage> = (args) => (
+  <PostListPage {...args} />
 );
 
 export const Overview = Template.bind({});

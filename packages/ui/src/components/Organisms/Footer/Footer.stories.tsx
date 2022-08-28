@@ -12,9 +12,9 @@ export default {
       title: 'Découvrez Eleven Labs',
       description: 'Notre site pour mieux nous connaître'
     },
-    buttonToElevenLabsSiteProps: {
+    elevenLabsSiteLink: {
       // eslint-disable-next-line prettier/prettier
-      children: `J'y vais`
+      label: `J'y vais`
     },
     contactTitle: 'Contact',
     contactList: [
@@ -34,9 +34,9 @@ export default {
       }
     ],
     languageLinks: config.languages.map((language) => ({
-      active: language.name === 'Français',
-      name: language.name,
-      linkProps: {}
+      active: language.locale === 'fr',
+      name: language.locale,
+      label: language.name
     }))
   },
   parameters: {

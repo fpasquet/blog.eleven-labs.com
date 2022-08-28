@@ -16,6 +16,7 @@ export interface HeaderProps {
     description: string;
   };
   choiceCategoryLabel: string;
+  choiceCategoryActive?: string;
   choiceCategories: ChoiceChipGroupProps['choices'];
 }
 
@@ -24,7 +25,8 @@ export const Header: React.FC<HeaderProps> = ({
   subtitle,
   introBlock,
   choiceCategoryLabel,
-  choiceCategories
+  choiceCategories,
+  choiceCategoryActive
 }) => (
   <Box as="header" bg="primary-light" color="white" className="header">
     <Flex
@@ -34,7 +36,7 @@ export const Header: React.FC<HeaderProps> = ({
       px={{ xs: 'm', md: 'l' }}
     >
       <Flex alignItems="center">
-        <Icons.Logo width="30px" height="30px" />
+        <Icons.Logo className="header__logo" />
         <Box ml={{ xs: 'xxs' }} size={{ xs: 'xxs', md: 'm' }}>
           <Text>{title}</Text>
           <Text weight="bold">{subtitle}</Text>
@@ -64,7 +66,12 @@ export const Header: React.FC<HeaderProps> = ({
           </Text>
         </Box>
         <Box className="header__choice-chip-group">
-          <ChoiceChipGroup mt="s" px={{ xs: 'm' }} choices={choiceCategories} />
+          <ChoiceChipGroup
+            mt="s"
+            px={{ xs: 'm' }}
+            choices={choiceCategories}
+            choiceActive={choiceCategoryActive}
+          />
         </Box>
       </Box>
     </Flex>

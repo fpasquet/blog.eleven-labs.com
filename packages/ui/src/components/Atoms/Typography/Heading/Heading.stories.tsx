@@ -1,14 +1,20 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import { systemPropsControls } from '../../../../constants';
+import {
+  systemPropsControls,
+  typographyPropsControls
+} from '../../../../constants';
 import { typographyFontSizeNameList } from '../../../../types';
 import { Heading } from './Heading';
 
 export default {
   title: 'Components/Atoms/Typography/Heading',
   component: Heading,
-  argTypes: systemPropsControls,
+  argTypes: {
+    ...systemPropsControls,
+    ...typographyPropsControls
+  },
   args: {
     size: 'l',
     children: 'Example Heading'

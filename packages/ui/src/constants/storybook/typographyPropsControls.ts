@@ -1,4 +1,5 @@
 import { createControls } from '../../helpers/storybookHelper';
+import { typographyFontSizeNameList } from '../../types';
 import {
   fontWeightList,
   textAlignList,
@@ -11,6 +12,7 @@ export const typographyPropsControls = createControls({
   category: 'Typography',
   props: typographySystemProps,
   options: {
+    size: typographyFontSizeNameList,
     textAlign: textAlignList,
     weight: fontWeightList,
     textDecoration: textDecorationList,

@@ -6,25 +6,21 @@ import {
   systemClassName,
   typographyClassName
 } from '../../../../helpers/systemPropsHelper';
-import { SystemProps, TypographySystemProps } from '../../../../types';
+import { TypographyProps } from '../TypographyProps';
 
 type TextHTMLElementType = keyof Pick<
   JSX.IntrinsicElements,
   'span' | 'p' | 'div'
 >;
 
-export interface TextProps
-  extends SystemProps<TextHTMLElementType>,
-    TypographySystemProps {
-  children?: React.ReactNode;
-}
+export type TextProps<C extends TextHTMLElementType = 'p'> = TypographyProps<C>;
 
-export const Text: React.FC<TextProps> = ({
-  as = 'p',
+export const Text = <C extends TextHTMLElementType = 'p'>({
+  as,
   children,
   ...nativeProps
-}) =>
-  React.createElement(as, {
+}: TextProps<C>): ReturnType<React.FC<C>> =>
+  React.createElement(as || 'p', {
     ...omitSystemProps(nativeProps),
     className: classNames(
       systemClassName(nativeProps),

@@ -7,32 +7,37 @@ import {
   omitSystemProps,
   systemClassName
 } from '../../../helpers/systemPropsHelper';
-import { SpacingSystemProps } from '../../../types/SystemProps';
+import { PolymorphicProps, SpacingSystemProps } from '../../../types';
 
-type ButtonHTMLElementType = Pick<JSX.IntrinsicElements, 'button' | 'a'>;
+type ButtonElementType =
+  | keyof Pick<JSX.IntrinsicElements, 'button' | 'a'>
+  | React.ForwardRefExoticComponent<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 
-export interface ButtonProps
-  extends SpacingSystemProps,
-    React.HTMLAttributes<ButtonHTMLElementType> {
-  variant?: 'primary' | 'primary-ghost' | 'form';
+export type ButtonProps<C extends ButtonElementType = ButtonElementType> = {
   /**
-   * Generate component with a specific HTML tag (default: button)
+   * The button variant
    */
-  as?: keyof ButtonHTMLElementType;
-  children: React.ReactNode;
-}
+  variant?: 'primary' | 'primary-ghost' | 'form';
+  children?: React.ReactNode;
+} & PolymorphicProps<C> &
+  SpacingSystemProps;
 
-export const Button: React.FC<ButtonProps> = ({
-  as = 'button',
+export const Button = <C extends ButtonElementType = 'button'>({
+  as,
   variant,
   children,
   ...nativeProps
-}) =>
-  React.createElement(as, {
-    ...omitSystemProps(nativeProps),
-    className: systemClassName<SpacingSystemProps>({
-      className: classNames('button', { [`button--${variant}`]: variant }),
-      ...nativeProps
-    }),
+}: ButtonProps<C>): ReturnType<React.FC<C>> =>
+  React.createElement(
+    as || 'button',
+    {
+      ...omitSystemProps(nativeProps),
+      ...nativeProps,
+      className: classNames(
+        'button',
+        { [`button--${variant}`]: variant },
+        systemClassName<SpacingSystemProps>(nativeProps)
+      )
+    },
     children
-  });
+  );

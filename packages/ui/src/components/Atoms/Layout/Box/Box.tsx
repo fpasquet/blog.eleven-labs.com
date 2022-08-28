@@ -6,50 +6,25 @@ import {
   systemClassName,
   typographyClassName
 } from '../../../../helpers/systemPropsHelper';
-import { SystemProps, TypographySystemProps } from '../../../../types';
+import {
+  DefaultAllowedHTMLElementType,
+  PolymorphicProps,
+  SystemProps,
+  TypographySystemProps
+} from '../../../../types';
 
-type BoxHTMLElementType = keyof Pick<
-  JSX.IntrinsicElements,
-  | 'address'
-  | 'article'
-  | 'aside'
-  | 'blockquote'
-  | 'canvas'
-  | 'caption'
-  | 'cite'
-  | 'code'
-  | 'details'
-  | 'dialog'
-  | 'div'
-  | 'figcaption'
-  | 'figure'
-  | 'footer'
-  | 'form'
-  | 'header'
-  | 'li'
-  | 'main'
-  | 'nav'
-  | 'ol'
-  | 'pre'
-  | 'section'
-  | 'span'
-  | 'summary'
-  | 'template'
-  | 'ul'
->;
-
-export interface BoxProps
-  extends SystemProps<BoxHTMLElementType>,
-    TypographySystemProps {
+export type BoxProps<C extends DefaultAllowedHTMLElementType = 'div'> = {
   children?: React.ReactNode;
-}
+} & PolymorphicProps<C> &
+  SystemProps &
+  TypographySystemProps;
 
-export const Box: React.FC<BoxProps> = ({
-  as = 'div',
+export const Box = <C extends DefaultAllowedHTMLElementType = 'div'>({
+  as,
   children,
   ...nativeProps
-}) =>
-  React.createElement(as, {
+}: BoxProps<C>): ReturnType<React.FC<C>> =>
+  React.createElement(as || 'div', {
     ...omitSystemProps(nativeProps),
     className: classNames(
       systemClassName(nativeProps),

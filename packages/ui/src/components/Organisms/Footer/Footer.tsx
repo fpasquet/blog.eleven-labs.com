@@ -1,3 +1,5 @@
+import './Footer.scss';
+
 import React from 'react';
 
 import {
@@ -19,19 +21,22 @@ export interface FooterProps {
     title: string;
     description: string;
   };
-  buttonToElevenLabsSiteProps: Pick<ButtonProps, 'children'>;
+  elevenLabsSiteLink: { label: string } & Omit<ButtonProps, 'children'>;
   contactTitle: string;
   contactList: { title: string; description: React.ReactNode }[];
-  languageLinks: {
+  languageLinks: ({
     name: string;
+    label: string;
     active?: boolean;
-    linkProps: LinkProps;
-  }[];
+  } & Omit<LinkProps, 'children'>)[];
 }
 
 export const Footer: React.FC<FooterProps> = ({
   introBlock,
-  buttonToElevenLabsSiteProps,
+  elevenLabsSiteLink: {
+    label: elevenLabsSiteLinkLabel,
+    ...elevenLabsSiteLinkProps
+  },
   contactTitle,
   contactList,
   languageLinks
@@ -41,6 +46,7 @@ export const Footer: React.FC<FooterProps> = ({
     bg="primary-dark"
     color="white"
     textAlign={{ xs: 'center', md: 'left' }}
+    className="footer"
   >
     <Flex
       direction={{ xs: 'column', md: 'row' }}
@@ -66,7 +72,9 @@ export const Footer: React.FC<FooterProps> = ({
         <Text size={{ xs: 'xxs' }} weight="bold" mb="s">
           {introBlock.description}
         </Text>
-        <Button {...buttonToElevenLabsSiteProps} mb="xl" />
+        <Button mb="xl" {...elevenLabsSiteLinkProps}>
+          {elevenLabsSiteLinkLabel}
+        </Button>
       </FlexItem>
       <FlexItem>
         <Heading size={{ xs: 'l' }} mb="s">
@@ -91,24 +99,17 @@ export const Footer: React.FC<FooterProps> = ({
     </Flex>
     <Divider variant="neutral" />
     <Flex py="s" justifyContent="center" alignItems="center">
-      <Box mr="xxs-2">
+      <Box mr="xxs">
         <Icons.Language width="16px" height="16px" />
       </Box>
-      {languageLinks.map((languageLink, index) => (
-        <React.Fragment key={languageLink.name}>
-          <Link
-            {...languageLink.linkProps}
-            weight={languageLink.active ? 'bold' : undefined}
-            color={!languageLink.active ? 'amaranth' : undefined}
-            size={{ xs: 'xs' }}
-          >
-            {languageLink.name}
+      {languageLinks.map(({ label, name, active, ...linkProps }, index) => (
+        <React.Fragment key={name}>
+          <Link size={{ xs: 'xs' }} active={active} {...linkProps}>
+            {label}
           </Link>
-          <Box mx="s">
-            {languageLinks.length - 1 !== index && (
-              <Icons.CircleSeparator width="6px" height="6px" />
-            )}
-          </Box>
+          {languageLinks.length - 1 !== index && (
+            <Box mx="s" className="footer__circle-separator" />
+          )}
         </React.Fragment>
       ))}
     </Flex>

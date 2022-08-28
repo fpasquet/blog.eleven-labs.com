@@ -14,5 +14,6 @@ export const PATHS = {
   HOME: '/:lang',
   PAGINATED_HOME: '/:lang/page/:page',
   POST: '/:lang/:slug',
-  AUTHOR: '/:lang/authors/:name'
+  AUTHOR: '/:lang/authors/:authorUsername',
+  CATEGORY: '/:lang/categories/:categoryName'
 };

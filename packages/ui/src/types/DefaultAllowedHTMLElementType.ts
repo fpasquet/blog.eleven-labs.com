@@ -1,4 +1,4 @@
-export type DefaultHTMLElementType = Pick<
+export type DefaultAllowedHTMLElementType = keyof Pick<
   JSX.IntrinsicElements,
   | 'address'
   | 'article'
@@ -17,6 +17,7 @@ export type DefaultHTMLElementType = Pick<
   | 'form'
   | 'header'
   | 'li'
+  | 'main'
   | 'nav'
   | 'ol'
   | 'pre'

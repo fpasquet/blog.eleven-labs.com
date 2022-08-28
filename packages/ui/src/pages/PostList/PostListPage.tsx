@@ -2,19 +2,19 @@ import React from 'react';
 
 import {
   Box,
-  Heading,
   PostPreviewList,
-  PostPreviewListProps
+  PostPreviewListProps,
+  Text
 } from '../../components';
 import { LayoutTemplate, LayoutTemplateProps } from '../../templates';
 
-export interface HomePageProps
-  extends LayoutTemplateProps,
+export interface PostListPageProps
+  extends Omit<LayoutTemplateProps, 'children'>,
     PostPreviewListProps {
   postPreviewListTitle: string;
 }
 
-export const HomePage: React.FC<HomePageProps> = ({
+export const PostListPage: React.FC<PostListPageProps> = ({
   postPreviewListTitle,
   posts,
   textNumberOfItems,
@@ -25,9 +25,9 @@ export const HomePage: React.FC<HomePageProps> = ({
 }) => (
   <LayoutTemplate headerProps={headerProps} footerProps={footerProps}>
     <Box as="main" className="container-main">
-      <Heading size="m" my="l" as="p">
+      <Text size="m" my="l">
         {postPreviewListTitle}
-      </Heading>
+      </Text>
       <PostPreviewList
         posts={posts}
         textNumberOfItems={textNumberOfItems}
