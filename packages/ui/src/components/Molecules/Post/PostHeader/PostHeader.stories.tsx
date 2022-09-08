@@ -7,7 +7,10 @@ import { PostHeader } from './PostHeader';
 export default {
   title: 'Components/Molecules/Post/PostHeader',
   component: PostHeader,
-  args: PostFixture,
+  args: {
+    ...PostFixture,
+    authorLinkProps: () => ({})
+  },
   parameters: {
     viewport: {
       defaultViewport: 'extraSmallScreen'

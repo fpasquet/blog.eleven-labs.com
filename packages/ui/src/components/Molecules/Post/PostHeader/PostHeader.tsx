@@ -1,6 +1,14 @@
 import React from 'react';
 
-import { Box, Divider, Flex, Heading, Icons, Link } from '../../../Atoms';
+import {
+  Box,
+  Divider,
+  Flex,
+  Heading,
+  Icons,
+  Link,
+  LinkProps
+} from '../../../Atoms';
 
 export interface PostHeaderProps {
   title: string;
@@ -10,13 +18,15 @@ export interface PostHeaderProps {
     username: string;
     nameWithInitial: string;
   }[];
+  authorLinkProps: (username: string) => Omit<LinkProps, 'children'>;
 }
 
 export const PostHeader: React.FC<PostHeaderProps> = ({
   title,
   date,
   readingTime,
-  authors
+  authors,
+  authorLinkProps
 }) => (
   <Box mt={{ xs: 's', md: 'xl' }} size={{ xs: 'xxs', md: 'xs' }}>
     <Heading as="h2" size={{ xs: 'xl', md: 'xxl-2' }} weight="bold">
@@ -41,7 +51,10 @@ export const PostHeader: React.FC<PostHeaderProps> = ({
         <Icons.Person width="16px" height="16px" />
         {authors.map((author, index) => (
           <React.Fragment key={author.username}>
-            <Link ml={index === 0 ? { xs: 'xxs-3' } : undefined}>
+            <Link
+              ml={index === 0 ? { xs: 'xxs-3' } : undefined}
+              {...authorLinkProps(author.username)}
+            >
               {author.nameWithInitial}
             </Link>
             {authors.length - 1 !== index && <Box as="span"> & </Box>}

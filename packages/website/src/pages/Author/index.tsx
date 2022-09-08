@@ -1,7 +1,9 @@
+import { AuthorPage as AuthorPageUI } from '@eleven-labs/blog-ui';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+
+import { useAuthorPageProps } from './useAuthorPageProps';
 
 export const AuthorPage: React.FC = () => {
-  const { t } = useTranslation();
-  return <>{t('welcome_to_author_page')}</>;
+  const authorPageProps = useAuthorPageProps();
+  return <AuthorPageUI {...authorPageProps} />;
 };

@@ -14,7 +14,7 @@ export const transformAuthorData = (author: AuthorData): Author => {
     username: author.username,
     name: author.name,
     nameWithInitial,
-    avatarImageUrl: '',
+    avatarImageUrl: `/imgs/authors/${author.username}.jpg`,
     description: decodeBase64(author.contentBase64)
   };
 };

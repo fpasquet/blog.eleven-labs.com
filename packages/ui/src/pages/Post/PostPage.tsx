@@ -6,6 +6,7 @@ import {
   LinkProps,
   PostFooter,
   PostHeader,
+  PostHeaderProps,
   RichText
 } from '../../components';
 import { LayoutTemplate, LayoutTemplateProps } from '../../templates';
@@ -22,9 +23,10 @@ export interface PostPageProps extends Omit<LayoutTemplateProps, 'children'> {
     avatarImageUrl?: string;
     description: string;
   }[];
+  authorLinkProps: PostHeaderProps['authorLinkProps'];
   postFooterTitle: string;
   backLinkLabel: string;
-  backLinkProps: LinkProps;
+  backLinkProps: Omit<LinkProps, 'children'>;
 }
 
 export const PostPage: React.FC<PostPageProps> = ({
@@ -32,6 +34,7 @@ export const PostPage: React.FC<PostPageProps> = ({
   date,
   readingTime,
   authors,
+  authorLinkProps,
   content,
   postFooterTitle,
   backLinkLabel,
@@ -47,9 +50,14 @@ export const PostPage: React.FC<PostPageProps> = ({
         date={date}
         readingTime={readingTime}
         authors={authors}
+        authorLinkProps={authorLinkProps}
       />
       <RichText mt={{ xs: 'l', md: 'xl' }} content={content} />
-      <PostFooter title={postFooterTitle} authors={authors} />
+      <PostFooter
+        title={postFooterTitle}
+        authors={authors}
+        authorLinkProps={authorLinkProps}
+      />
     </Box>
   </LayoutTemplate>
 );

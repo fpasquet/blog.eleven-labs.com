@@ -25,6 +25,13 @@ export const usePostPageProps = (): PostPageProps => {
     backLinkProps: {
       as: Link,
       to: generatePath(PATHS.HOME, { lang })
-    }
+    },
+    authorLinkProps: (username: string) => ({
+      as: Link,
+      to: generatePath(PATHS.AUTHOR, {
+        lang,
+        authorUsername: username
+      })
+    })
   };
 };
