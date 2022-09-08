@@ -15,9 +15,7 @@ describe('Test method getCategoryUrls', () => {
     const postsMock = Array.from({ length: 5 }).map((v, i) => ({
       lang: 'fr',
       slug: `post-${i + 1}`,
-      authors: [`username-${i + 1}`],
-      categories:
-        categoriesMock[Math.floor(Math.random() * categoriesMock.length)]
+      categories: categoriesMock[i] ?? []
     }));
     jest.spyOn(GetFileData, 'getFileData').mockReturnValueOnce(postsMock);
     const expected: string[] = [
