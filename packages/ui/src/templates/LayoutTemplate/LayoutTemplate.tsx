@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { Footer, FooterProps } from '../../components/Organisms/Footer';
-import { Header, HeaderProps } from '../../components/Organisms/Header/Header';
+import { Footer, FooterProps, Header, HeaderProps } from '../../components';
 
 export interface LayoutTemplateProps {
   headerProps: HeaderProps;

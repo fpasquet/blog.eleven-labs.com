@@ -13,12 +13,13 @@ export default defineConfig({
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
       // into your library
-      external: ['react'],
+      external: ['react', 'html-react-parser'],
       output: {
         // Provide global variables to use in the UMD build
         // for externalized deps
         globals: {
-          react: 'react'
+          react: 'react',
+          'html-react-parser': 'html-react-parser'
         }
       }
     }

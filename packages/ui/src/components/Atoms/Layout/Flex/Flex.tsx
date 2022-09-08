@@ -10,14 +10,16 @@ import {
   classNamesWithMediaQueries,
   flexOrGridBoxClassName,
   omitSystemProps,
-  systemClassName
+  systemClassName,
+  typographyClassName
 } from '../../../../helpers/systemPropsHelper';
 import {
   DefaultAllowedHTMLElementType,
   FlexOrGridBoxSystemProps,
   PolymorphicProps,
   SystemProps,
-  TypeWithMediaQueriesType
+  TypeWithMediaQueriesType,
+  TypographySystemProps
 } from '../../../../types';
 
 export type FlexProps<C extends DefaultAllowedHTMLElementType = 'div'> = {
@@ -36,6 +38,7 @@ export type FlexProps<C extends DefaultAllowedHTMLElementType = 'div'> = {
   children?: React.ReactNode;
 } & PolymorphicProps<C> &
   SystemProps &
+  TypographySystemProps &
   FlexOrGridBoxSystemProps;
 
 export const Flex = <C extends DefaultAllowedHTMLElementType = 'div'>({
@@ -72,7 +75,8 @@ export const Flex = <C extends DefaultAllowedHTMLElementType = 'div'>({
           justifyContent,
           ...nativeProps
         }),
-        systemClassName(nativeProps)
+        systemClassName(nativeProps),
+        typographyClassName(nativeProps)
       )
     },
     children

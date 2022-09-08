@@ -3,8 +3,11 @@
     "0": {
       "value": "0"
     },
-    "xxs-2": {
+    "xxs-3": {
       "value": "4px"
+    },
+    "xxs-2": {
+      "value": "6px"
     },
     "xxs": {
       "value": "8px"

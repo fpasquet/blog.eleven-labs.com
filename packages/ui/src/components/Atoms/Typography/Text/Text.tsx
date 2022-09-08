@@ -8,9 +8,9 @@ import {
 } from '../../../../helpers/systemPropsHelper';
 import { TypographyProps } from '../TypographyProps';
 
-type TextHTMLElementType = keyof Pick<
+export type TextHTMLElementType = keyof Pick<
   JSX.IntrinsicElements,
-  'span' | 'p' | 'div'
+  'span' | 'p' | 'li' | 'div'
 >;
 
 export type TextProps<C extends TextHTMLElementType = 'p'> = TypographyProps<C>;

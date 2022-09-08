@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { I18nextProvider } from 'react-i18next';
 import { useRoutes } from 'react-router-dom';
 
@@ -12,24 +12,5 @@ export const RootContainer: React.FC<{ lang?: string }> = ({ lang }) => {
     i18n.changeLanguage(lang);
   }
 
-  return (
-    <I18nextProvider i18n={i18n}>
-      <Suspense
-        fallback={
-          <div
-            style={{
-              height: '100vh',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }}
-          >
-            Loading ...
-          </div>
-        }
-      >
-        {routing}
-      </Suspense>
-    </I18nextProvider>
-  );
+  return <I18nextProvider i18n={i18n}>{routing}</I18nextProvider>;
 };

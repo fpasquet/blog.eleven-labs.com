@@ -1,7 +1,10 @@
+import { PostPage as PostPageUI } from '@eleven-labs/blog-ui';
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+
+import { usePostPageProps } from './usePostPageProps';
 
 export const PostPage: React.FC = () => {
-  const { t } = useTranslation();
-  return <>{t('welcome_to_post_page')}</>;
+  const postPageProps = usePostPageProps();
+
+  return <PostPageUI {...postPageProps} />;
 };

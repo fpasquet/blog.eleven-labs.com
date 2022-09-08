@@ -8,7 +8,7 @@ import {
 } from '../../../../helpers/systemPropsHelper';
 import { TypographyProps } from '../TypographyProps';
 
-type HeadingHTMLElementType = keyof Pick<
+export type HeadingHTMLElementType = keyof Pick<
   JSX.IntrinsicElements,
   'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'span' | 'p' | 'div'
 >;

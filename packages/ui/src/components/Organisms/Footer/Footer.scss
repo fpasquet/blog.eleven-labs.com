@@ -13,10 +13,10 @@
     left: 0;
     background-image: var(--background-image-footer, url('../../../assets/imgs/footer_mobile.png'));
     background-size: cover;
-    @include createMediaQueries(map_get($breakpointPropList, 'md'), 'min') {
-      --height-image-footer: 224px;
-      --background-image-footer: url('../../../assets/imgs/footer_desktop.png');
-    }
+  }
+  @include createMediaQueries(map_get($breakpointPropList, 'md'), 'min') {
+    --height-image-footer: 224px;
+    --background-image-footer: url('../../../assets/imgs/footer_desktop.png');
   }
   &__circle-separator {
     &::before {
