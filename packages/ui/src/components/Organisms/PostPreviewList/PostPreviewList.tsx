@@ -1,6 +1,14 @@
 import React from 'react';
 
-import { Box, Button, Divider, Flex, ProgressBar, Text } from '../../Atoms';
+import {
+  Box,
+  BoxProps,
+  Button,
+  Divider,
+  Flex,
+  ProgressBar,
+  Text
+} from '../../Atoms';
 import { PostPreview, PostPreviewProps } from '../../Molecules/PostPreview';
 
 export interface PostPreviewListProps {
@@ -8,20 +16,24 @@ export interface PostPreviewListProps {
   textNumberOfItems?: string;
   percentageOfItemDisplayed?: number;
   loadMoreButtonLabel?: string;
+  onLoadMore?: () => void;
+  postPreviewListContainerProps?: BoxProps;
 }
 
 export const PostPreviewList: React.FC<PostPreviewListProps> = ({
   posts,
   textNumberOfItems,
   percentageOfItemDisplayed,
-  loadMoreButtonLabel
+  loadMoreButtonLabel,
+  onLoadMore,
+  postPreviewListContainerProps = {}
 }) => {
   const hasPagination =
     textNumberOfItems && percentageOfItemDisplayed && loadMoreButtonLabel;
   return (
-    <>
-      {posts.map((post, index) => (
-        <React.Fragment key={post.slug}>
+    <Box {...postPreviewListContainerProps}>
+      {posts.map(({ slug, ...post }, index) => (
+        <React.Fragment key={slug}>
           <PostPreview
             hasMask={Boolean(hasPagination && index === posts.length - 1)}
             {...post}
@@ -37,10 +49,12 @@ export const PostPreviewList: React.FC<PostPreviewListProps> = ({
           <Flex direction="column" justifyContent="center" alignItems="center">
             <Text size={{ xs: 'xxs', md: 'xs' }}>{textNumberOfItems}</Text>
             <ProgressBar value={percentageOfItemDisplayed} mt="xxs" />
-            <Button my="s">{loadMoreButtonLabel}</Button>
+            <Button my="s" onClick={onLoadMore}>
+              {loadMoreButtonLabel}
+            </Button>
           </Flex>
         </>
       )}
-    </>
+    </Box>
   );
 };

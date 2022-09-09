@@ -28,6 +28,7 @@ export const PostListPage: React.FC<PostListPageProps> = ({
   textNumberOfItems,
   percentageOfItemDisplayed,
   loadMoreButtonLabel,
+  onLoadMore,
   headerProps,
   footerProps
 }) => (
@@ -48,6 +49,7 @@ export const PostListPage: React.FC<PostListPageProps> = ({
         textNumberOfItems={textNumberOfItems}
         percentageOfItemDisplayed={percentageOfItemDisplayed}
         loadMoreButtonLabel={loadMoreButtonLabel}
+        onLoadMore={onLoadMore}
       />
     </Box>
   </LayoutTemplate>

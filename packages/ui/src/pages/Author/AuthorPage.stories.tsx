@@ -17,7 +17,7 @@ export default {
     postPreviewListTitle: 'Articles de l’autrice',
     posts: AuthorFixture.posts.map((previewPost) => ({
       ...previewPost,
-      articleLinkProps: {}
+      postLinkProps: {}
     })),
     textNumberOfItems: PostPreviewListWithPagination!.args!.textNumberOfItems,
     percentageOfItemDisplayed:

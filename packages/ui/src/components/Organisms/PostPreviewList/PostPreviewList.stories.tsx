@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
@@ -11,8 +12,9 @@ export default {
   args: {
     posts: PreviewPostsFixture.map((post) => ({
       ...post,
-      articleLinkProps: {}
-    }))
+      postLinkProps: {}
+    })),
+    onLoadMore: action('onLoadMore')
   },
   parameters: {
     layout: 'full',

@@ -11,7 +11,7 @@ export default {
     relatedPostListTitle: 'Articles sur le même thème',
     posts: PreviewPostsFixture.slice(0, 3).map((post) => ({
       ...post,
-      articleLinkProps: {}
+      postLinkProps: {}
     }))
   },
   parameters: {
