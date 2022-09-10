@@ -17,10 +17,14 @@ export interface PostFooterProps {
 export const PostFooter: React.FC<PostFooterProps> = ({ title, authors }) => (
   <Box className="post-footer" color="grey-dark" mt={{ xs: 'm' }}>
     <Divider mb={{ xs: 'm' }} />
-    <Text size={{ xs: 'xxs' }} mb={{ xs: 'xxs' }} textTransform="uppercase">
+    <Text
+      mb={{ xs: 'xxs' }}
+      size={{ xs: 'xxs-2', md: 'xxs' }}
+      weight="bold"
+      textTransform="uppercase"
+    >
       {title}
     </Text>
-
     <Flex direction={{ xs: 'column', md: 'row' }} gapY={{ md: 'xxl' }}>
       {authors.map((author) => (
         <Flex
@@ -36,7 +40,9 @@ export const PostFooter: React.FC<PostFooterProps> = ({ title, authors }) => (
             />
           )}
           <Box ml={{ xs: 'xxs' }}>
-            <Link size={{ xs: 's' }}>{author.name}</Link>
+            <Link size={{ xs: 'xs', md: 's' }} weight="medium">
+              {author.name}
+            </Link>
             <Text
               size={{ xs: 'xxs', md: 'xs' }}
               dangerouslySetInnerHTML={{ __html: author.description }}

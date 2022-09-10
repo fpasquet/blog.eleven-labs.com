@@ -25,7 +25,7 @@ export const PostListPage: React.FC<PostListPageProps> = ({
 }) => (
   <LayoutTemplate headerProps={headerProps} footerProps={footerProps}>
     <Box as="main" className="container-main">
-      <Text size="m" my="l">
+      <Text my="l" size={{ xs: 'm', md: 'l' }} weight="medium">
         {postPreviewListTitle}
       </Text>
       <PostPreviewList

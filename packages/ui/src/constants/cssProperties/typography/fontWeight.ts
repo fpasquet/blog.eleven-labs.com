@@ -1,2 +1,2 @@
-export const fontWeightList = ['normal', 'bold', 'lighter'] as const;
+export const fontWeightList = ['regular', 'medium', 'bold'] as const;
 export type FontWeightType = typeof fontWeightList[number];

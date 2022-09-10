@@ -4,12 +4,6 @@
       "value": "'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif"
     },
     "font-size": {
-      "xxs-4": {
-        "value": "8px"
-      },
-      "xxs-3": {
-        "value": "10px"
-      },
       "xxs-2": {
         "value": "12px"
       },
@@ -36,12 +30,6 @@
       },
       "xxl-2": {
         "value": "28px"
-      },
-      "xxl-3": {
-        "value": "30px"
-      },
-      "xxl-4": {
-        "value": "32px"
       }
     }
   }

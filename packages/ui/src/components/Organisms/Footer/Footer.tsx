@@ -9,7 +9,6 @@ import {
   Divider,
   Flex,
   FlexItem,
-  Heading,
   Icons,
   Link,
   LinkProps,
@@ -47,6 +46,7 @@ export const Footer: React.FC<FooterProps> = ({
     color="white"
     textAlign={{ xs: 'center', md: 'left' }}
     className="footer"
+    size={{ xs: 'xxs', md: 'xs' }}
   >
     <Flex
       direction={{ xs: 'column', md: 'row' }}
@@ -64,12 +64,12 @@ export const Footer: React.FC<FooterProps> = ({
           mb="xxs"
         >
           <Icons.Logo width="45px" height="45px" />
-          <Heading as="span" size={{ xs: 'xxl-4' }} weight="normal">
+          <Text as="span" size={{ xs: 'xxl', md: 'xxl-2' }}>
             Eleven Labs
-          </Heading>
+          </Text>
         </Flex>
-        <Text size={{ xs: 'xxs-2' }}>{introBlock.title}</Text>
-        <Text size={{ xs: 'xxs' }} weight="bold" mb="s">
+        <Text>{introBlock.title}</Text>
+        <Text weight="bold" mb="s">
           {introBlock.description}
         </Text>
         <Button mb="xl" {...elevenLabsSiteLinkProps}>
@@ -77,17 +77,12 @@ export const Footer: React.FC<FooterProps> = ({
         </Button>
       </FlexItem>
       <FlexItem>
-        <Heading size={{ xs: 'l' }} mb="s">
+        <Text size={{ xs: 'l', md: 'xxl' }} weight="medium" mb="s">
           {contactTitle}
-        </Heading>
+        </Text>
         <Flex direction={{ xs: 'column', md: 'row' }} gap={{ md: 'xl' }}>
           {contactList.map((contact) => (
-            <Box
-              key={contact.title}
-              mb="m"
-              className="footer__contact-item"
-              size={{ xs: 'xxs' }}
-            >
+            <Box key={contact.title} mb="m" className="footer__contact-item">
               <Text weight="bold" mb="xxs-2">
                 {contact.title}
               </Text>
@@ -104,7 +99,7 @@ export const Footer: React.FC<FooterProps> = ({
       </Box>
       {languageLinks.map(({ label, name, active, ...linkProps }, index) => (
         <React.Fragment key={name}>
-          <Link size={{ xs: 'xs' }} active={active} {...linkProps}>
+          <Link active={active} {...linkProps}>
             {label}
           </Link>
           {languageLinks.length - 1 !== index && (

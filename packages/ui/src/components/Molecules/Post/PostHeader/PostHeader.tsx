@@ -18,15 +18,12 @@ export const PostHeader: React.FC<PostHeaderProps> = ({
   readingTime,
   authors
 }) => (
-  <Box mt={{ xs: 's', md: 'xl' }}>
-    <Heading size={{ xs: 'l', md: 'xxl-3' }}>{title}</Heading>
+  <Box mt={{ xs: 's', md: 'xl' }} size={{ xs: 'xxs', md: 'xs' }}>
+    <Heading as="h2" size={{ xs: 'xl', md: 'xxl-2' }} weight="bold">
+      {title}
+    </Heading>
     <Flex direction={{ xs: 'column', md: 'row' }} mt={{ md: 'xxs-3' }}>
-      <Flex
-        mt={{ xs: 'xxs', md: '0' }}
-        color="grey-dark"
-        size={{ xs: 'xxs-2', md: 'xs' }}
-        alignItems="center"
-      >
+      <Flex mt={{ xs: 'xxs', md: '0' }} color="grey-dark" alignItems="center">
         <Box>
           <Icons.CalendarToday width="12px" height="12px" />
           <Box as="span" ml={{ xs: 'xxs-3' }}>
@@ -40,12 +37,7 @@ export const PostHeader: React.FC<PostHeaderProps> = ({
           </Box>
         </Box>
       </Flex>
-      <Box
-        mt={{ xs: 'xxs-2', md: '0' }}
-        ml={{ md: 'xxs-3' }}
-        color="grey-dark"
-        size={{ xs: 'xxs-2', md: 'xs' }}
-      >
+      <Box mt={{ xs: 'xxs-2', md: '0' }} ml={{ md: 'xxs-3' }} color="grey-dark">
         <Icons.Person width="16px" height="16px" />
         {authors.map((author, index) => (
           <React.Fragment key={author.username}>

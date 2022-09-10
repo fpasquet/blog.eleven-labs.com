@@ -49,29 +49,27 @@ const htmlReactParserOptions: HTMLReactParser.HTMLReactParserOptions = {
       if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(domNode.tagName)) {
         let headingProps: HeadingProps = {};
         switch (domNode.tagName) {
-          case 'h1':
-            headingProps = {
-              size: { xs: 'l', md: 'xxl' },
-              mt: { xs: 'l', md: 'xl' },
-              mb: { xs: 'xxs', md: 'l' }
-            };
-            break;
           case 'h2':
             headingProps = {
-              size: { xs: 'm', md: 'xl' },
+              size: { xs: 'l', md: 'xl' },
               mt: { xs: 'l', md: 'xl' },
               mb: { xs: 'xxs', md: 'l' }
             };
             break;
           case 'h3':
-          case 'h4':
-          case 'h5':
-          case 'h6':
             headingProps = {
-              size: { xs: 's', md: 'l' },
+              size: { xs: 'm', md: 'l' },
               mt: { xs: 'xs', md: 'l' },
               mb: { xs: 'xxs', md: 's' }
             };
+            break;
+          case 'h4':
+            headingProps = {
+              size: { xs: 's', md: 'm' },
+              mt: { xs: 'xs', md: 'l' },
+              mb: { xs: 'xxs', md: 's' }
+            };
+            break;
         }
         return (
           <Heading

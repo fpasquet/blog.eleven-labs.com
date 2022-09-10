@@ -18,7 +18,6 @@ export type HeadingProps<C extends HeadingHTMLElementType = 'h1'> =
 
 export const Heading = <C extends HeadingHTMLElementType = 'h1'>({
   as,
-  weight = 'bold',
   children,
   ...nativeProps
 }: HeadingProps<C>): ReturnType<React.FC<C>> =>
@@ -26,7 +25,7 @@ export const Heading = <C extends HeadingHTMLElementType = 'h1'>({
     ...omitSystemProps(nativeProps),
     className: classNames(
       systemClassName(nativeProps),
-      typographyClassName({ ...nativeProps, weight })
+      typographyClassName(nativeProps)
     ),
     children
   });
