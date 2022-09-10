@@ -24,7 +24,7 @@ export const HtmlTemplate: React.FC<HtmlTemplateProps> = ({
         crossOrigin="anonymous"
       />
       <link
-        href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;600&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;600&display=swap"
         rel="stylesheet"
       />
       {inlineCss && <style dangerouslySetInnerHTML={{ __html: inlineCss }} />}

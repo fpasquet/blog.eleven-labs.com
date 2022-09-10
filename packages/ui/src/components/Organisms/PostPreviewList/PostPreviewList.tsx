@@ -35,7 +35,7 @@ export const PostPreviewList: React.FC<PostPreviewListProps> = ({
             <Divider variant="secondary" />
           </Box>
           <Flex direction="column" justifyContent="center" alignItems="center">
-            <Text size={{ xs: 'xxs', md: 's' }}>{textNumberOfItems}</Text>
+            <Text size={{ xs: 'xxs', md: 'xs' }}>{textNumberOfItems}</Text>
             <ProgressBar value={percentageOfItemDisplayed} mt="xxs" />
             <Button my="s">{loadMoreButtonLabel}</Button>
           </Flex>

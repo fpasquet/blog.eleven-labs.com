@@ -3,7 +3,7 @@ import './PostPreview.scss';
 import classNames from 'classnames';
 import React from 'react';
 
-import { Box, BoxProps, Link, LinkProps, Text } from '../../Atoms';
+import { Box, BoxProps, Heading, Link, LinkProps, Text } from '../../Atoms';
 
 export interface PostPreviewProps extends BoxProps {
   title: string;
@@ -33,18 +33,20 @@ export const PostPreview: React.FC<PostPreviewProps> = ({
     className={classNames('post-preview', { 'post-preview--mask': hasMask })}
     {...boxProps}
   >
-    <Text
+    <Heading
+      as="h2"
       color="amaranth"
       size={{ xs: 'xs', md: 's' }}
+      weight="medium"
       mb={{ xs: 'xxs-3', md: 'xxs' }}
     >
       {hasMask ? title : <Link {...articleLinkProps}>{title}</Link>}
-    </Text>
+    </Heading>
     <Text size={{ xs: 'xxs', md: 'xs' }}>{excerpt}</Text>
     <Box
       className="post-preview__metadata"
       mt={{ xs: 'xs', md: 's' }}
-      size={{ xs: 'xxs-3', md: 'xxs-2' }}
+      size={{ xs: 'xxs-2', md: 'xxs' }}
     >
       <Text as="span">{date}</Text>
       <Text as="span">{readingTime}</Text>

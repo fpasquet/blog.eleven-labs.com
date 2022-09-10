@@ -2,7 +2,7 @@ import './Header.scss';
 
 import React from 'react';
 
-import { Box, Divider, Flex, Heading, Icons, Text } from '../../Atoms';
+import { Box, Divider, Flex, Icons, Text } from '../../Atoms';
 import {
   ChoiceChipGroup,
   ChoiceChipGroupProps
@@ -39,7 +39,7 @@ export const Header: React.FC<HeaderProps> = ({
         <Icons.Logo className="header__logo" />
         <Box ml={{ xs: 'xxs' }} size={{ xs: 'xxs', md: 'm' }}>
           <Text>{title}</Text>
-          <Text weight="bold">{subtitle}</Text>
+          <Text>{subtitle}</Text>
         </Box>
       </Flex>
       <Icons.Search width="18px" height="18px" />
@@ -54,14 +54,16 @@ export const Header: React.FC<HeaderProps> = ({
     >
       <Box>
         <Box px={{ xs: 'm' }}>
-          <Text size={{ xs: 's', md: 'xl' }}>{introBlock.title}</Text>
-          <Heading
+          <Text size={{ xs: 'm', md: 'l' }} weight="medium">
+            {introBlock.title}
+          </Text>
+          <Text
             mt={{ xs: 'xxs-3' }}
-            size={{ xs: 'xl' }}
+            size={{ xs: 'xl', md: 'xxl-2' }}
             weight="bold"
             dangerouslySetInnerHTML={{ __html: introBlock.description }}
           />
-          <Text size={{ xs: 's', md: 'xxl-4' }} mt="s">
+          <Text mt="s" size={{ xs: 'm', md: 'l' }} weight="medium">
             {choiceCategoryLabel}
           </Text>
         </Box>
