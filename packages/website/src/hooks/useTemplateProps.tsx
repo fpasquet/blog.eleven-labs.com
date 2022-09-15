@@ -3,7 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link, useParams } from 'react-router-dom';
 
-import { contact } from '../config/website';
+import { contact, websiteUrl } from '../config/website';
 import { AUTHORIZED_LANGUAGES, CATEGORIES, PATHS } from '../constants';
 import postsData from '../data/posts.json';
 import { PostData } from '../types';
@@ -25,6 +25,10 @@ export const useLayoutTemplateProps = (): Pick<
       introBlock: {
         title: t('header.intro_block.title'),
         description: t('header.intro_block.description')
+      },
+      homeLinkProps: {
+        as: Link,
+        to: generatePath(PATHS.HOME, { lang })
       },
       choiceCategoryLabel: t('header.choice_category_label'),
       choiceCategoryActive: categoryName,
@@ -58,7 +62,10 @@ export const useLayoutTemplateProps = (): Pick<
         description: t('footer.intro_block.description')
       },
       elevenLabsSiteLink: {
-        label: t('footer.link_to_eleven_labs_site')
+        as: 'a',
+        label: t('footer.link_to_eleven_labs_site'),
+        target: '_blank',
+        href: websiteUrl
       },
       contactTitle: t('footer.contact.title'),
       contactList: [

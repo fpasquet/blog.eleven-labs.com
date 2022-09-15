@@ -2,7 +2,7 @@ import './Header.scss';
 
 import React from 'react';
 
-import { Box, Divider, Flex, Icons, Text } from '../../Atoms';
+import { Box, Divider, Flex, Icons, Link, LinkProps, Text } from '../../Atoms';
 import {
   ChoiceChipGroup,
   ChoiceChipGroupProps
@@ -15,6 +15,7 @@ export interface HeaderProps {
     title: string;
     description: string;
   };
+  homeLinkProps: LinkProps;
   choiceCategoryLabel: string;
   choiceCategoryActive?: string;
   choiceCategories: ChoiceChipGroupProps['choices'];
@@ -24,6 +25,7 @@ export const Header: React.FC<HeaderProps> = ({
   title,
   subtitle,
   introBlock,
+  homeLinkProps,
   choiceCategoryLabel,
   choiceCategories,
   choiceCategoryActive
@@ -37,10 +39,15 @@ export const Header: React.FC<HeaderProps> = ({
     >
       <Flex alignItems="center">
         <Icons.Logo className="header__logo" />
-        <Box ml={{ xs: 'xxs' }} size={{ xs: 'xxs', md: 'm' }}>
-          <Text>{title}</Text>
-          <Text>{subtitle}</Text>
-        </Box>
+        <Link
+          {...homeLinkProps}
+          ml={{ xs: 'xxs' }}
+          size={{ xs: 'xxs', md: 'm' }}
+          active={true}
+        >
+          <Text weight="medium">{title}</Text>
+          <Text weight="bold">{subtitle}</Text>
+        </Link>
       </Flex>
       <Icons.Search width="18px" height="18px" />
     </Flex>

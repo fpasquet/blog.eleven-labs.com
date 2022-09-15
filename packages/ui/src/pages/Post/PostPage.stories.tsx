@@ -11,7 +11,8 @@ export default {
   args: {
     postFooterTitle: 'écrit par',
     ...PostFixture,
-    ...LayoutTemplateStories.args
+    ...LayoutTemplateStories.args,
+    backLinkLabel: 'Retour'
   },
   parameters: {
     layout: 'full',

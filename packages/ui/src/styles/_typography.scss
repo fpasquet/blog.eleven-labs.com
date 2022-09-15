@@ -1,7 +1,12 @@
 $textAlignList: ('left', 'center', 'right', 'justify');
 $textTransformList: ('capitalize', 'uppercase', 'lowercase');
 $textDecorationList: ('underline', 'dotted', 'wavy', 'overline');
-$fontWeightList: ('normal', 'bold', 'lighter');
+
+$fontWeightPropList: (
+  'regular': 'normal',
+  'medium': 500,
+  'bold': 'bold'
+);
 
 @mixin fontSize($sizeName, $size, $modifier) {
   .size-#{$sizeName}\@#{$modifier} {
@@ -16,9 +21,9 @@ $fontWeightList: ('normal', 'bold', 'lighter');
   }
 }
 
-@mixin fontWeight($name, $modifier) {
-  .font-weight-#{$name}\@#{$modifier} {
-    font-weight: #{$name};
+@mixin fontWeight($prefixClassName, $propertyCss, $modifier) {
+  .font-weight-#{$prefixClassName}\@#{$modifier} {
+    font-weight: #{$propertyCss};
   }
 }
 
@@ -42,8 +47,8 @@ $fontWeightList: ('normal', 'bold', 'lighter');
     @each $textAlign in $textAlignList {
       @include textAlign($textAlign, $modifier);
     }
-    @each $fontWeight in $fontWeightList {
-      @include fontWeight($fontWeight, $modifier);
+    @each $prefixClassName, $propertyCss in $fontWeightPropList {
+      @include fontWeight($prefixClassName, $propertyCss, $modifier);
     }
     @each $textTransform in $textTransformList {
       @include textTransform($textTransform, $modifier);

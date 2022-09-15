@@ -38,6 +38,7 @@ export const Reminder: React.FC<ReminderProps> = ({
   <Box
     {...nativeProps}
     className={classNames('reminder', `reminder--${variant}`)}
+    size={{ xs: 's', md: 'm' }}
   >
     <Text className="reminder__title" p={{ xs: 'xxs' }}>
       {title}
