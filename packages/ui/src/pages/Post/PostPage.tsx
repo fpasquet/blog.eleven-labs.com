@@ -1,6 +1,13 @@
 import React from 'react';
 
-import { Box, PostFooter, PostHeader, RichText } from '../../components';
+import {
+  BackLink,
+  Box,
+  LinkProps,
+  PostFooter,
+  PostHeader,
+  RichText
+} from '../../components';
 import { LayoutTemplate, LayoutTemplateProps } from '../../templates';
 
 export interface PostPageProps extends Omit<LayoutTemplateProps, 'children'> {
@@ -16,6 +23,8 @@ export interface PostPageProps extends Omit<LayoutTemplateProps, 'children'> {
     description: string;
   }[];
   postFooterTitle: string;
+  backLinkLabel: string;
+  backLinkProps: LinkProps;
 }
 
 export const PostPage: React.FC<PostPageProps> = ({
@@ -25,11 +34,14 @@ export const PostPage: React.FC<PostPageProps> = ({
   authors,
   content,
   postFooterTitle,
+  backLinkLabel,
+  backLinkProps,
   headerProps,
   footerProps
 }) => (
   <LayoutTemplate headerProps={headerProps} footerProps={footerProps}>
     <Box as="main" className="container-main">
+      <BackLink label={backLinkLabel} {...backLinkProps} />
       <PostHeader
         title={title}
         date={date}

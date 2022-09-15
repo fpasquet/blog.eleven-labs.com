@@ -43,7 +43,7 @@ const htmlReactParserOptions: HTMLReactParser.HTMLReactParserOptions = {
 
       const defaultSize: TypeWithMediaQueriesType<TypographyFontSizeType> = {
         xs: 's',
-        md: 'l'
+        md: 'm'
       };
 
       if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(domNode.tagName)) {

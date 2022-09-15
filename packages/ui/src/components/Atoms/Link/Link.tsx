@@ -35,7 +35,6 @@ export const Link = <C extends LinkElementType = 'a'>({
     as || 'a',
     {
       ...omitSystemProps(nativeProps),
-      ...nativeProps,
       className: classNames(
         'link',
         { [`link--active`]: active },

@@ -11,6 +11,9 @@
     "fr": "Français",
     "en": "English"
   },
+  "common": {
+    "back": "retour"
+  },
   "header": {
     "title": "Eleven Labs",
     "subtitle": "Le blog",
@@ -36,9 +39,10 @@
       "post_preview_list_category_title": "Nos articles {{ categoryName }}",
       "number_of_posts_displayed_label": "{{ numberOfPostsDisplayed }}/{{ numberOfPosts }} affichés",
       "load_more_button_label": "Afficher plus"
+    },
+    "post": {
+      "post_footer_title": "écrit par"
     }
   },
-  "welcome_to_home_page": "Bienvenue sur la page d'accueil",
-  "welcome_to_post_page": "Bienvenue sur la page article",
   "welcome_to_author_page": "Bienvenue sur la page auteur"
 }
