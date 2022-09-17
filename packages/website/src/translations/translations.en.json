@@ -42,6 +42,9 @@
     },
     "post": {
       "post_footer_title": "write by"
+    },
+    "author": {
+      "post_preview_list_title": "Author's article"
     }
   },
   "welcome_to_author_page": "Welcome to author page"

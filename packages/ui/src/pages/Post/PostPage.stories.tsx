@@ -12,6 +12,7 @@ export default {
     postFooterTitle: 'écrit par',
     ...PostFixture,
     ...LayoutTemplateStories.args,
+    authorLinkProps: () => ({}),
     backLinkLabel: 'Retour'
   },
   parameters: {

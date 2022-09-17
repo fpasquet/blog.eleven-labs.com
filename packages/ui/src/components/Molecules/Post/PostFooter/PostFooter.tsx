@@ -2,7 +2,7 @@ import './PostFooter.scss';
 
 import React from 'react';
 
-import { Box, Divider, Flex, Link, Text } from '../../../Atoms';
+import { Box, Divider, Flex, Link, LinkProps, Text } from '../../../Atoms';
 
 export interface PostFooterProps {
   title: string;
@@ -12,9 +12,14 @@ export interface PostFooterProps {
     avatarImageUrl?: string;
     description: string;
   }[];
+  authorLinkProps: (username: string) => Omit<LinkProps, 'children'>;
 }
 
-export const PostFooter: React.FC<PostFooterProps> = ({ title, authors }) => (
+export const PostFooter: React.FC<PostFooterProps> = ({
+  title,
+  authors,
+  authorLinkProps
+}) => (
   <Box className="post-footer" color="grey-dark" mt={{ xs: 'm' }}>
     <Divider mb={{ xs: 'm' }} />
     <Text
@@ -40,7 +45,11 @@ export const PostFooter: React.FC<PostFooterProps> = ({ title, authors }) => (
             />
           )}
           <Box ml={{ xs: 'xxs' }}>
-            <Link size={{ xs: 'xs', md: 's' }} weight="medium">
+            <Link
+              size={{ xs: 'xs', md: 's' }}
+              weight="medium"
+              {...authorLinkProps(author.username)}
+            >
               {author.name}
             </Link>
             <Text
