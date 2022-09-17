@@ -1,1 +1,1 @@
-export * from './getCssContent';
+export * from './blogUI';

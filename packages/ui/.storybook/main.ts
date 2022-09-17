@@ -19,7 +19,7 @@ const config: StorybookViteConfig = {
       config.base = '/storybook/'
     }
 
-    return config
+    return config;
   },
 };
 
