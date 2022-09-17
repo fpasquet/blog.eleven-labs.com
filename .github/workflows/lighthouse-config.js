@@ -3,6 +3,9 @@ module.exports = {
   settings: {
     maxWaitForFcp: 15 * 1000,
     maxWaitForLoad: 35 * 1000,
+    throttling: {
+      cpuSlowdownMultiplier: 2
+    },
     skipAudits: ['uses-http2'],
   },
   audits: [

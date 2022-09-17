@@ -56,7 +56,7 @@ export const Footer: React.FC<FooterProps> = ({
       pb={{ md: 'xl' }}
       gap={{ md: 'xxl-3' }}
     >
-      <FlexItem>
+      <FlexItem mb="xl">
         <Flex
           justifyContent={{ xs: 'center', md: 'start' }}
           alignItems="center"
@@ -72,9 +72,7 @@ export const Footer: React.FC<FooterProps> = ({
         <Text weight="bold" mb="s">
           {introBlock.description}
         </Text>
-        <Button mb="xl" {...elevenLabsSiteLinkProps}>
-          {elevenLabsSiteLinkLabel}
-        </Button>
+        <Button {...elevenLabsSiteLinkProps}>{elevenLabsSiteLinkLabel}</Button>
       </FlexItem>
       <FlexItem>
         <Text size={{ xs: 'l', md: 'xxl' }} weight="medium" mb="s">

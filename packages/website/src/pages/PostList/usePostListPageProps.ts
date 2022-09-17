@@ -26,13 +26,21 @@ export const usePostListPageProps = (): PostListPageProps => {
   const posts: PostListPageProps['posts'] = postsByLang
     .filter((post) => post?.lang === lang)
     .slice(0, NUMBER_OF_ITEMS_PER_PAGE + 1)
-    .map((post) => ({
-      ...transformPostData(post, lang),
-      articleLinkProps: {
-        as: Link,
-        to: generatePath(PATHS.POST, { lang, slug: post.slug })
-      }
-    }));
+    .map((postData) => {
+      const post = transformPostData(postData, lang);
+      return {
+        slug: post.slug,
+        title: post.title,
+        excerpt: post.excerpt,
+        date: post.date,
+        readingTime: post.readingTime,
+        authors: post.authors,
+        articleLinkProps: {
+          as: Link,
+          to: generatePath(PATHS.POST, { lang, slug: post.slug })
+        }
+      };
+    });
 
   const numberOfPostsDisplayed = NUMBER_OF_ITEMS_PER_PAGE;
   const percentageOfItemDisplayed = Math.ceil(

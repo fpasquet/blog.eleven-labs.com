@@ -13,20 +13,13 @@ export const HtmlTemplate: React.FC<HtmlTemplateProps> = ({
     <head>
       <meta charSet="UTF-8" />
       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-      <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-        crossOrigin="anonymous"
-      />
-      <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossOrigin="anonymous"
-      />
-      <link
-        href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;500;700&display=swap"
-        rel="stylesheet"
-      />
+      {Object.entries({
+        'worksans-regular': `/fonts/WorkSans-Regular.woff2`,
+        'worksans-medium': `/fonts/WorkSans-Medium.woff2`,
+        'worksans-bold': `/fonts/WorkSans-Bold.woff2`
+      }).map(([key, url]) => (
+        <link key={key} rel="preload" href={url} as="font" type="font/woff2" />
+      ))}
       {inlineCss && <style dangerouslySetInnerHTML={{ __html: inlineCss }} />}
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Blog Eleven Labs</title>

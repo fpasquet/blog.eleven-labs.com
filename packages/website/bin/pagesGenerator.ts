@@ -2,7 +2,7 @@ import * as cliProgress from 'cli-progress';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { getCssContent } from './helpers';
+import { copyAssets, getCssContent } from './helpers';
 
 const rootDir = process.cwd();
 
@@ -22,6 +22,8 @@ const rootDir = process.cwd();
     {},
     cliProgress.Presets.shades_classic
   );
+
+  copyAssets();
 
   try {
     progressBar.start(urlsData.length, 0);

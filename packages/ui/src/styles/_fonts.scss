@@ -1,0 +1,17 @@
+$fontNamesByWeight: (
+  'WorkSans-Regular': 400,
+  'WorkSans-Medium': 500,
+  'WorkSans-Bold': 700,
+);
+
+@each $fontName, $weight in $fontNamesByWeight {
+  @font-face {
+    font-family: 'Work Sans';
+    font-style: normal;
+    font-weight: $weight;
+    font-display: swap;
+    src:
+      url('/fonts/#{$fontName}.woff2') format('woff2'),
+      url('/fonts/#{$fontName}.woff') format('woff');
+  }
+}
