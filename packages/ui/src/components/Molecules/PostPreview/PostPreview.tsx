@@ -16,6 +16,7 @@ export interface PostPreviewProps extends BoxProps {
   }[];
   articleLinkProps: Omit<LinkProps, 'children'>;
   hasMask?: boolean;
+  isRelated?: boolean;
 }
 
 export const PostPreview: React.FC<PostPreviewProps> = ({
@@ -26,11 +27,16 @@ export const PostPreview: React.FC<PostPreviewProps> = ({
   authors,
   articleLinkProps,
   hasMask,
+  isRelated,
   ...boxProps
 }) => (
   <Box
     as="article"
-    className={classNames('post-preview', { 'post-preview--mask': hasMask })}
+    className={classNames(
+      'post-preview',
+      { 'post-preview--mask': hasMask },
+      { 'post-preview--related': isRelated }
+    )}
     {...boxProps}
   >
     <Heading

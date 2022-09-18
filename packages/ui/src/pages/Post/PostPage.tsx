@@ -7,8 +7,10 @@ import {
   PostFooter,
   PostHeader,
   PostHeaderProps,
+  PostPreviewProps,
   RichText
 } from '../../components';
+import { RelatedPostList } from '../../components/Molecules/Post/RelatedPostList';
 import { LayoutTemplate, LayoutTemplateProps } from '../../templates';
 
 export interface PostPageProps extends Omit<LayoutTemplateProps, 'children'> {
@@ -23,6 +25,8 @@ export interface PostPageProps extends Omit<LayoutTemplateProps, 'children'> {
     avatarImageUrl?: string;
     description: string;
   }[];
+  relatedPostListTitle: string;
+  relatedPosts: ({ slug: string } & PostPreviewProps)[];
   authorLinkProps: PostHeaderProps['authorLinkProps'];
   postFooterTitle: string;
   backLinkLabel: string;
@@ -37,13 +41,15 @@ export const PostPage: React.FC<PostPageProps> = ({
   authorLinkProps,
   content,
   postFooterTitle,
+  relatedPostListTitle,
+  relatedPosts,
   backLinkLabel,
   backLinkProps,
   headerProps,
   footerProps
 }) => (
   <LayoutTemplate headerProps={headerProps} footerProps={footerProps}>
-    <Box as="main" className="container-main">
+    <Box as="main" className="container-content">
       <BackLink label={backLinkLabel} {...backLinkProps} />
       <PostHeader
         title={title}
@@ -57,6 +63,10 @@ export const PostPage: React.FC<PostPageProps> = ({
         title={postFooterTitle}
         authors={authors}
         authorLinkProps={authorLinkProps}
+      />
+      <RelatedPostList
+        relatedPostListTitle={relatedPostListTitle}
+        posts={relatedPosts}
       />
     </Box>
   </LayoutTemplate>

@@ -23,12 +23,26 @@ const generateAuthorsData = async () => {
   );
   progressBar.start(authorFilePaths.length, 0);
 
-  const authors = [];
+  const authors: AuthorData[] = [];
   for (const authorFilePath of authorFilePaths) {
     const { data, htmlContentBase64 } =
       parseMarkdownByFilePath<AuthorData>(authorFilePath);
+
     const validatedData = await authorDataValidationSchema.validate(data);
-    authors.push({ ...validatedData, contentBase64: htmlContentBase64 });
+    const avatarImageExist = fs.existsSync(
+      path.resolve(
+        process.cwd(),
+        'public/imgs/authors',
+        `${validatedData.username}.jpg`
+      )
+    );
+    authors.push({
+      ...validatedData,
+      avatarImageUrl: avatarImageExist
+        ? `/imgs/authors/${validatedData.username}.jpg`
+        : undefined,
+      contentBase64: htmlContentBase64
+    });
     progressBar.increment();
   }
 

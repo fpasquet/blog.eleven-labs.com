@@ -27,6 +27,7 @@ export const transformPostData = (post: PostData, lang: string): Post => {
     date: postDateToString(post.date, lang),
     readingTime: readingTimeToString(post.readingTimeInMinutes),
     authors,
+    categories: post.categories,
     content: decodeBase64(post.contentBase64)
   };
 };

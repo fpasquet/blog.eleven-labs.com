@@ -9,8 +9,8 @@ export default {
   title: 'Components/Organisms/PostPreviewList',
   component: PostPreviewList,
   args: {
-    posts: PreviewPostsFixture.map((previewPost) => ({
-      ...previewPost,
+    posts: PreviewPostsFixture.map((post) => ({
+      ...post,
       articleLinkProps: {}
     }))
   },

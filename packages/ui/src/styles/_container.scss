@@ -1,4 +1,4 @@
-.container-main {
+.container-content {
   margin: var(--margin-container-main, 0 auto);
   width: var(--width-container-main, auto);
   padding-top: var(--padding-top-container-main, var(--spacing-l));
@@ -7,5 +7,15 @@
   @include createMediaQueries(map_get($breakpointPropList, 'md'), 'min') {
     --width-container-main: 864px;
     --padding-top-container-main: var(--spacing-xl);
+  }
+}
+
+@each $modifier , $breakpoint in $breakpointPropList {
+  @include createMediaQueries($breakpoint, 'min') {
+    @each $prefixClassName, $propertyCss in $spacingPropList {
+      @each $name, $size in $spacingList {
+        @include spacing($prefixClassName, $name, $propertyCss, $size, $modifier);
+      }
+    }
   }
 }

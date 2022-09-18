@@ -2,7 +2,7 @@ import { PostListPageProps, PostPreviewListProps } from '@eleven-labs/blog-ui';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link, useParams } from 'react-router-dom';
 
-import { NUMBER_OF_ITEMS_PER_PAGE, PATHS } from '../../constants';
+import { CATEGORIES, NUMBER_OF_ITEMS_PER_PAGE, PATHS } from '../../constants';
 import postsData from '../../data/posts.json';
 import { transformPostData } from '../../helpers/transformPostData';
 import { useLayoutTemplateProps } from '../../hooks/useTemplateProps';
@@ -65,6 +65,34 @@ export const usePostListPageProps = (): PostListPageProps => {
 
   return {
     ...layoutTemplateProps,
+    introBlock: {
+      title: t('header.intro_block.title'),
+      description: t('header.intro_block.description')
+    },
+    choiceCategoryLabel: t('header.choice_category_label'),
+    choiceCategoryActive: categoryName,
+    choiceCategories: [
+      {
+        as: Link,
+        name: 'all',
+        label: t('categories.all'),
+        to: generatePath(PATHS.HOME, { lang })
+      },
+      ...CATEGORIES.filter((currentCategoryName) =>
+        (postsData as PostData[]).find(
+          (post) =>
+            post.lang === lang && post.categories.includes(currentCategoryName)
+        )
+      ).map((currentCategoryName) => ({
+        as: Link,
+        name: currentCategoryName,
+        label: t(`categories.${currentCategoryName}`),
+        to: generatePath(PATHS.CATEGORY, {
+          lang,
+          categoryName: currentCategoryName
+        })
+      }))
+    ],
     postPreviewListTitle: categoryName
       ? t('pages.post_list.post_preview_list_category_title', { categoryName })
       : t('pages.post_list.post_preview_list_title'),

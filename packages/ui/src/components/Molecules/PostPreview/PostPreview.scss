@@ -22,4 +22,10 @@
     }
     mask-image: linear-gradient(#000, transparent);
   }
+  &--related {
+    padding: var(--spacing-s);
+    background-color: var(--color-white);
+    border-radius: 4px;
+    box-shadow: 0 4px 4px rgb(0 0 0 / 20%);
+  }
 }
