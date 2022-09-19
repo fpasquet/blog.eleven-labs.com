@@ -4,57 +4,23 @@ import { useTranslation } from 'react-i18next';
 import { generatePath, Link, useParams } from 'react-router-dom';
 
 import { contact, websiteUrl } from '../config/website';
-import { AUTHORIZED_LANGUAGES, CATEGORIES, PATHS } from '../constants';
-import postsData from '../data/posts.json';
-import { PostData } from '../types';
+import { AUTHORIZED_LANGUAGES, PATHS } from '../constants';
 
 export const useLayoutTemplateProps = (): Pick<
   LayoutTemplateProps,
   'headerProps' | 'footerProps'
 > => {
-  const { lang = 'fr', categoryName } = useParams<{
-    lang?: string;
-    categoryName?: string;
-  }>();
+  const { lang = 'fr' } = useParams<{ lang?: string }>();
   const { t } = useTranslation();
 
   return {
     headerProps: {
       title: t('header.title'),
       subtitle: t('header.subtitle'),
-      introBlock: {
-        title: t('header.intro_block.title'),
-        description: t('header.intro_block.description')
-      },
       homeLinkProps: {
         as: Link,
         to: generatePath(PATHS.HOME, { lang })
-      },
-      choiceCategoryLabel: t('header.choice_category_label'),
-      choiceCategoryActive: categoryName,
-      choiceCategories: [
-        {
-          as: Link,
-          name: 'all',
-          label: t('categories.all'),
-          to: generatePath(PATHS.HOME, { lang })
-        },
-        ...CATEGORIES.filter((currentCategoryName) =>
-          (postsData as PostData[]).find(
-            (post) =>
-              post.lang === lang &&
-              post.categories.includes(currentCategoryName)
-          )
-        ).map((currentCategoryName) => ({
-          as: Link,
-          name: currentCategoryName,
-          label: t(`categories.${currentCategoryName}`),
-          to: generatePath(PATHS.CATEGORY, {
-            lang,
-            categoryName: currentCategoryName
-          })
-        }))
-      ]
+      }
     },
     footerProps: {
       introBlock: {

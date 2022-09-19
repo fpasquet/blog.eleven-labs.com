@@ -41,6 +41,7 @@
       "load_more_button_label": "Afficher plus"
     },
     "post": {
+      "related_post_list_title": "Articles sur le même thème",
       "post_footer_title": "écrit par"
     },
     "author": {

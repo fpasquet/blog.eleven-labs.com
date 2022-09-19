@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import RelatedPostListStories from '../../components/Molecules/Post/RelatedPostList/RelatedPostList.stories';
 import PostFixture from '../../fixtures/post.json';
 import LayoutTemplateStories from '../../templates/LayoutTemplate/LayoutTemplate.stories';
 import { PostPage } from './PostPage';
@@ -12,6 +13,8 @@ export default {
     postFooterTitle: 'écrit par',
     ...PostFixture,
     ...LayoutTemplateStories.args,
+    relatedPostListTitle: RelatedPostListStories.args!.relatedPostListTitle,
+    relatedPosts: RelatedPostListStories.args!.posts,
     authorLinkProps: () => ({}),
     backLinkLabel: 'Retour'
   },

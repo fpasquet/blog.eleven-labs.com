@@ -41,7 +41,7 @@ export const AuthorPage: React.FC<AuthorPageProps> = ({
   footerProps
 }) => (
   <LayoutTemplate headerProps={headerProps} footerProps={footerProps}>
-    <Box as="main" className="container-main author-page">
+    <Box as="main" className="container-content author-page">
       <BackLink label={backLinkLabel} {...backLinkProps} />
       <Flex
         direction={{ xs: 'column', md: 'row' }}

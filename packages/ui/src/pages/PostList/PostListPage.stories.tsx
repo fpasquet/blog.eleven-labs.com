@@ -4,6 +4,7 @@ import React from 'react';
 import PreviewPostsStories, {
   PostPreviewListWithPagination
 } from '../../components/Organisms/PostPreviewList/PostPreviewList.stories';
+import SubHeaderStories from '../../components/Organisms/SubHeader/SubHeader.stories';
 import LayoutTemplateStories from '../../templates/LayoutTemplate/LayoutTemplate.stories';
 import { PostListPage } from './PostListPage';
 
@@ -18,6 +19,7 @@ export default {
       PostPreviewListWithPagination!.args!.percentageOfItemDisplayed,
     loadMoreButtonLabel:
       PostPreviewListWithPagination!.args!.loadMoreButtonLabel,
+    ...SubHeaderStories.args,
     ...LayoutTemplateStories.args
   },
   parameters: {

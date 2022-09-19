@@ -9,12 +9,4 @@
       --size-logo-header: 46px;
     }
   }
-  &__choice-chip-group {
-    width: var(--width-choice-chip-group-header, 100vw);
-    overflow-x: var(--overflow-x-choice-chip-group--header, scroll);
-    @include createMediaQueries(map_get($breakpointPropList, 'md'), 'min') {
-      --width-choice-chip-group-header: 'auto';
-      --overflow-x-choice-chip-group--header: 'auto';
-    }
-  }
 }

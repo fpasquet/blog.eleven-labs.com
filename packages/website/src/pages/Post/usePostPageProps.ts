@@ -8,14 +8,54 @@ import { transformPostData } from '../../helpers/transformPostData';
 import { useLayoutTemplateProps } from '../../hooks/useTemplateProps';
 import { PostData } from '../../types';
 
+const intersection = (arrayA: unknown[], arrayB: unknown[]): unknown[] =>
+  arrayA.filter((x) => arrayB.includes(x));
+
 export const usePostPageProps = (): PostPageProps => {
   const { lang = 'fr', slug } = useParams<{ lang: string; slug: string }>();
   const { t } = useTranslation();
   const layoutTemplateProps = useLayoutTemplateProps();
-  const postData = (postsData as PostData[]).find(
-    (post) => post.lang === lang && post.slug === slug
+  const allPostData = postsData as PostData[];
+  const postData = allPostData.find(
+    (currentPostData) =>
+      currentPostData.lang === lang && currentPostData.slug === slug
   ) as PostData;
   const post = transformPostData(postData, lang);
+
+  const relatedPostsByCategory = allPostData
+    .filter(
+      (currentPostData) =>
+        currentPostData.lang === lang &&
+        currentPostData.slug !== slug &&
+        intersection(post.categories, currentPostData.categories).length > 0
+    )
+    .slice(0, 3);
+  const relatedPostsByAuthor = allPostData
+    .filter(
+      (currentPostData) =>
+        currentPostData.lang === lang &&
+        currentPostData.slug !== slug &&
+        intersection(post.authors, currentPostData.authors).length > 0
+    )
+    .slice(0, 3);
+
+  const relatedPosts = [...relatedPostsByCategory, ...relatedPostsByAuthor]
+    .slice(0, 3)
+    .map((postData) => {
+      const post = transformPostData(postData, lang);
+      return {
+        slug: post.slug,
+        title: post.title,
+        excerpt: post.excerpt,
+        date: post.date,
+        readingTime: post.readingTime,
+        authors: post.authors,
+        articleLinkProps: {
+          as: Link,
+          to: generatePath(PATHS.POST, { lang, slug: post.slug })
+        }
+      };
+    });
 
   return {
     ...layoutTemplateProps,
@@ -26,6 +66,8 @@ export const usePostPageProps = (): PostPageProps => {
       as: Link,
       to: generatePath(PATHS.HOME, { lang })
     },
+    relatedPostListTitle: t('pages.post.related_post_list_title'),
+    relatedPosts,
     authorLinkProps: (username: string) => ({
       as: Link,
       to: generatePath(PATHS.AUTHOR, {
