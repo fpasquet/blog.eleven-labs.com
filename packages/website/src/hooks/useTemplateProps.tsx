@@ -3,6 +3,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link, useParams } from 'react-router-dom';
 
+import { i18n } from '../config/i18n';
 import { contact, websiteUrl } from '../config/website';
 import { AUTHORIZED_LANGUAGES, PATHS } from '../constants';
 
@@ -57,7 +58,8 @@ export const useLayoutTemplateProps = (): Pick<
           active: currentLang === lang,
           name: currentLang,
           label: t(`languages.${currentLang}`),
-          to: languagePath
+          to: languagePath,
+          onClick: () => i18n.changeLanguage(currentLang)
         };
       })
     }
