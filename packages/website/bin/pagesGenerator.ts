@@ -2,9 +2,14 @@ import * as cliProgress from 'cli-progress';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { copyAssets, getCssContent } from './helpers';
+import { blogUIRootDir, rootDir } from './constants';
 
-const rootDir = process.cwd();
+const getCssContent = (): string => {
+  return fs.readFileSync(`${blogUIRootDir}/dist/style.css`, {
+    encoding: 'utf8',
+    flag: 'r'
+  });
+};
 
 (async () => {
   const {
@@ -22,8 +27,6 @@ const rootDir = process.cwd();
     {},
     cliProgress.Presets.shades_classic
   );
-
-  copyAssets();
 
   try {
     progressBar.start(urlsData.length, 0);

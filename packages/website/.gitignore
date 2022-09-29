@@ -26,7 +26,7 @@ dist-ssr
 # Custom
 _authors
 _posts
-public/imgs/authors/
-public/imgs/posts/
+public
+!public/favicon.ico
 src/data
 build
