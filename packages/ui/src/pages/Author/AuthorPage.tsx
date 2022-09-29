@@ -32,6 +32,7 @@ export const AuthorPage: React.FC<AuthorPageProps> = ({
   author,
   backLinkLabel,
   backLinkProps,
+  postPreviewListContainerProps,
   postPreviewListTitle,
   posts,
   textNumberOfItems,
@@ -72,6 +73,7 @@ export const AuthorPage: React.FC<AuthorPageProps> = ({
         {postPreviewListTitle}
       </Text>
       <PostPreviewList
+        postPreviewListContainerProps={postPreviewListContainerProps}
         posts={posts}
         textNumberOfItems={textNumberOfItems}
         percentageOfItemDisplayed={percentageOfItemDisplayed}

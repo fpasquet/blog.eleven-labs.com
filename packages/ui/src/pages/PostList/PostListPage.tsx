@@ -23,6 +23,7 @@ export const PostListPage: React.FC<PostListPageProps> = ({
   choiceCategoryLabel,
   choiceCategories,
   choiceCategoryActive,
+  postPreviewListContainerProps,
   postPreviewListTitle,
   posts,
   textNumberOfItems,
@@ -45,6 +46,7 @@ export const PostListPage: React.FC<PostListPageProps> = ({
         {postPreviewListTitle}
       </Text>
       <PostPreviewList
+        postPreviewListContainerProps={postPreviewListContainerProps}
         posts={posts}
         textNumberOfItems={textNumberOfItems}
         percentageOfItemDisplayed={percentageOfItemDisplayed}
