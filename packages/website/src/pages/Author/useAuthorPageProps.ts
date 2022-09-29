@@ -7,6 +7,7 @@ import authorsData from '../../data/authors.json';
 import postsData from '../../data/posts.json';
 import { transformAuthorData } from '../../helpers/transformAuthorData';
 import { transformPostData } from '../../helpers/transformPostData';
+import { useNewsletterBlockProps } from '../../hooks/useNewsletterBlockProps';
 import { useLayoutTemplateProps } from '../../hooks/useTemplateProps';
 import { AuthorData, PostData } from '../../types';
 
@@ -17,6 +18,7 @@ export const useAuthorPageProps = (): AuthorPageProps => {
   }>();
   const { t } = useTranslation();
   const layoutTemplateProps = useLayoutTemplateProps();
+  const newsletterBlockProps = useNewsletterBlockProps();
 
   const authorData = (authorsData as AuthorData[]).find(
     (currentAuthor) => currentAuthor.username === authorUsername
@@ -69,6 +71,7 @@ export const useAuthorPageProps = (): AuthorPageProps => {
       to: generatePath(PATHS.HOME, { lang })
     },
     author: transformAuthorData(authorData),
+    newsletterBlockProps,
     postPreviewListContainerProps: {
       id: 'post-preview-list-container'
     },

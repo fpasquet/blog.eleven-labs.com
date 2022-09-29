@@ -16,7 +16,7 @@ export interface UsePostPreviewListOptions {
   }) => PostPreviewListProps['posts'][0]['postLinkProps'];
 }
 
-export const usePostPreviewList = ({
+export const usePostPreviewListProps = ({
   allPosts,
   translateTextNumberOfItems,
   loadMoreButtonLabel,

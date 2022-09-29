@@ -6,6 +6,7 @@ import { PATHS } from '../../constants';
 import postsData from '../../data/posts.json';
 import { intersection } from '../../helpers/objectHelper';
 import { transformPostData } from '../../helpers/transformPostData';
+import { useNewsletterBlockProps } from '../../hooks/useNewsletterBlockProps';
 import { useLayoutTemplateProps } from '../../hooks/useTemplateProps';
 import { PostData } from '../../types';
 
@@ -13,6 +14,7 @@ export const usePostPageProps = (): PostPageProps => {
   const { lang = 'fr', slug } = useParams<{ lang: string; slug: string }>();
   const { t } = useTranslation();
   const layoutTemplateProps = useLayoutTemplateProps();
+  const newsletterBlockProps = useNewsletterBlockProps();
   const allPostData = postsData as PostData[];
   const postData = allPostData.find(
     (currentPostData) =>
@@ -64,6 +66,7 @@ export const usePostPageProps = (): PostPageProps => {
       as: Link,
       to: generatePath(PATHS.HOME, { lang })
     },
+    newsletterBlockProps,
     relatedPostListTitle: t('pages.post.related_post_list_title'),
     relatedPosts,
     authorLinkProps: (username: string) => ({

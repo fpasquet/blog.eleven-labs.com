@@ -9,6 +9,10 @@ import {
   SubHeaderProps,
   Text
 } from '../../components';
+import {
+  NewsletterBlock,
+  NewsletterBlockProps
+} from '../../components/Molecules/NewsletterBlock';
 import { LayoutTemplate, LayoutTemplateProps } from '../../templates';
 
 export interface PostListPageProps
@@ -16,6 +20,7 @@ export interface PostListPageProps
     PostPreviewListProps,
     SubHeaderProps {
   postPreviewListTitle: string;
+  newsletterBlockProps: NewsletterBlockProps;
 }
 
 export const PostListPage: React.FC<PostListPageProps> = ({
@@ -30,6 +35,7 @@ export const PostListPage: React.FC<PostListPageProps> = ({
   percentageOfItemDisplayed,
   loadMoreButtonLabel,
   onLoadMore,
+  newsletterBlockProps,
   headerProps,
   footerProps
 }) => (
@@ -53,6 +59,7 @@ export const PostListPage: React.FC<PostListPageProps> = ({
         loadMoreButtonLabel={loadMoreButtonLabel}
         onLoadMore={onLoadMore}
       />
+      <NewsletterBlock my={{ xs: 'xl', md: 'xxl' }} {...newsletterBlockProps} />
     </Box>
   </LayoutTemplate>
 );

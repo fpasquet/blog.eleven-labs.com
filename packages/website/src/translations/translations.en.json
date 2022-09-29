@@ -33,6 +33,11 @@
     },
     "link_to_eleven_labs_site": "Let's go"
   },
+  "newsletter": {
+    "title": "Want to know more ?",
+    "description": "Sign up to our Newsletter",
+    "button_label": "Subscribe"
+  },
   "pages": {
     "post_list": {
       "post_preview_list_title": "All our articles",
@@ -47,6 +52,5 @@
     "author": {
       "post_preview_list_title": "Author's article"
     }
-  },
-  "welcome_to_author_page": "Welcome to author page"
+  }
 }

@@ -1,4 +1,5 @@
 .button {
+  display: inline-block;
   font-size: var(--typography-font-size-xxs);
   padding: var(--spacing-xxs) var(--spacing-m);
   border-radius: 4px;
@@ -8,7 +9,6 @@
   background-color: var(--background-color-button, var(--color-amaranth));
   color: var(--color-button, var(--color-white));
   border: var(--border-button, none);
-
   &--primary {
     --background-color-button: var(--color-amaranth);
     --color-button: var(--color-white);

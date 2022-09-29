@@ -3,7 +3,6 @@
 .footer {
   --height-image-footer: 86px;
   position: relative;
-  margin-top: var(--height-image-footer);
   &::before {
     position: absolute;
     content: '';

@@ -1,12 +1,12 @@
 import { PostPreviewList } from '@eleven-labs/blog-ui';
 import React from 'react';
 
-import { usePostPreviewList } from '../../hooks/usePostPreviewList';
+import { usePostPreviewListProps } from '../../hooks/usePostPreviewListProps';
 import { StaticCache } from '../../types';
 
 export const PostPreviewListContainer: React.FC = () => {
   const cache: StaticCache = window.staticCache;
-  const postPreviewListProps = usePostPreviewList({
+  const postPreviewListProps = usePostPreviewListProps({
     allPosts: cache.posts,
     loadMoreButtonLabel:
       cache.translations.pages.post_list.load_more_button_label,
