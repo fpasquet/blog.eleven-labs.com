@@ -14,7 +14,7 @@ export interface PostPreviewProps extends BoxProps {
     username: string;
     nameWithInitial: string;
   }[];
-  articleLinkProps: Omit<LinkProps, 'children'>;
+  postLinkProps: Omit<LinkProps, 'children'>;
   hasMask?: boolean;
   isRelated?: boolean;
 }
@@ -25,7 +25,7 @@ export const PostPreview: React.FC<PostPreviewProps> = ({
   date,
   readingTime,
   authors,
-  articleLinkProps,
+  postLinkProps,
   hasMask,
   isRelated,
   ...boxProps
@@ -46,7 +46,7 @@ export const PostPreview: React.FC<PostPreviewProps> = ({
       weight="medium"
       mb={{ xs: 'xxs-3', md: 'xxs' }}
     >
-      {hasMask ? title : <Link {...articleLinkProps}>{title}</Link>}
+      {hasMask ? title : <Link {...postLinkProps}>{title}</Link>}
     </Heading>
     <Text size={{ xs: 'xxs', md: 'xs' }}>{excerpt}</Text>
     <Box

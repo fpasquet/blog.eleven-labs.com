@@ -4,7 +4,14 @@ import React from 'react';
 import { usePostListPageProps } from './usePostListPageProps';
 
 export const PostListPage: React.FC = () => {
-  const postListPageProps = usePostListPageProps();
+  const { inlineScript, ...postListPageProps } = usePostListPageProps();
 
-  return <PostListPageUI {...postListPageProps} />;
+  return (
+    <>
+      <PostListPageUI {...postListPageProps} />
+      {inlineScript && (
+        <script dangerouslySetInnerHTML={{ __html: inlineScript }} />
+      )}
+    </>
+  );
 };

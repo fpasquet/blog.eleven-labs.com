@@ -4,12 +4,10 @@ import { generatePath, Link, useParams } from 'react-router-dom';
 
 import { PATHS } from '../../constants';
 import postsData from '../../data/posts.json';
+import { intersection } from '../../helpers/objectHelper';
 import { transformPostData } from '../../helpers/transformPostData';
 import { useLayoutTemplateProps } from '../../hooks/useTemplateProps';
 import { PostData } from '../../types';
-
-const intersection = (arrayA: unknown[], arrayB: unknown[]): unknown[] =>
-  arrayA.filter((x) => arrayB.includes(x));
 
 export const usePostPageProps = (): PostPageProps => {
   const { lang = 'fr', slug } = useParams<{ lang: string; slug: string }>();
@@ -50,7 +48,7 @@ export const usePostPageProps = (): PostPageProps => {
         date: post.date,
         readingTime: post.readingTime,
         authors: post.authors,
-        articleLinkProps: {
+        postLinkProps: {
           as: Link,
           to: generatePath(PATHS.POST, { lang, slug: post.slug })
         }

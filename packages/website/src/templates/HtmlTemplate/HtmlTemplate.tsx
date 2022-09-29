@@ -2,11 +2,13 @@ import React from 'react';
 
 export interface HtmlTemplateProps {
   inlineCss?: string;
+  inlineScript?: string;
   children: React.ReactNode;
 }
 
 export const HtmlTemplate: React.FC<HtmlTemplateProps> = ({
   inlineCss,
+  inlineScript,
   children
 }) => (
   <html lang="en">
@@ -25,5 +27,9 @@ export const HtmlTemplate: React.FC<HtmlTemplateProps> = ({
       <title>Blog Eleven Labs</title>
     </head>
     <body>{children}</body>
+    {inlineScript && (
+      <script dangerouslySetInnerHTML={{ __html: inlineScript }} />
+    )}
+    <script type="text/javascript" defer src="/js/main.min.js" />
   </html>
 );

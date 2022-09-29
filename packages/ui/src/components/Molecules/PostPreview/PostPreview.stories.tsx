@@ -15,7 +15,7 @@ export default {
     date: PreviewPostFixture.date,
     readingTime: PreviewPostFixture.readingTime,
     authors: PreviewPostFixture.authors,
-    articleLinkProps: {}
+    postLinkProps: {}
   },
   parameters: {
     viewport: {

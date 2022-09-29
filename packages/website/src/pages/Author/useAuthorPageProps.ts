@@ -34,7 +34,7 @@ export const useAuthorPageProps = (): AuthorPageProps => {
     .slice(0, NUMBER_OF_ITEMS_PER_PAGE + 1)
     .map((post) => ({
       ...transformPostData(post, lang),
-      articleLinkProps: {
+      postLinkProps: {
         as: Link,
         to: generatePath(PATHS.POST, { lang, slug: post.slug })
       }
@@ -69,6 +69,9 @@ export const useAuthorPageProps = (): AuthorPageProps => {
       to: generatePath(PATHS.HOME, { lang })
     },
     author: transformAuthorData(authorData),
+    postPreviewListContainerProps: {
+      id: 'post-preview-list-container'
+    },
     postPreviewListTitle: t('pages.author.post_preview_list_title'),
     posts,
     ...paginationProps

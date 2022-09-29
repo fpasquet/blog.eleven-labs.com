@@ -8,7 +8,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src/index.ts'),
       name: '@eleven-labs/blog-ui',
-      fileName: (format) => `index.${format}.js`
+      fileName: (format) => `[name].${format}.js`
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled
