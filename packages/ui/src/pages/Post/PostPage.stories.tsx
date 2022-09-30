@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import NewsletterBlockStories from '../../components/Molecules/NewsletterBlock/NewsletterBlock.stories';
 import RelatedPostListStories from '../../components/Molecules/Post/RelatedPostList/RelatedPostList.stories';
 import PostFixture from '../../fixtures/post.json';
 import LayoutTemplateStories from '../../templates/LayoutTemplate/LayoutTemplate.stories';
@@ -13,6 +14,7 @@ export default {
     postFooterTitle: 'écrit par',
     ...PostFixture,
     ...LayoutTemplateStories.args,
+    newsletterBlockProps: NewsletterBlockStories.args,
     relatedPostListTitle: RelatedPostListStories.args!.relatedPostListTitle,
     relatedPosts: RelatedPostListStories.args!.posts,
     authorLinkProps: () => ({}),

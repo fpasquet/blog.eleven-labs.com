@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import NewsletterBlockStories from '../../components/Molecules/NewsletterBlock/NewsletterBlock.stories';
 import PreviewPostsStories, {
   PostPreviewListWithPagination
 } from '../../components/Organisms/PostPreviewList/PostPreviewList.stories';
@@ -20,6 +21,7 @@ export default {
     loadMoreButtonLabel:
       PostPreviewListWithPagination!.args!.loadMoreButtonLabel,
     ...SubHeaderStories.args,
+    newsletterBlockProps: NewsletterBlockStories.args,
     ...LayoutTemplateStories.args
   },
   parameters: {

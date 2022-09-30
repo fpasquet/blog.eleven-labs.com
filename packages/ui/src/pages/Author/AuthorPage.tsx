@@ -12,6 +12,10 @@ import {
   PostPreviewListProps,
   Text
 } from '../../components';
+import {
+  NewsletterBlock,
+  NewsletterBlockProps
+} from '../../components/Molecules/NewsletterBlock';
 import { LayoutTemplate, LayoutTemplateProps } from '../../templates';
 
 export interface AuthorPageProps
@@ -26,6 +30,7 @@ export interface AuthorPageProps
   postPreviewListTitle: string;
   backLinkLabel: string;
   backLinkProps: Omit<LinkProps, 'children'>;
+  newsletterBlockProps: NewsletterBlockProps;
 }
 
 export const AuthorPage: React.FC<AuthorPageProps> = ({
@@ -38,6 +43,7 @@ export const AuthorPage: React.FC<AuthorPageProps> = ({
   textNumberOfItems,
   percentageOfItemDisplayed,
   loadMoreButtonLabel,
+  newsletterBlockProps,
   headerProps,
   footerProps
 }) => (
@@ -79,6 +85,7 @@ export const AuthorPage: React.FC<AuthorPageProps> = ({
         percentageOfItemDisplayed={percentageOfItemDisplayed}
         loadMoreButtonLabel={loadMoreButtonLabel}
       />
+      <NewsletterBlock my={{ xs: 'xl', md: 'xxl' }} {...newsletterBlockProps} />
     </Box>
   </LayoutTemplate>
 );

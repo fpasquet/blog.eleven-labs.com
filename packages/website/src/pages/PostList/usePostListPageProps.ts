@@ -7,7 +7,8 @@ import { CATEGORIES, PATHS } from '../../constants';
 import postsData from '../../data/posts.json';
 import { pick } from '../../helpers/objectHelper';
 import { transformPostData } from '../../helpers/transformPostData';
-import { usePostPreviewList } from '../../hooks/usePostPreviewList';
+import { useNewsletterBlockProps } from '../../hooks/useNewsletterBlockProps';
+import { usePostPreviewListProps } from '../../hooks/usePostPreviewListProps';
 import { useLayoutTemplateProps } from '../../hooks/useTemplateProps';
 import { PostData } from '../../types';
 
@@ -20,6 +21,7 @@ export const usePostListPageProps = (): PostListPageProps & {
   }>();
   const { t } = useTranslation();
   const layoutTemplateProps = useLayoutTemplateProps();
+  const newsletterBlockProps = useNewsletterBlockProps();
 
   const postsByLang = useMemo(
     () =>
@@ -43,7 +45,7 @@ export const usePostListPageProps = (): PostListPageProps & {
     [lang, categoryName]
   );
 
-  const postPreviewListProps = usePostPreviewList({
+  const postPreviewListProps = usePostPreviewListProps({
     allPosts: postsByLang,
     loadMoreButtonLabel: t('pages.post_list.load_more_button_label'),
     postLinkProps: ({ path }) => ({
@@ -87,6 +89,7 @@ export const usePostListPageProps = (): PostListPageProps & {
         })
       }))
     ],
+    newsletterBlockProps,
     postPreviewListContainerProps: {
       id: 'post-preview-list-container'
     },

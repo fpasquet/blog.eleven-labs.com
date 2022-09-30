@@ -1,18 +1,21 @@
+import './RelatedPostList.scss';
+
 import React from 'react';
 
-import { Box, Text } from '../../../Atoms';
+import { Box, BoxProps, Text } from '../../../Atoms';
 import { PostPreview, PostPreviewProps } from '../../PostPreview';
 
-export interface RelatedPostListProps {
+export interface RelatedPostListProps extends BoxProps {
   relatedPostListTitle: string;
   posts: ({ slug: string } & PostPreviewProps)[];
 }
 
 export const RelatedPostList: React.FC<RelatedPostListProps> = ({
   relatedPostListTitle,
-  posts
+  posts,
+  ...boxProps
 }) => (
-  <Box bg="grey-ultra-light" p={{ xs: 'm' }}>
+  <Box {...boxProps} p={{ xs: 'm' }} className="related-post-list">
     <Text mb="m" size={{ xs: 'm', md: 'l' }} weight="medium">
       {relatedPostListTitle}
     </Text>

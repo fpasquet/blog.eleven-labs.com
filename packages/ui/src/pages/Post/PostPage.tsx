@@ -10,6 +10,10 @@ import {
   PostPreviewProps,
   RichText
 } from '../../components';
+import {
+  NewsletterBlock,
+  NewsletterBlockProps
+} from '../../components/Molecules/NewsletterBlock';
 import { RelatedPostList } from '../../components/Molecules/Post/RelatedPostList';
 import { LayoutTemplate, LayoutTemplateProps } from '../../templates';
 
@@ -25,6 +29,7 @@ export interface PostPageProps extends Omit<LayoutTemplateProps, 'children'> {
     avatarImageUrl?: string;
     description: string;
   }[];
+  newsletterBlockProps: NewsletterBlockProps;
   relatedPostListTitle: string;
   relatedPosts: ({ slug: string } & PostPreviewProps)[];
   authorLinkProps: PostHeaderProps['authorLinkProps'];
@@ -41,6 +46,7 @@ export const PostPage: React.FC<PostPageProps> = ({
   authorLinkProps,
   content,
   postFooterTitle,
+  newsletterBlockProps,
   relatedPostListTitle,
   relatedPosts,
   backLinkLabel,
@@ -64,7 +70,9 @@ export const PostPage: React.FC<PostPageProps> = ({
         authors={authors}
         authorLinkProps={authorLinkProps}
       />
+      <NewsletterBlock my={{ xs: 'l' }} {...newsletterBlockProps} />
       <RelatedPostList
+        mb={{ xs: 'xl', md: 'xxl' }}
         relatedPostListTitle={relatedPostListTitle}
         posts={relatedPosts}
       />

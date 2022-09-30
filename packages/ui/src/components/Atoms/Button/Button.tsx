@@ -32,7 +32,6 @@ export const Button = <C extends ButtonElementType = 'button'>({
     as || 'button',
     {
       ...omitSystemProps(nativeProps),
-      ...nativeProps,
       className: classNames(
         'button',
         { [`button--${variant}`]: variant },

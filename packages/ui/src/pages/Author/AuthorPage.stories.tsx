@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import NewsletterBlockStories from '../../components/Molecules/NewsletterBlock/NewsletterBlock.stories';
 import { PostPreviewListWithPagination } from '../../components/Organisms/PostPreviewList/PostPreviewList.stories';
 import AuthorFixture from '../../fixtures/author.json';
 import LayoutTemplateStories from '../../templates/LayoutTemplate/LayoutTemplate.stories';
@@ -24,6 +25,7 @@ export default {
       PostPreviewListWithPagination!.args!.percentageOfItemDisplayed,
     loadMoreButtonLabel:
       PostPreviewListWithPagination!.args!.loadMoreButtonLabel,
+    newsletterBlockProps: NewsletterBlockStories.args,
     ...LayoutTemplateStories.args
   },
   parameters: {

@@ -33,6 +33,11 @@
     },
     "link_to_eleven_labs_site": "J'y vais"
   },
+  "newsletter": {
+    "title": "En quête d’un outil de veille ?",
+    "description": "Abonne-toi à notre newsletter",
+    "button_label": "Je m'abonne"
+  },
   "pages": {
     "post_list": {
       "post_preview_list_title": "Tous nos articles",
@@ -47,6 +52,5 @@
     "author": {
       "post_preview_list_title": "Article de l'auteur"
     }
-  },
-  "welcome_to_author_page": "Bienvenue sur la page auteur"
+  }
 }

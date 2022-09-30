@@ -1,4 +1,6 @@
 .container-content {
+  position: relative;
+  z-index: 1;
   margin: var(--margin-container-main, 0 auto);
   width: var(--width-container-main, auto);
   padding-top: var(--padding-top-container-main, var(--spacing-l));
