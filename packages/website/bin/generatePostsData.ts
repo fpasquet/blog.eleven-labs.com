@@ -9,6 +9,9 @@ import { postDataValidationSchema } from './generateData/post/postDataValidation
 
 const rootDir = process.cwd();
 
+const findDuplicates = <T = string>(arr: T[]): T[] =>
+  arr.filter((item, index) => arr.indexOf(item) !== index);
+
 const generatePostsData = async () => {
   const postsDir = path.resolve(rootDir, '_posts');
   const langOfPosts = fs.readdirSync(postsDir);
@@ -48,6 +51,14 @@ const generatePostsData = async () => {
       contentBase64: htmlContentBase64
     });
     progressBar.increment();
+  }
+
+  const duplicateIds = findDuplicates(
+    posts.map((post) => `${post.slug}-${post.lang}`)
+  );
+
+  if (duplicateIds.length) {
+    throw new Error(`Some posts are duplicates, [${duplicateIds.join(', ')}]`);
   }
 
   progressBar.stop();
