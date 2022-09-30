@@ -25,4 +25,3 @@ export default {
 const Template: ComponentStory<typeof Box> = (args) => <Box {...args} />;
 
 export const Overview = Template.bind({});
-Overview.args = {};

@@ -22,4 +22,3 @@ export default {
 const Template: ComponentStory<typeof Link> = (args) => <Link {...args} />;
 
 export const Overview = Template.bind({});
-Overview.args = {};

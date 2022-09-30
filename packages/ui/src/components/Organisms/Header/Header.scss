@@ -9,4 +9,17 @@
       --size-logo-header: 46px;
     }
   }
+  &__icon-search {
+    display: var(--icon-search-visibility-header, block);
+    @include createMediaQueries(map_get($breakpointPropList, 'md'), 'min') {
+      --icon-search-visibility-header: none;
+    }
+  }
+  &__input-search {
+    display: var(--input-search-visibility-header, none);
+    @include createMediaQueries(map_get($breakpointPropList, 'md'), 'min') {
+      --input-search-visibility-header: block;
+      min-width: 450px;
+    }
+  }
 }

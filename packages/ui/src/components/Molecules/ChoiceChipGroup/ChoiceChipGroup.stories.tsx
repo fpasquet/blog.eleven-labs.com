@@ -36,4 +36,3 @@ const Template: ComponentStory<typeof ChoiceChipGroup> = (args) => (
 );
 
 export const Overview = Template.bind({});
-Overview.args = {};

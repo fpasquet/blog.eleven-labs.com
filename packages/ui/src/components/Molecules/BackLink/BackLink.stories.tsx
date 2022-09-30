@@ -26,4 +26,3 @@ const Template: ComponentStory<typeof BackLink> = (args) => (
 );
 
 export const Overview = Template.bind({});
-Overview.args = {};

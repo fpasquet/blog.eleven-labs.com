@@ -23,4 +23,3 @@ const Template: ComponentStory<typeof PostHeader> = (args) => (
 );
 
 export const Overview = Template.bind({});
-Overview.args = {};

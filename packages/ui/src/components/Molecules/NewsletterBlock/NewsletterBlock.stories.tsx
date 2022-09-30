@@ -20,4 +20,3 @@ const Template: ComponentStory<typeof NewsletterBlock> = (args) => (
 );
 
 export const Overview = Template.bind({});
-Overview.args = {};

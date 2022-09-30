@@ -9,7 +9,8 @@ export default {
   component: PostFooter,
   args: {
     title: 'écrit par',
-    authors: PostFixture.authors
+    authors: PostFixture.authors,
+    authorLinkProps: () => ({})
   },
   parameters: {
     viewport: {
@@ -23,4 +24,3 @@ const Template: ComponentStory<typeof PostFooter> = (args) => (
 );
 
 export const Overview = Template.bind({});
-Overview.args = {};

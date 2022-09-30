@@ -29,7 +29,6 @@ const Template: ComponentStory<typeof Heading> = (args) => (
 );
 
 export const Overview = Template.bind({});
-Overview.args = {};
 
 export const All: ComponentStory<typeof Heading> = () => (
   <>

@@ -20,4 +20,3 @@ const Template: ComponentStory<typeof ProgressBar> = (args) => (
 );
 
 export const Overview = Template.bind({});
-Overview.args = {};

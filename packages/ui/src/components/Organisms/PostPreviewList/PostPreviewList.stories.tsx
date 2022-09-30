@@ -36,7 +36,6 @@ const Template: ComponentStory<typeof PostPreviewList> = (args) => (
 );
 
 export const Overview = Template.bind({});
-Overview.args = {};
 
 export const PostPreviewListWithPagination = Template.bind({});
 PostPreviewListWithPagination.args = {

@@ -3,17 +3,23 @@ import './Header.scss';
 import React from 'react';
 
 import { Box, Flex, Icons, Link, LinkProps, Text } from '../../Atoms';
+import {
+  InputSearch,
+  InputSearchProps
+} from '../../Molecules/InputSearch/InputSearch';
 
 export interface HeaderProps {
   title: string;
   subtitle: string;
   homeLinkProps: LinkProps;
+  searchInputProps: InputSearchProps;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   title,
   subtitle,
-  homeLinkProps
+  homeLinkProps,
+  searchInputProps
 }) => (
   <Box as="header" bg="primary-light" color="white" className="header">
     <Flex
@@ -34,7 +40,12 @@ export const Header: React.FC<HeaderProps> = ({
           <Text weight="bold">{subtitle}</Text>
         </Link>
       </Flex>
-      <Icons.Search width="18px" height="18px" />
+      <Icons.Search
+        width="18px"
+        height="18px"
+        className="header__icon-search"
+      />
+      <InputSearch {...searchInputProps} className="header__input-search" />
     </Flex>
   </Box>
 );

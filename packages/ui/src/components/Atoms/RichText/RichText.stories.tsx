@@ -57,4 +57,3 @@ const Template: ComponentStory<typeof RichText> = (args) => (
 );
 
 export const Overview = Template.bind({});
-Overview.args = {};

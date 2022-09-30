@@ -56,4 +56,3 @@ export default {
 const Template: ComponentStory<typeof Flex> = (args) => <Flex {...args} />;
 
 export const Overview = Template.bind({});
-Overview.args = {};
