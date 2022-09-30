@@ -15,4 +15,9 @@
     --height-divider: 1px;
     --background-color-divider: var(--color-white);
   }
+  &--search {
+    height: 16px;
+    width: 80px;
+    --background-color-divider: var(--color-yellow);
+  }
 }

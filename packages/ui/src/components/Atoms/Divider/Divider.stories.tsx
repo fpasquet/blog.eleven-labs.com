@@ -17,4 +17,3 @@ const Template: ComponentStory<typeof Divider> = (args) => (
 );
 
 export const Overview = Template.bind({});
-Overview.args = {};

@@ -26,7 +26,6 @@ const Template: ComponentStory<typeof ChoiceChip> = (args) => (
 );
 
 export const Overview = Template.bind({});
-Overview.args = {};
 
 export const ChoiceChipIsActice = Template.bind({});
 ChoiceChipIsActice.args = {

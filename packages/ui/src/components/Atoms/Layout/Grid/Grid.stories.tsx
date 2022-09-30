@@ -42,4 +42,3 @@ export default {
 const Template: ComponentStory<typeof Grid> = (args) => <Grid {...args} />;
 
 export const Overview = Template.bind({});
-Overview.args = {};

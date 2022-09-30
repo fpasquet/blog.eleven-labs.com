@@ -1,0 +1,16 @@
+.input {
+  border: none;
+  padding: var(--spacing-xs) var(--spacing-s);
+  &::placeholder {
+    color: var(--color-grey-middle);
+  }
+  &:focus-visible {
+    outline-color: var(--color-grey-middle);
+  }
+  &--search {
+    border-radius: 21px;
+  }
+  &--form {
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.15);
+  }
+}

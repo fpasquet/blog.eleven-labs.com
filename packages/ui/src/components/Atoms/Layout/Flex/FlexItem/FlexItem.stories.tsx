@@ -62,4 +62,3 @@ const Template: ComponentStory<typeof FlexItem> = (args) => (
 );
 
 export const Overview = Template.bind({});
-Overview.args = {};

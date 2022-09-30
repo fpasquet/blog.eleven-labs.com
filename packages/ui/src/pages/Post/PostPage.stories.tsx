@@ -33,4 +33,3 @@ const Template: ComponentStory<typeof PostPage> = (args) => (
 );
 
 export const Overview = Template.bind({});
-Overview.args = {};

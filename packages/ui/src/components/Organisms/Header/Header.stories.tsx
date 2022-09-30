@@ -1,6 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
+import InputSearchStories from '../../Molecules/InputSearch/InputSearch.stories';
 import { Header } from './Header';
 
 export default {
@@ -8,7 +9,8 @@ export default {
   component: Header,
   args: {
     title: 'Eleven Labs',
-    subtitle: 'Le blog'
+    subtitle: 'Le blog',
+    searchInputProps: InputSearchStories.args
   },
   parameters: {
     layout: 'full',
@@ -21,4 +23,3 @@ export default {
 const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />;
 
 export const Overview = Template.bind({});
-Overview.args = {};

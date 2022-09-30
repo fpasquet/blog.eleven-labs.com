@@ -27,7 +27,6 @@ export default {
 const Template: ComponentStory<typeof Text> = (args) => <Text {...args} />;
 
 export const Overview = Template.bind({});
-Overview.args = {};
 
 export const All: ComponentStory<typeof Text> = () => (
   <>

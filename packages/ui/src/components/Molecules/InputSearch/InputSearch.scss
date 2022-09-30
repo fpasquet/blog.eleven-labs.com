@@ -1,0 +1,21 @@
+.input-search {
+  position: relative;
+  &__input {
+    width: 100%;
+    padding-right: var(--spacing-xxl) !important;
+  }
+  &__button {
+    position: absolute;
+    right: var(--spacing-xxs);
+    height: calc(100% - var(--spacing-s));
+    margin: var(--spacing-xxs) 0;
+    border: none;
+    border-left: 1px solid var(--color-grey-middle);
+    background-color: transparent;
+  }
+  &__icon {
+    width: 24px;
+    height: 24px;
+    color: var(--color-amaranth);
+  }
+}

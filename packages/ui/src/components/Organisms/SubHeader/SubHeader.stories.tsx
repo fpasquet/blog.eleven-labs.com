@@ -34,4 +34,3 @@ const Template: ComponentStory<typeof SubHeader> = (args) => (
 );
 
 export const Overview = Template.bind({});
-Overview.args = {};

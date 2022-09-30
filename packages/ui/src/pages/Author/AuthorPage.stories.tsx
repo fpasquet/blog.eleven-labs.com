@@ -41,4 +41,3 @@ const Template: ComponentStory<typeof AuthorPage> = (args) => (
 );
 
 export const Overview = Template.bind({});
-Overview.args = {};

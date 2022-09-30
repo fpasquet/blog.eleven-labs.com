@@ -23,7 +23,6 @@ const Template: ComponentStory<typeof Reminder> = (args) => (
 );
 
 export const Overview = Template.bind({});
-Overview.args = {};
 
 export const All: ComponentStory<typeof Text> = () => (
   <>
