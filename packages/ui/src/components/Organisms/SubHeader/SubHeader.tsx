@@ -43,15 +43,17 @@ export const SubHeader: React.FC<SubHeaderProps> = ({
             mt={{ xs: 'xxs-3' }}
             size={{ xs: 'xl', md: 'xxl-2' }}
             weight="bold"
-            dangerouslySetInnerHTML={{ __html: introBlock.description }}
-          />
-          <Text mt="s" size={{ xs: 'm', md: 'l' }} weight="medium">
+            className="sub-header__description-container"
+          >
+            {introBlock.description}
+          </Text>
+          <Text mt={{ xs: 's', md: 'l' }} size={{ xs: 'm', md: 'l' }} weight="medium">
             {choiceCategoryLabel}
           </Text>
         </Box>
         <Box className="sub-header__choice-chip-group">
           <ChoiceChipGroup
-            mt="s"
+            mt={{ xs: 's', md: 'm' }}
             px={{ xs: 'm' }}
             choices={choiceCategories}
             choiceActive={choiceCategoryActive}

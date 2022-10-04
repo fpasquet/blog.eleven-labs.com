@@ -1,6 +1,6 @@
 export const contact = {
   email: 'business@eleven-labs.com',
-  phoneNumber: '0182831175',
+  phoneNumber: '01.82.83.11.75',
   addressList: [
     {
       name: 'Eleven Labs - Paris',

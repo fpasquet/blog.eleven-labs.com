@@ -52,14 +52,20 @@ export const useLayoutTemplateProps = (): Pick<
         }
       ],
       languageLinks: AUTHORIZED_LANGUAGES.map((currentLang) => {
-        const languagePath = generatePath(PATHS.HOME, { lang: currentLang });
+        const active = currentLang === lang;
+        let languageLinkProps = {}
+        if (active) {
+          languageLinkProps = {
+            to: generatePath(PATHS.HOME, { lang: currentLang }),
+            onClick: () => i18n.changeLanguage(currentLang)
+          };
+        }
         return {
-          as: Link,
-          active: currentLang === lang,
+          as: active ? Link : 'span',
+          active,
           name: currentLang,
           label: t(`languages.${currentLang}`),
-          to: languagePath,
-          onClick: () => i18n.changeLanguage(currentLang)
+          ...languageLinkProps,
         };
       })
     }

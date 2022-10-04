@@ -1,12 +1,18 @@
 @import '../../../styles/breakpoints';
 
 .sub-header {
-  &__choice-chip-group {
-    width: var(--width-choice-chip-group-header, 100vw);
-    overflow-x: var(--overflow-x-choice-chip-group--header, scroll);
+  &__description-container {
+    max-width: var(--max-width-description-container-sub-header, 230px);
     @include createMediaQueries(map_get($breakpointPropList, 'md'), 'min') {
-      --width-choice-chip-group-header: 'auto';
-      --overflow-x-choice-chip-group--header: 'auto';
+      --max-width-description-container-sub-header: 'auto';
+    }
+  }
+  &__choice-chip-group {
+    width: var(--width-choice-chip-group-sub-header, 100vw);
+    overflow-x: var(--overflow-x-choice-chip-group-sub-header, scroll);
+    @include createMediaQueries(map_get($breakpointPropList, 'md'), 'min') {
+      --width-choice-chip-group-sub-header: 'auto';
+      --overflow-x-choice-chip-group-sub-header: 'auto';
     }
   }
 }

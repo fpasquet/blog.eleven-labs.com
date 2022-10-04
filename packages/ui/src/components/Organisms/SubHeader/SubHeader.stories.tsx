@@ -9,7 +9,7 @@ export default {
   args: {
     introBlock: {
       title: 'Ravi de te voir',
-      description: 'Explorons de\nnouveaux savoirs'
+      description: 'Explorons de nouveaux savoirs'
     },
     choiceCategoryLabel: 'Quels articles veux-tu lire ?',
     choiceCategories: [
