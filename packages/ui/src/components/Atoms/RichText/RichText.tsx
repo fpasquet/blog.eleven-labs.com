@@ -1,5 +1,6 @@
 import parse, * as HTMLReactParser from 'html-react-parser';
 import React from 'react';
+import './RichText.scss';
 
 import {
   getReminderByDomNode,
@@ -118,4 +119,4 @@ const htmlReactParserOptions: HTMLReactParser.HTMLReactParserOptions = {
 export const RichText: React.FC<RichTextProps> = ({
   content,
   ...nativeProps
-}) => <Box {...nativeProps}>{parse(content, htmlReactParserOptions)}</Box>;
+}) => <Box {...nativeProps} className="rich-text">{parse(content, htmlReactParserOptions)}</Box>;

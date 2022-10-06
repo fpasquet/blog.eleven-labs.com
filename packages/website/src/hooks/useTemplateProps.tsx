@@ -54,14 +54,14 @@ export const useLayoutTemplateProps = (): Pick<
       languageLinks: AUTHORIZED_LANGUAGES.map((currentLang) => {
         const active = currentLang === lang;
         let languageLinkProps = {}
-        if (active) {
+        if (!active) {
           languageLinkProps = {
             to: generatePath(PATHS.HOME, { lang: currentLang }),
             onClick: () => i18n.changeLanguage(currentLang)
           };
         }
         return {
-          as: active ? Link : 'span',
+          as: active ? 'span' : Link,
           active,
           name: currentLang,
           label: t(`languages.${currentLang}`),
