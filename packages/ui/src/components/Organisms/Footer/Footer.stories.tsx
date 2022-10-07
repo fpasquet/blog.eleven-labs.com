@@ -3,6 +3,7 @@ import React from 'react';
 
 import config from '../../../fixtures/config.json';
 import { Footer } from './Footer';
+import SocialIconsStories from '../../Molecules/SocialIcons/SocialIcons.stories';
 
 export default {
   title: 'Components/Organisms/Footer',
@@ -33,6 +34,7 @@ export default {
         description: config.contact.phoneNumber
       }
     ],
+    socialLinks: SocialIconsStories.args!.links,
     languageLinks: config.languages.map((language) => ({
       active: language.locale === 'fr',
       name: language.locale,

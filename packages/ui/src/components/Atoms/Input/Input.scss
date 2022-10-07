@@ -5,7 +5,9 @@
     color: var(--color-grey-middle);
   }
   &:focus-visible {
-    outline-color: var(--color-grey-middle);
+    outline: none;
+    border: 2px solid var(--color-amaranth);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
   }
   &--search {
     border-radius: 21px;

@@ -14,6 +14,7 @@ import {
   LinkProps,
   Text
 } from '../../Atoms';
+import { SocialIcons, SocialIconsProps } from '../../Molecules/SocialIcons';
 
 export interface FooterProps {
   introBlock: {
@@ -23,6 +24,7 @@ export interface FooterProps {
   elevenLabsSiteLink: { label: string } & Omit<ButtonProps, 'children'>;
   contactTitle: string;
   contactList: { title: string; description: React.ReactNode }[];
+  socialLinks: SocialIconsProps['links'];
   languageLinks: ({
     name: string;
     label: string;
@@ -38,6 +40,7 @@ export const Footer: React.FC<FooterProps> = ({
   },
   contactTitle,
   contactList,
+  socialLinks,
   languageLinks
 }) => (
   <Box
@@ -55,6 +58,7 @@ export const Footer: React.FC<FooterProps> = ({
       pt={{ md: 'xl' }}
       pb={{ md: 'xl' }}
       gap={{ md: 'xxl-3' }}
+      mb={{ xs: 'xl' }}
     >
       <FlexItem mb="xl">
         <Flex
@@ -79,8 +83,8 @@ export const Footer: React.FC<FooterProps> = ({
           {contactTitle}
         </Text>
         <Flex direction={{ xs: 'column', md: 'row' }} gap={{ md: 'xl' }}>
-          {contactList.map((contact) => (
-            <Box key={contact.title} mb="m" className="footer__contact-item">
+          {contactList.map((contact, contactIndex) => (
+            <Box key={contact.title} mb={{ xs: contactList.length === contactIndex+1 ? 'xs' : 'm' }} className="footer__contact-item">
               <Text weight="bold" mb="xxs-2">
                 {contact.title}
               </Text>
@@ -88,9 +92,10 @@ export const Footer: React.FC<FooterProps> = ({
             </Box>
           ))}
         </Flex>
+        <SocialIcons links={socialLinks} />
       </FlexItem>
     </Flex>
-    <Divider variant="neutral" />
+    <Divider variant="neutral" m={{ xs: '0' }} />
     <Flex py="s" justifyContent="center" alignItems="center">
       <Box mr="xxs">
         <Icons.Language width="16px" height="16px" />

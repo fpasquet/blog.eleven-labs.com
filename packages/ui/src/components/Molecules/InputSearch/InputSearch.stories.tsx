@@ -28,3 +28,10 @@ const Template: ComponentStory<typeof InputSearch> = (args) => (
 );
 
 export const Overview = Template.bind({});
+
+export const InputSearchHasValue = Template.bind({});
+InputSearchHasValue.args = {
+  inputProps: {
+    value: 'Les femmes dans'
+  }
+}

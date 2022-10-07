@@ -32,7 +32,7 @@ export const NewsletterBlock: React.FC<NewsletterBlockProps> = ({
     direction={{ xs: 'column', md: 'row' }}
     justifyContent="center"
     alignItems="center"
-    textAlign="center"
+    textAlign={{ xs: 'center', md: 'left' }}
     className="newsletter-block"
   >
     <img src="/imgs/newsletter.png" alt="" className="newsletter-block__img" />

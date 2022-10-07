@@ -4,3 +4,4 @@ export * from './Post';
 export * from './Reminder';
 export * from './BackLink';
 export * from './NewsletterBlock';
+export * from './SocialIcons';
