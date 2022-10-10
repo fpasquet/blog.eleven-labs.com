@@ -2,6 +2,7 @@ import classNames from 'classnames';
 
 import {
   colorSystemProps,
+  hiddenSystemProps,
   marginSystemProps,
   paddingSystemProps
 } from '../../constants/systemProps';
@@ -23,5 +24,10 @@ export const systemClassName = <TProps extends SystemProps = SystemProps>(
       props,
       systemProps: paddingSystemProps,
       hasResponsiveProps: true
+    }),
+    ...systemClassNames({
+      props,
+      systemProps: hiddenSystemProps,
+      valueIsResponsiveProps: true
     })
   );

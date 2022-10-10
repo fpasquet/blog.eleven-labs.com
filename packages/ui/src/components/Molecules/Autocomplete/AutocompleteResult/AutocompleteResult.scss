@@ -1,0 +1,25 @@
+@import '../../../../styles/breakpoints';
+
+.autocomplete-result {
+  position: var(--position-autocomplete-result, fixed);
+  z-index: 5;
+  left: 0;
+  width: var(--width-autocomplete-result, 100vw);
+  margin-top: var(--margin-top-autocomplete-result, var(--spacing-s));
+  padding-top: var(--padding-top-autocomplete-result, var(--spacing-s));
+  @include createMediaQueries(map_get($breakpointPropList, 'md'), 'min') {
+    --position-autocomplete-result: absolute;
+    --width-autocomplete-result: 100%;
+    --margin-top-autocomplete-result: calc(var(--spacing-m) * -1);
+    --padding-top-autocomplete-result: var(--spacing-l);
+  }
+
+  background-color: var(--color-white);
+  filter: drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.25));
+  border-radius: 0 0 4px 4px;
+  &__item {
+    &--is-highlighted {
+      background-color: var(--color-lavender);
+    }
+  }
+}

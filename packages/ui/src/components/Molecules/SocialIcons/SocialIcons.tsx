@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Flex, FlexProps, Link, LinkProps, Icons } from '../../Atoms';
+import { Flex, FlexProps, Icons, Link, LinkProps } from '../../Atoms';
 
 export const enum SocialNameType {
   RSS = 'rss',
@@ -11,34 +11,35 @@ export const enum SocialNameType {
 }
 
 export interface SocialIconsProps extends FlexProps {
-  links: Omit<LinkProps, 'children'> & { socialName: SocialNameType }[]
+  links: Omit<LinkProps, 'children'> & { socialName: SocialNameType }[];
 }
 
 const getIconBySocialName = (socialName: SocialNameType) => {
   const iconSvgProps: React.SVGProps<SVGSVGElement> = {
     height: '32px',
     width: '32px'
-  }
+  };
   switch (socialName) {
     case SocialNameType.RSS:
-      return <Icons.Rss {...iconSvgProps} color="#FFF"  />
+      return <Icons.Rss {...iconSvgProps} color="#FFF" />;
     case SocialNameType.FACEBOOK:
-      return <Icons.Facebook {...iconSvgProps} />
+      return <Icons.Facebook {...iconSvgProps} />;
     case SocialNameType.TWITTER:
-      return <Icons.Twitter {...iconSvgProps} />
+      return <Icons.Twitter {...iconSvgProps} />;
     case SocialNameType.LINKEDIN:
-      return <Icons.Linkedin {...iconSvgProps} />
+      return <Icons.Linkedin {...iconSvgProps} />;
     case SocialNameType.WELCOME_TO_JUNGLE:
-      return <Icons.Welcometothejungle {...iconSvgProps} />
+      return <Icons.Welcometothejungle {...iconSvgProps} />;
   }
-}
+};
 
-export const SocialIcons: React.FC<SocialIconsProps> = ({ links, ...flexProps }) => (
+export const SocialIcons: React.FC<SocialIconsProps> = ({
+  links,
+  ...flexProps
+}) => (
   <Flex {...flexProps} gapY={'s'}>
     {links.map(({ socialName, ...linkProps }) => (
-      <Link {...linkProps}>
-        {getIconBySocialName(socialName)}
-      </Link>
+      <Link {...linkProps}>{getIconBySocialName(socialName)}</Link>
     ))}
   </Flex>
 );

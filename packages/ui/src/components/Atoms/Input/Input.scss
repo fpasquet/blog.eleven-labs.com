@@ -1,6 +1,8 @@
 .input {
   border: none;
   padding: var(--spacing-xs) var(--spacing-s);
+  font-size: var(--typography-font-size-xs);
+  font-family: var(--typography-font-family);
   &::placeholder {
     color: var(--color-grey-middle);
   }

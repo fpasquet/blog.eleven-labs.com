@@ -5,3 +5,5 @@ export * from './Reminder';
 export * from './BackLink';
 export * from './NewsletterBlock';
 export * from './SocialIcons';
+export * from './Autocomplete';
+export * from './TextHighlight';

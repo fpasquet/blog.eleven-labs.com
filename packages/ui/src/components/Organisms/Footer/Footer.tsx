@@ -84,7 +84,11 @@ export const Footer: React.FC<FooterProps> = ({
         </Text>
         <Flex direction={{ xs: 'column', md: 'row' }} gap={{ md: 'xl' }}>
           {contactList.map((contact, contactIndex) => (
-            <Box key={contact.title} mb={{ xs: contactList.length === contactIndex+1 ? 'xs' : 'm' }} className="footer__contact-item">
+            <Box
+              key={contact.title}
+              mb={{ xs: contactList.length === contactIndex + 1 ? 'xs' : 'm' }}
+              className="footer__contact-item"
+            >
               <Text weight="bold" mb="xxs-2">
                 {contact.title}
               </Text>

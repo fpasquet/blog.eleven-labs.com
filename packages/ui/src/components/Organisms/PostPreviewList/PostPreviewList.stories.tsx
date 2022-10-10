@@ -25,7 +25,7 @@ export default {
   decorators: [
     (Story) => (
       <Box px="m" py="xl">
-        {Story()}
+        <Story />
       </Box>
     )
   ]

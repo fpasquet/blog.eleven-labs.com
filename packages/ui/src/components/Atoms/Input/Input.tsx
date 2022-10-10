@@ -15,15 +15,18 @@ export interface InputProps
   variant?: 'search' | 'form';
 }
 
-export const Input: React.FC<InputProps> = ({ variant, ...nativeProps }) =>
-  React.createElement('input', {
-    ...omitSystemProps(nativeProps),
-    className: systemClassName<SpacingSystemProps>({
-      ...nativeProps,
-      className: classNames(
-        'input',
-        { [`input--${variant}`]: variant },
-        nativeProps.className
-      )
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
+  ({ variant, ...nativeProps }, ref) =>
+    React.createElement('input', {
+      ...omitSystemProps(nativeProps),
+      className: systemClassName<SpacingSystemProps>({
+        ...nativeProps,
+        className: classNames(
+          'input',
+          { [`input--${variant}`]: variant },
+          nativeProps.className
+        )
+      }),
+      ref
     })
-  });
+);

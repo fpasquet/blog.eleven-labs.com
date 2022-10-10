@@ -47,7 +47,11 @@ export const SubHeader: React.FC<SubHeaderProps> = ({
           >
             {introBlock.description}
           </Text>
-          <Text mt={{ xs: 's', md: 'l' }} size={{ xs: 'm', md: 'l' }} weight="medium">
+          <Text
+            mt={{ xs: 's', md: 'l' }}
+            size={{ xs: 'm', md: 'l' }}
+            weight="medium"
+          >
             {choiceCategoryLabel}
           </Text>
         </Box>
