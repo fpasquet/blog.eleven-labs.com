@@ -22,7 +22,11 @@ import {
   TypographySystemProps
 } from '../../../../types';
 
-export type FlexProps<C extends DefaultAllowedHTMLElementType = 'div'> = {
+type FlexElementType =
+  | DefaultAllowedHTMLElementType
+  | React.ForwardRefExoticComponent<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
+
+export type FlexProps<C extends FlexElementType = FlexElementType> = {
   /**
    * Defines a flex container, inline-flex or flex (including breakpoints modifiers)
    */
@@ -41,7 +45,7 @@ export type FlexProps<C extends DefaultAllowedHTMLElementType = 'div'> = {
   TypographySystemProps &
   FlexOrGridBoxSystemProps;
 
-export const Flex = <C extends DefaultAllowedHTMLElementType = 'div'>({
+export const Flex = <C extends FlexElementType = 'div'>({
   inline = false,
   direction,
   alignItems,

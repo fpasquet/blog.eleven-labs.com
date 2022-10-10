@@ -26,4 +26,5 @@ export type DefaultAllowedHTMLElementType = keyof Pick<
   | 'summary'
   | 'template'
   | 'ul'
+  | 'a'
 >;

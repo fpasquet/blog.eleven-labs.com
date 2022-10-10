@@ -1,0 +1,9 @@
+@import '../../../styles/breakpoints';
+
+.autocomplete {
+  position: var(--position-autocomplete, initial);
+  @include createMediaQueries(map_get($breakpointPropList, 'md'), 'min') {
+    --position-autocomplete: relative;
+    width: 664px;
+  }
+}

@@ -1,12 +1,15 @@
 import { LayoutTemplateProps } from '@eleven-labs/blog-ui';
-import React from 'react';
+import { AutocompleteProps } from '@eleven-labs/blog-ui';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link, useParams } from 'react-router-dom';
 
 import { i18n } from '../config/i18n';
 import { contact, websiteUrl } from '../config/website';
-import { AUTHORIZED_LANGUAGES, PATHS } from '../constants';
 import { socialNetworks } from '../config/website/socialNetworks';
+import { AUTHORIZED_LANGUAGES, PATHS } from '../constants';
+import { algoliaSearchIndex } from '../helpers/algolia';
+import { useDebounce } from './useDebounce';
 
 export const useLayoutTemplateProps = (): Pick<
   LayoutTemplateProps,
@@ -14,18 +17,79 @@ export const useLayoutTemplateProps = (): Pick<
 > => {
   const { lang = 'fr' } = useParams<{ lang?: string }>();
   const { t } = useTranslation();
+  const [autocompleteDisplayed, setAutocompleteDisplayed] =
+    useState<boolean>(false);
+  const [search, setSearch] = useState<string>('');
+  const debouncedSearch = useDebounce<string>(search, 500);
+  const [searchHits, setSearchHits] = useState<
+    { objectID: string; slug: string; title: string; excerpt: string }[]
+  >([]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+  };
+
+  useEffect(() => {
+    if (debouncedSearch.length > 0) {
+      setAutocompleteDisplayed(true);
+      algoliaSearchIndex
+        .search<{ slug: string; title: string; excerpt: string }>(
+          debouncedSearch,
+          { hitsPerPage: 6, facetFilters: [`lang:${lang}`] }
+        )
+        .then(({ hits }) => {
+          setSearchHits(hits);
+        });
+    }
+  }, [debouncedSearch]);
+
+  const items = useMemo<AutocompleteProps['items']>(
+    () =>
+      searchHits.map<AutocompleteProps['items'][0]>((hit) => ({
+        id: hit.objectID,
+        title: hit.title,
+        description: hit.excerpt,
+        as: Link,
+        to: generatePath(PATHS.POST, { lang, slug: hit.slug })
+      })),
+    [lang, searchHits]
+  );
 
   return {
     headerProps: {
       title: t('header.title'),
       subtitle: t('header.subtitle'),
+      onClickOpenSearch: () => setAutocompleteDisplayed(!autocompleteDisplayed),
+      onClickCloseSearch: () =>
+        setAutocompleteDisplayed(!autocompleteDisplayed),
+      autocompleteDisplayed: autocompleteDisplayed,
       homeLinkProps: {
         as: Link,
         to: generatePath(PATHS.HOME, { lang })
       },
-      searchInputProps: {
+      autocompleteProps: {
+        isOpen: debouncedSearch.length > 0,
+        items,
         inputProps: {
-          placeholder: 'Rechercher par nom d’article ou d’auteur',
+          placeholder: t('autocomplete.placeholder'),
+          value: search,
+          onChange: handleChange
+          /*onBlur: () => setSearch('')*/
+        },
+        buttonCloseProps: {
+          onClick: () => setSearch('')
+        },
+        buttonSearchProps: {
+          onClick: () => setAutocompleteDisplayed(true)
+        },
+        searchNotFoundProps: {
+          title: t('search_not_found.title'),
+          description: t('search_not_found.description')
+        },
+        seeAllSearchLinkProps: {
+          label: t('autocomplete.see_all_search_label'),
+          as: Link,
+          to: generatePath(PATHS.SEARCH, { lang, search: debouncedSearch })
         }
       }
     },
@@ -57,13 +121,13 @@ export const useLayoutTemplateProps = (): Pick<
           description: contact.phoneNumber
         }
       ],
-      socialLinks: socialNetworks.map(socialNetwork => ({
+      socialLinks: socialNetworks.map((socialNetwork) => ({
         socialName: socialNetwork.socialName,
-        href: socialNetwork.url,
+        href: socialNetwork.url
       })),
       languageLinks: AUTHORIZED_LANGUAGES.map((currentLang) => {
         const active = currentLang === lang;
-        let languageLinkProps = {}
+        let languageLinkProps = {};
         if (!active) {
           languageLinkProps = {
             to: generatePath(PATHS.HOME, { lang: currentLang }),
@@ -72,10 +136,10 @@ export const useLayoutTemplateProps = (): Pick<
         }
         return {
           as: active ? 'span' : Link,
-          active,
+          neutral: active,
           name: currentLang,
           label: t(`languages.${currentLang}`),
-          ...languageLinkProps,
+          ...languageLinkProps
         };
       })
     }

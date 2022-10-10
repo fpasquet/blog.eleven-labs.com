@@ -13,13 +13,17 @@ import {
   TypographySystemProps
 } from '../../../../types';
 
-export type BoxProps<C extends DefaultAllowedHTMLElementType = 'div'> = {
+type BoxElementType =
+  | DefaultAllowedHTMLElementType
+  | React.ForwardRefExoticComponent<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
+
+export type BoxProps<C extends BoxElementType = BoxElementType> = {
   children?: React.ReactNode;
 } & PolymorphicProps<C> &
   SystemProps &
   TypographySystemProps;
 
-export const Box = <C extends DefaultAllowedHTMLElementType = 'div'>({
+export const Box = <C extends BoxElementType = 'div'>({
   as,
   children,
   ...nativeProps

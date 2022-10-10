@@ -2,50 +2,69 @@ import './Header.scss';
 
 import React from 'react';
 
-import { Box, Flex, Icons, Link, LinkProps, Text } from '../../Atoms';
-import {
-  InputSearch,
-  InputSearchProps
-} from '../../Molecules/InputSearch/InputSearch';
+import { useMediaQuery } from '../../../hooks/useMediaQuery';
+import { Box, Flex, FlexProps, Icons, Text } from '../../Atoms';
+import { Autocomplete, AutocompleteProps } from '../../Molecules/Autocomplete';
 
 export interface HeaderProps {
   title: string;
   subtitle: string;
-  homeLinkProps: LinkProps;
-  searchInputProps: InputSearchProps;
+  homeLinkProps: FlexProps;
+  onClickOpenSearch: () => void;
+  onClickCloseSearch: () => void;
+  autocompleteDisplayed?: boolean;
+  autocompleteProps: AutocompleteProps;
 }
 
 export const Header: React.FC<HeaderProps> = ({
   title,
   subtitle,
   homeLinkProps,
-  searchInputProps
-}) => (
-  <Box as="header" bg="primary-light" color="white" className="header">
-    <Flex
-      justifyContent={{ xs: 'between' }}
-      alignItems="center"
-      py={{ xs: 's' }}
-      px={{ xs: 'm', md: 'l' }}
-    >
-      <Flex alignItems="center">
-        <Icons.Logo className="header__logo" />
-        <Link
-          {...homeLinkProps}
-          ml={{ xs: 'xxs' }}
-          size={{ xs: 'xxs', md: 'm' }}
-          active={true}
-        >
-          <Text weight="medium">{title}</Text>
-          <Text weight="bold">{subtitle}</Text>
-        </Link>
+  autocompleteDisplayed = false,
+  onClickOpenSearch,
+  onClickCloseSearch,
+  autocompleteProps
+}) => {
+  const isNotTablet = useMediaQuery('upTablet');
+  return (
+    <Box as="header" bg="primary-light" className="header">
+      <Flex
+        justifyContent={{ xs: 'between' }}
+        alignItems="center"
+        py={{ xs: 's' }}
+        px={{ xs: 'm', md: 'l' }}
+      >
+        {(!autocompleteDisplayed || isNotTablet) && (
+          <>
+            <Flex as="a" {...homeLinkProps} alignItems="center" color="white">
+              <Icons.Logo className="header__logo" />
+              <Box ml={{ xs: 'xxs' }} size={{ xs: 'xxs', md: 'm' }}>
+                <Text weight="medium">{title}</Text>
+                <Text weight="bold">{subtitle}</Text>
+              </Box>
+            </Flex>
+            <Icons.Search
+              width="18px"
+              height="18px"
+              color="white"
+              className="header__icon-for-mobile"
+              onClick={onClickOpenSearch}
+            />
+          </>
+        )}
+        {(autocompleteDisplayed || isNotTablet) && (
+          <>
+            <Icons.Back
+              width="18px"
+              height="18px"
+              color="white"
+              className="header__icon-for-mobile"
+              onClick={onClickCloseSearch}
+            />
+            <Autocomplete {...autocompleteProps} />
+          </>
+        )}
       </Flex>
-      <Icons.Search
-        width="18px"
-        height="18px"
-        className="header__icon-search"
-      />
-      <InputSearch {...searchInputProps} className="header__input-search" />
-    </Flex>
-  </Box>
-);
+    </Box>
+  );
+};

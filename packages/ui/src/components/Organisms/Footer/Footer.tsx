@@ -26,9 +26,7 @@ export interface FooterProps {
   contactList: { title: string; description: React.ReactNode }[];
   socialLinks: SocialIconsProps['links'];
   languageLinks: ({
-    name: string;
     label: string;
-    active?: boolean;
   } & Omit<LinkProps, 'children'>)[];
 }
 
@@ -84,7 +82,11 @@ export const Footer: React.FC<FooterProps> = ({
         </Text>
         <Flex direction={{ xs: 'column', md: 'row' }} gap={{ md: 'xl' }}>
           {contactList.map((contact, contactIndex) => (
-            <Box key={contact.title} mb={{ xs: contactList.length === contactIndex+1 ? 'xs' : 'm' }} className="footer__contact-item">
+            <Box
+              key={contact.title}
+              mb={{ xs: contactList.length === contactIndex + 1 ? 'xs' : 'm' }}
+              className="footer__contact-item"
+            >
               <Text weight="bold" mb="xxs-2">
                 {contact.title}
               </Text>
@@ -100,11 +102,9 @@ export const Footer: React.FC<FooterProps> = ({
       <Box mr="xxs">
         <Icons.Language width="16px" height="16px" />
       </Box>
-      {languageLinks.map(({ label, name, active, ...linkProps }, index) => (
-        <React.Fragment key={name}>
-          <Link active={active} {...linkProps}>
-            {label}
-          </Link>
+      {languageLinks.map(({ label, ...linkProps }, index) => (
+        <React.Fragment key={index}>
+          <Link {...linkProps}>{label}</Link>
           {languageLinks.length - 1 !== index && (
             <Box mx="s" className="footer__circle-separator" />
           )}

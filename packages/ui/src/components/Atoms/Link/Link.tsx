@@ -19,7 +19,7 @@ type LinkElementType =
   | React.ForwardRefExoticComponent<any>; // eslint-disable-line @typescript-eslint/no-explicit-any
 
 export type LinkProps<C extends LinkElementType = LinkElementType> = {
-  active?: boolean;
+  neutral?: boolean;
   children?: React.ReactNode;
 } & PolymorphicProps<C> &
   SpacingSystemProps &
@@ -27,7 +27,7 @@ export type LinkProps<C extends LinkElementType = LinkElementType> = {
 
 export const Link = <C extends LinkElementType = 'a'>({
   as,
-  active,
+  neutral,
   children,
   ...nativeProps
 }: LinkProps<C>): ReturnType<React.FC<C>> =>
@@ -37,7 +37,7 @@ export const Link = <C extends LinkElementType = 'a'>({
       ...omitSystemProps(nativeProps),
       className: classNames(
         'link',
-        { [`link--active`]: active },
+        { [`link--neutral`]: neutral },
         systemClassName<SpacingSystemProps>(nativeProps),
         typographyClassName(nativeProps)
       )

@@ -1,20 +1,22 @@
 import { AuthorPageProps } from '@eleven-labs/blog-ui';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link, useParams } from 'react-router-dom';
 
 import { PATHS } from '../../constants';
 import authorsData from '../../data/authors.json';
 import postsData from '../../data/posts.json';
+import { pick } from '../../helpers/objectHelper';
 import { transformAuthorData } from '../../helpers/transformAuthorData';
 import { transformPostData } from '../../helpers/transformPostData';
 import { useNewsletterBlockProps } from '../../hooks/useNewsletterBlockProps';
+import { usePostPreviewListProps } from '../../hooks/usePostPreviewListProps';
 import { useLayoutTemplateProps } from '../../hooks/useTemplateProps';
 import { AuthorData, PostData } from '../../types';
-import { usePostPreviewListProps } from '../../hooks/usePostPreviewListProps';
-import { useMemo } from 'react';
-import { pick } from '../../helpers/objectHelper';
 
-export const useAuthorPageProps = (): AuthorPageProps & { inlineScript: string; } => {
+export const useAuthorPageProps = (): AuthorPageProps & {
+  inlineScript: string;
+} => {
   const { lang = 'fr', authorUsername } = useParams<{
     lang: string;
     authorUsername: string;

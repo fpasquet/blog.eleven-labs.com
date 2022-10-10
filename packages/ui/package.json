@@ -28,6 +28,7 @@
     "build:storybook": "yarn build:design-tokens && build-storybook"
   },
   "dependencies": {
+    "autosuggest-highlight": "^3.3.4",
     "classnames": "^2.3.1",
     "html-react-parser": "^3.0.4",
     "react": "^18.2.0",
@@ -47,6 +48,7 @@
     "@storybook/testing-library": "^0.0.13",
     "@storybook/theming": "^6.5.10",
     "@svgr/cli": "^6.3.1",
+    "@types/autosuggest-highlight": "^3.2.0",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/react-syntax-highlighter": "^15.5.5",

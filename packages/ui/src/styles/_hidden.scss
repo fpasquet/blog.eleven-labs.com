@@ -1,0 +1,17 @@
+.hidden\@xs {
+  display: none !important;
+}
+
+@each $modifier , $breakpoint in $breakpointPropList {
+  @include createMediaQueries($breakpoint - 1, 'max') {
+    .hidden-down\@#{$modifier} {
+      display: none !important;
+    }
+  }
+
+  @include createMediaQueries($breakpoint, 'min') {
+    .hidden-up\@#{$modifier} {
+      display: none !important;
+    }
+  }
+}
