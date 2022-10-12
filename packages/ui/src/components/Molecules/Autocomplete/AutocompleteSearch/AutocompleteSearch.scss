@@ -1,6 +1,7 @@
-.input-search {
+.autocomplete-search {
   $this: &;
   position: relative;
+  z-index: 10;
   &__input {
     width: 100%;
     padding-right: 74px !important;
@@ -21,7 +22,8 @@
     padding: 0 var(--spacing-s);
     background-color: transparent;
     border: none;
-    &:after{
+    cursor: pointer;
+    &:after {
       display: inline-block;
       content: "\00d7"; /* This will render the 'X' */
       font-size: var(--typography-font-size-xxl-2);
@@ -33,6 +35,7 @@
     border: none;
     border-left: 1px solid var(--color-grey-middle);
     background-color: transparent;
+    cursor: pointer;
   }
   &__icon {
     width: 24px;

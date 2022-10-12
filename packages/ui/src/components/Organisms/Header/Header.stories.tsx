@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
-import InputSearchStories from '../../Molecules/InputSearch/InputSearch.stories';
+import AutocompleteStories from '../../Molecules/Autocomplete/Autocomplete.stories';
 import { Header } from './Header';
 
 export default {
@@ -10,7 +10,7 @@ export default {
   args: {
     title: 'Eleven Labs',
     subtitle: 'Le blog',
-    searchInputProps: InputSearchStories.args
+    autocompleteProps: AutocompleteStories.args
   },
   parameters: {
     layout: 'full',

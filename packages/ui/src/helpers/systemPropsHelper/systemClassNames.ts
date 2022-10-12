@@ -5,6 +5,7 @@ export const systemClassNames = <TProps>(options: {
   props: TProps;
   systemProps: Partial<Record<string, string[]>>;
   hasResponsiveProps?: boolean;
+  valueIsResponsiveProps?: boolean;
 }) =>
   Object.keys(options.systemProps).reduce<string[]>((classNames, propName) => {
     const propValue = options.props[propName as keyof TProps];
@@ -17,7 +18,11 @@ export const systemClassNames = <TProps>(options: {
       propValue &&
       !options.hasResponsiveProps
     ) {
-      classNames.push(`${kebabCase(propName)}-${kebabCase(propValue)}`);
+      classNames.push(
+        `${kebabCase(propName)}${
+          options.valueIsResponsiveProps ? '@' : '-'
+        }${kebabCase(propValue)}`
+      );
       return classNames;
     }
 

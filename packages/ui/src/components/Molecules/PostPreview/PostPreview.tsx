@@ -48,7 +48,9 @@ export const PostPreview: React.FC<PostPreviewProps> = ({
     >
       {hasMask ? title : <Link {...postLinkProps}>{title}</Link>}
     </Heading>
-    <Text size={{ xs: 'xxs', md: 'xs' }} className="post-preview__excerpt">{excerpt}</Text>
+    <Text size={{ xs: 'xxs', md: 'xs' }} className="post-preview__excerpt">
+      {excerpt}
+    </Text>
     <Box
       className="post-preview__metadata"
       mt={{ xs: 'xs', md: 's' }}

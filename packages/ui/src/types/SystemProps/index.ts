@@ -7,3 +7,4 @@ export * from './SystemProps';
 export * from './FlexOrGridBoxSystemProps';
 export * from './FlexOrGridBoxItemSystemProps';
 export * from './TypographySystemProps';
+export * from './HiddenSystemProps';

@@ -5,8 +5,8 @@ import { generatePath, Link, useParams } from 'react-router-dom';
 
 import { i18n } from '../config/i18n';
 import { contact, websiteUrl } from '../config/website';
-import { AUTHORIZED_LANGUAGES, PATHS } from '../constants';
 import { socialNetworks } from '../config/website/socialNetworks';
+import { AUTHORIZED_LANGUAGES, PATHS } from '../constants';
 
 export const useLayoutTemplateProps = (): Pick<
   LayoutTemplateProps,
@@ -25,7 +25,7 @@ export const useLayoutTemplateProps = (): Pick<
       },
       searchInputProps: {
         inputProps: {
-          placeholder: 'Rechercher par nom d’article ou d’auteur',
+          placeholder: 'Rechercher par nom d’article ou d’auteur'
         }
       }
     },
@@ -57,13 +57,13 @@ export const useLayoutTemplateProps = (): Pick<
           description: contact.phoneNumber
         }
       ],
-      socialLinks: socialNetworks.map(socialNetwork => ({
+      socialLinks: socialNetworks.map((socialNetwork) => ({
         socialName: socialNetwork.socialName,
-        href: socialNetwork.url,
+        href: socialNetwork.url
       })),
       languageLinks: AUTHORIZED_LANGUAGES.map((currentLang) => {
         const active = currentLang === lang;
-        let languageLinkProps = {}
+        let languageLinkProps = {};
         if (!active) {
           languageLinkProps = {
             to: generatePath(PATHS.HOME, { lang: currentLang }),
@@ -75,7 +75,7 @@ export const useLayoutTemplateProps = (): Pick<
           active,
           name: currentLang,
           label: t(`languages.${currentLang}`),
-          ...languageLinkProps,
+          ...languageLinkProps
         };
       })
     }

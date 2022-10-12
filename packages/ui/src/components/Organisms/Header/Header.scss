@@ -9,10 +9,10 @@
       --size-logo-header: 46px;
     }
   }
-  &__icon-search {
-    display: var(--icon-search-visibility-header, block);
+  &__icon-for-mobile {
+    display: var(--icon-for-mobile-visibility-header, block);
     @include createMediaQueries(map_get($breakpointPropList, 'md'), 'min') {
-      --icon-search-visibility-header: none;
+      --icon-for-mobile-visibility-header: none;
     }
   }
   &__input-search {

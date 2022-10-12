@@ -13,19 +13,19 @@ export default {
   args: {
     links: [
       {
-        socialName: SocialNameType.RSS,
+        socialName: SocialNameType.RSS
       },
       {
-        socialName: SocialNameType.FACEBOOK,
+        socialName: SocialNameType.FACEBOOK
       },
       {
-        socialName: SocialNameType.TWITTER,
+        socialName: SocialNameType.TWITTER
       },
       {
-        socialName: SocialNameType.LINKEDIN,
+        socialName: SocialNameType.LINKEDIN
       },
       {
-        socialName: SocialNameType.WELCOME_TO_JUNGLE,
+        socialName: SocialNameType.WELCOME_TO_JUNGLE
       }
     ]
   },

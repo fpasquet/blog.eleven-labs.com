@@ -39,8 +39,8 @@ const generateAuthorsData = async () => {
     authors.push({
       username: validatedData.username,
       name: validatedData.name,
-      github: validatedData.github || undefined,
-      twitter: validatedData.twitter || undefined,
+      github: validatedData.github || undefined,
+      twitter: validatedData.twitter || undefined,
       avatarImageUrl: avatarImageExist
         ? `/imgs/authors/${validatedData.username}.jpg`
         : undefined,
