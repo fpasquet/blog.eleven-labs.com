@@ -3,7 +3,7 @@ import './Header.scss';
 import React from 'react';
 
 import { useMediaQuery } from '../../../hooks/useMediaQuery';
-import { Box, Flex, FlexProps, Icons, Text } from '../../Atoms';
+import { Box, BoxProps, Flex, FlexProps, Icons, Text } from '../../Atoms';
 import { Autocomplete, AutocompleteProps } from '../../Molecules/Autocomplete';
 
 export interface HeaderProps {
@@ -14,6 +14,7 @@ export interface HeaderProps {
   onClickCloseSearch: () => void;
   autocompleteDisplayed?: boolean;
   autocompleteProps: AutocompleteProps;
+  headerContainerProps?: BoxProps;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -23,11 +24,12 @@ export const Header: React.FC<HeaderProps> = ({
   autocompleteDisplayed = false,
   onClickOpenSearch,
   onClickCloseSearch,
-  autocompleteProps
+  autocompleteProps,
+  headerContainerProps = {}
 }) => {
   const isNotTablet = useMediaQuery('upTablet');
   return (
-    <Box as="header" bg="primary-light" className="header">
+    <Box {...headerContainerProps} as="header" bg="primary-light" className="header">
       <Flex
         justifyContent={{ xs: 'between' }}
         alignItems="center"

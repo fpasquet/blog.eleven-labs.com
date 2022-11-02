@@ -1,5 +1,5 @@
 import { AuthorPageProps } from '@eleven-labs/blog-ui';
-import { useMemo } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link, useParams } from 'react-router-dom';
 
@@ -14,22 +14,20 @@ import { usePostPreviewListProps } from '../../hooks/usePostPreviewListProps';
 import { useLayoutTemplateProps } from '../../hooks/useTemplateProps';
 import { AuthorData, PostData } from '../../types';
 
-export const useAuthorPageProps = (): AuthorPageProps & {
-  inlineScript: string;
-} => {
+export const useAuthorPageProps = (): AuthorPageProps & { staticCache: any; } => {
   const { lang = 'fr', authorUsername } = useParams<{
     lang: string;
     authorUsername: string;
   }>();
   const { t } = useTranslation();
-  const layoutTemplateProps = useLayoutTemplateProps();
+  const { staticCache: staticCacheLayout, ...layoutTemplateProps } = useLayoutTemplateProps();
   const newsletterBlockProps = useNewsletterBlockProps();
 
   const authorData = (authorsData as AuthorData[]).find(
     (currentAuthor) => currentAuthor.username === authorUsername
   ) as AuthorData;
 
-  const postsByAuthorAndLang = useMemo(
+  const postsByAuthorAndLang = React.useMemo(
     () =>
       (postsData as PostData[])
         .filter(
@@ -52,9 +50,16 @@ export const useAuthorPageProps = (): AuthorPageProps & {
     [lang, authorUsername]
   );
 
-  const postPreviewListProps = usePostPreviewListProps({
+  const { staticCache: staticCachePostPreviewList, ...postPreviewListProps } = usePostPreviewListProps({
     allPosts: postsByAuthorAndLang,
     loadMoreButtonLabel: t('pages.post_list.load_more_button_label'),
+    numberOfPostsDisplayedLabel: t(
+      'pages.post_list.number_of_posts_displayed_label',
+      {
+        numberOfPosts: 'numberOfPosts',
+        numberOfPostsDisplayed: 'numberOfPostsDisplayed'
+      }
+    ),
     postLinkProps: ({ path }) => ({
       as: Link,
       to: path
@@ -80,22 +85,9 @@ export const useAuthorPageProps = (): AuthorPageProps & {
     },
     postPreviewListTitle: t('pages.author.post_preview_list_title'),
     ...postPreviewListProps,
-    inlineScript: `window.staticCache = ${JSON.stringify({
-      posts: postsByAuthorAndLang,
-      translations: {
-        pages: {
-          post_list: {
-            load_more_button_label: postPreviewListProps.loadMoreButtonLabel,
-            number_of_posts_displayed_label: t(
-              'pages.post_list.number_of_posts_displayed_label',
-              {
-                numberOfPosts: 'numberOfPosts',
-                numberOfPostsDisplayed: 'numberOfPostsDisplayed'
-              }
-            )
-          }
-        }
-      }
-    })}`
+    staticCache: {
+      ...staticCacheLayout,
+      ...staticCachePostPreviewList,
+    }
   };
 };

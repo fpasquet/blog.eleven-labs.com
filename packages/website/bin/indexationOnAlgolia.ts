@@ -1,5 +1,5 @@
 import { algoliaSearchIndex } from '../src/helpers/algolia';
-import { PostData } from '../src/types';
+import { AuthorData, PostData } from '../src/types';
 import { getFileData } from './generateData/getFileData';
 
 interface AlgoliaApiError extends Error {
@@ -10,13 +10,15 @@ interface AlgoliaApiError extends Error {
 
 const indexationOnAlglolia = async () => {
   try {
+    const authors = getFileData<AuthorData[]>('authors.json');
+
     const posts = getFileData<PostData[]>('posts.json').reduce<
       Record<
         string,
         Pick<
           PostData,
           'lang' | 'slug' | 'categories' | 'title' | 'date' | 'excerpt'
-        > & { objectID: string }
+        > & { objectID: string; authors: Pick<AuthorData, 'name' | 'username'>[] }
       >
     >((currentPosts, post) => {
       const objectID = `${post.slug}-${post.lang}`;
@@ -25,9 +27,15 @@ const indexationOnAlglolia = async () => {
         lang: post.lang,
         slug: post.slug,
         categories: post.categories,
+        authors: authors
+          .filter(author => post.authors.includes(author.username))
+          .map(author => ({
+            name: author.name,
+            username: author.username,
+          })),
         title: post.title,
         date: post.date,
-        excerpt: post.excerpt
+        excerpt: post.excerpt,
       };
 
       return currentPosts;
@@ -39,7 +47,7 @@ const indexationOnAlglolia = async () => {
     console.info(`Number of posts indexed on algolia: ${objectIDs.length}`);
 
     await algoliaSearchIndex.setSettings({
-      searchableAttributes: ['title', 'categories', 'excerpt'],
+      searchableAttributes: ['title', 'categories', 'authors', 'excerpt'],
       attributesForFaceting: ['lang']
     });
   } catch (error) {

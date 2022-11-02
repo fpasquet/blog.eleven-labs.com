@@ -12,9 +12,9 @@ if (container) {
   const root = ReactDOM.createRoot(container);
   root.render(
     <React.StrictMode>
-      <BrowserRouter>
-        <RootContainer />
-      </BrowserRouter>
+        <BrowserRouter>
+          <RootContainer />
+        </BrowserRouter>
     </React.StrictMode>
   );
 }

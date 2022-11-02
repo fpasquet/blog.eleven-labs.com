@@ -2,26 +2,40 @@ import { PostPreviewListProps } from '@eleven-labs/blog-ui';
 import React from 'react';
 
 import { NUMBER_OF_ITEMS_PER_PAGE } from '../constants';
-import { StaticCache } from '../types';
 
 export interface UsePostPreviewListOptions {
-  allPosts: StaticCache['posts'];
+  allPosts: ({ path: string } & Pick<
+    PostPreviewListProps['posts'][0],
+    'slug' | 'title' | 'excerpt' | 'date' | 'readingTime' | 'authors'
+    >)[];
+  loadMoreButtonLabel: string;
+  numberOfPostsDisplayedLabel: string;
   translateTextNumberOfItems: (options: {
     numberOfPostsDisplayed: number;
     numberOfPosts: number;
   }) => string;
-  loadMoreButtonLabel: string;
   postLinkProps: (options: {
     path: string;
   }) => PostPreviewListProps['posts'][0]['postLinkProps'];
 }
 
+export interface StaticCache {
+  loadMoreButtonLabel: string;
+  numberOfPostsDisplayedLabel: string;
+  posts: ({ path: string } & Pick<
+    PostPreviewListProps['posts'][0],
+    'slug' | 'title' | 'excerpt' | 'date' | 'readingTime' | 'authors'
+    >)[];
+}
+
 export const usePostPreviewListProps = ({
   allPosts,
-  translateTextNumberOfItems,
   loadMoreButtonLabel,
+  numberOfPostsDisplayedLabel,
+  translateTextNumberOfItems,
   postLinkProps
-}: UsePostPreviewListOptions): PostPreviewListProps => {
+}: UsePostPreviewListOptions):
+  PostPreviewListProps & { staticCache: StaticCache; } => {
   const numberOfPosts = allPosts.length;
   const [posts, setPosts] = React.useState<
     UsePostPreviewListOptions['allPosts']
@@ -76,6 +90,11 @@ export const usePostPreviewListProps = ({
       };
     }),
     ...paginationProps,
-    onLoadMore
+    onLoadMore,
+    staticCache: {
+      posts: allPosts,
+      loadMoreButtonLabel,
+      numberOfPostsDisplayedLabel,
+    }
   };
 };

@@ -4,13 +4,13 @@ import React from 'react';
 import { useAuthorPageProps } from './useAuthorPageProps';
 
 export const AuthorPage: React.FC = () => {
-  const { inlineScript, ...authorPageProps } = useAuthorPageProps();
+  const { staticCache, ...authorPageProps } = useAuthorPageProps();
   return (
     <>
       <AuthorPageUI {...authorPageProps} />
-      {inlineScript && (
-        <script dangerouslySetInnerHTML={{ __html: inlineScript }} />
-      )}
+      <script
+        dangerouslySetInnerHTML={{ __html: `window.staticCache = ${JSON.stringify(staticCache)};` }}
+      />
     </>
   );
 };

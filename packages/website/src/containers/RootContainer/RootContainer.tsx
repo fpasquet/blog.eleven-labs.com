@@ -12,5 +12,11 @@ export const RootContainer: React.FC<{ lang?: string }> = ({ lang }) => {
     i18n.changeLanguage(lang);
   }
 
-  return <I18nextProvider i18n={i18n}>{routing}</I18nextProvider>;
+  return (
+    <>
+      <I18nextProvider i18n={i18n}>
+        {routing}
+      </I18nextProvider>
+    </>
+  );
 };

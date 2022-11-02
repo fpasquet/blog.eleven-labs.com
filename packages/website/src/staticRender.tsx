@@ -17,9 +17,9 @@ export const staticRender = (options: {
 }) => {
   return ReactDOMServer.renderToStaticMarkup(
     <StaticRouter location={options.url}>
-      <HtmlTemplate inlineCss={options.inlineCss}>
-        <RootContainer lang={options.lang} />
-      </HtmlTemplate>
+        <HtmlTemplate inlineCss={options.inlineCss}>
+          <RootContainer lang={options.lang} />
+        </HtmlTemplate>
     </StaticRouter>
   );
 };

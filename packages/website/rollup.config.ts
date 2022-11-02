@@ -11,7 +11,12 @@ export default [
       esbuild({
         minify: true,
         optimizeDeps: {
-          include: ['react', 'react-dom/client', '@eleven-labs/blog-ui']
+          include: [
+            'react',
+            'react-dom/client',
+            'algoliasearch',
+            '@eleven-labs/blog-ui'
+          ]
         }
       })
     ]

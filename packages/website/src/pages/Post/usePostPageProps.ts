@@ -10,10 +10,10 @@ import { useNewsletterBlockProps } from '../../hooks/useNewsletterBlockProps';
 import { useLayoutTemplateProps } from '../../hooks/useTemplateProps';
 import { PostData } from '../../types';
 
-export const usePostPageProps = (): PostPageProps => {
+export const usePostPageProps = (): PostPageProps & { staticCache: any; } => {
   const { lang = 'fr', slug } = useParams<{ lang: string; slug: string }>();
   const { t } = useTranslation();
-  const layoutTemplateProps = useLayoutTemplateProps();
+  const { staticCache, ...layoutTemplateProps } = useLayoutTemplateProps();
   const newsletterBlockProps = useNewsletterBlockProps();
   const allPostData = postsData as PostData[];
   const postData = allPostData.find(
@@ -75,6 +75,7 @@ export const usePostPageProps = (): PostPageProps => {
         lang,
         authorUsername: username
       })
-    })
+    }),
+    staticCache
   };
 };

@@ -10,8 +10,9 @@ export const HtmlTemplate: React.FC<HtmlTemplateProps> = ({
   inlineCss,
   inlineScript,
   children
-}) => (
-  <html lang="en">
+}) => {
+  return (
+    <html lang="en">
     <head>
       <meta charSet="UTF-8" />
       <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
@@ -31,5 +32,6 @@ export const HtmlTemplate: React.FC<HtmlTemplateProps> = ({
       <script dangerouslySetInnerHTML={{ __html: inlineScript }} />
     )}
     <script type="text/javascript" defer src="/js/main.min.js" />
-  </html>
-);
+    </html>
+  );
+}

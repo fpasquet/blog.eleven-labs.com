@@ -17,7 +17,7 @@
     "build:staticRender": "vite build --ssr src/staticRender.tsx --outDir dist",
     "generate:website": "yarn ts-node bin/pagesGenerator",
     "generate:js": "rollup -c",
-    "generate": "yarn generate:data && yarn build:staticRender && yarn generate:website && yarn generate:js",
+    "generate": "yarn build:staticRender && yarn generate:website && yarn generate:js",
     "preview-prod": "yarn generate && serve dist"
   },
   "dependencies": {
