@@ -40,6 +40,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
   textNumberOfItems,
   percentageOfItemDisplayed,
   loadMoreButtonLabel,
+  onLoadMore,
   numberOfSearchLabel,
   description,
   searchNotFoundProps,
@@ -74,6 +75,7 @@ export const SearchPage: React.FC<SearchPageProps> = ({
               textNumberOfItems={textNumberOfItems}
               percentageOfItemDisplayed={percentageOfItemDisplayed}
               loadMoreButtonLabel={loadMoreButtonLabel}
+              onLoadMore={onLoadMore}
             />
           </>
         )}

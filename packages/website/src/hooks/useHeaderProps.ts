@@ -3,48 +3,41 @@ import React from 'react';
 import { algoliaSearchIndex } from '../helpers/algolia';
 import { useDebounce } from './useDebounce';
 import { PATHS } from '../constants';
+import { generatePath, Link, useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useOutsideClick } from './useOutsideClick';
 
-export interface useHeaderPropsOptions {
-  lang: string;
-  headerTitle: string;
-  headerSubtitle: string;
-  autocompletePlaceholder: string;
-  searchNotFoundTitle: string;
-  searchNotFoundDescription: string;
-  seeAllSearchLinkLabel: string;
-  generatePath: (path: string, params?: Record<string, string>) => string;
+export interface UseHeaderProps {
+  search?: string;
 }
 
-export interface StaticCache {
-  lang: string;
-  headerTitle: string;
-  headerSubtitle: string;
-  autocompletePlaceholder: string;
-  searchNotFoundTitle: string;
-  searchNotFoundDescription: string;
-  seeAllSearchLinkLabel: string;
-}
-
-export const useHeaderProps = ({
-  lang,
-  headerTitle,
-  headerSubtitle,
-  autocompletePlaceholder,
-  searchNotFoundTitle,
-  searchNotFoundDescription,
-  seeAllSearchLinkLabel,
-  generatePath,
-}: useHeaderPropsOptions): HeaderProps & { staticCache: StaticCache; } => {
+export const useHeaderProps = ({ search: defaultSearch = '' }: UseHeaderProps): HeaderProps => {
+  const { lang = 'fr' } = useParams<{ lang?: string }>();
+  const { t } = useTranslation();
   const [autocompleteDisplayed, setAutocompleteDisplayed] =
     React.useState<boolean>(false);
-  const [search, setSearch] = React.useState<string>('');
+  const [isOpen, setIsOpen] = React.useState<boolean>(false);
+  const [search, setSearch] = React.useState<string>(defaultSearch);
   const debouncedSearch = useDebounce<string>(search, 500);
   const [searchHits, setSearchHits] = React.useState<
     { objectID: string; slug: string; title: string; excerpt: string }[]
     >([]);
 
+  const onClickAutocompleteBox = (event: MouseEvent) => {
+    const eventTargets = event.composedPath();
+    const insideAutocompleteBox = Boolean(eventTargets.find(eventTarget =>
+      (eventTarget as HTMLDivElement)?.classList?.contains('autocomplete')
+    ));
+    if (!insideAutocompleteBox) {
+      setIsOpen(false);
+    }
+  };
+
+  const autocompleteRef = useOutsideClick(onClickAutocompleteBox);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
+    setIsOpen(true);
   };
 
   React.useEffect(() => {
@@ -67,32 +60,31 @@ export const useHeaderProps = ({
         id: hit.objectID,
         title: hit.title,
         description: hit.excerpt,
-        href: generatePath(PATHS.POST, { lang: lang, slug: hit.slug })
+        as: Link,
+        to: generatePath(PATHS.POST, { lang: lang, slug: hit.slug })
       })),
     [lang, searchHits]
   );
 
   return {
-      headerContainerProps: {
-        id: 'header-container',
-      },
-      title: headerTitle,
-      subtitle: headerSubtitle,
+      title: t('header.title'),
+      subtitle: t('header.subtitle'),
       onClickOpenSearch: () => setAutocompleteDisplayed(!autocompleteDisplayed),
       onClickCloseSearch: () =>
         setAutocompleteDisplayed(!autocompleteDisplayed),
       autocompleteDisplayed: autocompleteDisplayed,
       homeLinkProps: {
-        href: generatePath(PATHS.HOME, { lang })
+        as: Link,
+        to: generatePath(PATHS.HOME, { lang })
       },
       autocompleteProps: {
-        isOpen: debouncedSearch.length > 0,
+        ref: autocompleteRef,
+        isOpen,
         items,
         inputProps: {
-          placeholder: autocompletePlaceholder,
+          placeholder: t('autocomplete.placeholder'),
           value: search,
-          onChange: handleChange
-          /*onBlur: () => setSearch('')*/
+          onChange: handleChange,
         },
         buttonCloseProps: {
           onClick: () => setSearch('')
@@ -101,22 +93,14 @@ export const useHeaderProps = ({
           onClick: () => setAutocompleteDisplayed(true)
         },
         searchNotFoundProps: {
-          title: searchNotFoundTitle,
-          description: searchNotFoundDescription,
+          title: t('search_not_found.title'),
+          description: t('search_not_found.description'),
         },
         seeAllSearchLinkProps: {
-          label: seeAllSearchLinkLabel,
-          href: generatePath(PATHS.SEARCH, { lang, search: debouncedSearch })
+          label: t('autocomplete.see_all_search_label'),
+          as: Link,
+          to: generatePath(PATHS.SEARCH, { lang, search: debouncedSearch })
         }
-      },
-      staticCache: {
-        lang,
-        headerTitle,
-        headerSubtitle,
-        autocompletePlaceholder,
-        searchNotFoundTitle,
-        searchNotFoundDescription,
-        seeAllSearchLinkLabel,
       },
   };
 };

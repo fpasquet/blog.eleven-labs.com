@@ -12,13 +12,13 @@ import { usePostPreviewListProps } from '../../hooks/usePostPreviewListProps';
 import { useLayoutTemplateProps } from '../../hooks/useTemplateProps';
 import { PostData } from '../../types';
 
-export const usePostListPageProps = (): PostListPageProps & { staticCache: any; } => {
+export const usePostListPageProps = (): PostListPageProps => {
   const { lang = 'fr', categoryName } = useParams<{
     lang?: string;
     categoryName?: string;
   }>();
   const { t } = useTranslation();
-  const { staticCache: staticCacheLayout, ...layoutTemplateProps } = useLayoutTemplateProps();
+  const layoutTemplateProps = useLayoutTemplateProps();
   const newsletterBlockProps = useNewsletterBlockProps();
 
   const postsByLang = React.useMemo(
@@ -43,26 +43,7 @@ export const usePostListPageProps = (): PostListPageProps & { staticCache: any; 
     [lang, categoryName]
   );
 
-  const { staticCache: staticCachePostPreviewList, ...postPreviewListProps } = usePostPreviewListProps({
-    allPosts: postsByLang,
-    loadMoreButtonLabel: t('pages.post_list.load_more_button_label'),
-    numberOfPostsDisplayedLabel: t(
-      'pages.post_list.number_of_posts_displayed_label',
-      {
-        numberOfPosts: 'numberOfPosts',
-        numberOfPostsDisplayed: 'numberOfPostsDisplayed'
-      }
-    ),
-    postLinkProps: ({ path }) => ({
-      as: Link,
-      to: path
-    }),
-    translateTextNumberOfItems: ({ numberOfPosts, numberOfPostsDisplayed }) =>
-      t('pages.post_list.number_of_posts_displayed_label', {
-        numberOfPosts,
-        numberOfPostsDisplayed
-      })
-  });
+  const postPreviewListProps = usePostPreviewListProps({ allPosts: postsByLang });
 
   return {
     ...layoutTemplateProps,
@@ -95,16 +76,9 @@ export const usePostListPageProps = (): PostListPageProps & { staticCache: any; 
       }))
     ],
     newsletterBlockProps,
-    postPreviewListContainerProps: {
-      id: 'post-preview-list-container'
-    },
     postPreviewListTitle: categoryName
       ? t('pages.post_list.post_preview_list_category_title', { categoryName })
       : t('pages.post_list.post_preview_list_title'),
     ...postPreviewListProps,
-    staticCache: {
-      ...staticCacheLayout,
-      ...staticCachePostPreviewList,
-    }
   };
 };

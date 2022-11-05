@@ -9,11 +9,13 @@ import { transformPostData } from '../../helpers/transformPostData';
 import { useNewsletterBlockProps } from '../../hooks/useNewsletterBlockProps';
 import { useLayoutTemplateProps } from '../../hooks/useTemplateProps';
 import { PostData } from '../../types';
+import { useBackLinkProps } from '../../hooks/useBackLinkProps';
 
-export const usePostPageProps = (): PostPageProps & { staticCache: any; } => {
+export const usePostPageProps = (): PostPageProps => {
   const { lang = 'fr', slug } = useParams<{ lang: string; slug: string }>();
   const { t } = useTranslation();
-  const { staticCache, ...layoutTemplateProps } = useLayoutTemplateProps();
+  const layoutTemplateProps = useLayoutTemplateProps();
+  const backLinkProps = useBackLinkProps();
   const newsletterBlockProps = useNewsletterBlockProps();
   const allPostData = postsData as PostData[];
   const postData = allPostData.find(
@@ -59,13 +61,9 @@ export const usePostPageProps = (): PostPageProps & { staticCache: any; } => {
 
   return {
     ...layoutTemplateProps,
+    ...backLinkProps,
     postFooterTitle: t('pages.post.post_footer_title'),
     ...post,
-    backLinkLabel: t('common.back'),
-    backLinkProps: {
-      as: Link,
-      to: generatePath(PATHS.HOME, { lang })
-    },
     newsletterBlockProps,
     relatedPostListTitle: t('pages.post.related_post_list_title'),
     relatedPosts,
@@ -76,6 +74,5 @@ export const usePostPageProps = (): PostPageProps & { staticCache: any; } => {
         authorUsername: username
       })
     }),
-    staticCache
   };
 };

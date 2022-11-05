@@ -15,9 +15,16 @@ const copyImgs = (): void => {
   fs.cpSync(srcDir, outputDir, { recursive: true });
 };
 
+const copyStyle = (): void => {
+  const srcDir = path.resolve(blogUIRootDir, 'dist/style.css');
+  const outputDir = path.resolve(rootDir, 'public/style.css');
+  fs.cpSync(srcDir, outputDir, { recursive: true });
+};
+
 export const copyAssets = (): void => {
   copyFonts();
   copyImgs();
+  copyStyle();
 };
 
 copyAssets();

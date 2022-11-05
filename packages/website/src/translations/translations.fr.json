@@ -59,6 +59,12 @@
     },
     "author": {
       "post_preview_list_title": "Article de l'auteur"
+    },
+    "search": {
+      "number_of_search_label": "{{ numberOfHits }} résultats",
+      "description": "triés par pertinence",
+      "search_not_found_title": "Aucun résultat en vue...",
+      "search_not_found_description": "Vérifiez les termes de votre recherche avant de réessayer"
     }
   }
 }

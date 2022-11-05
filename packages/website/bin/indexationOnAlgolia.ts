@@ -18,21 +18,21 @@ const indexationOnAlglolia = async () => {
         Pick<
           PostData,
           'lang' | 'slug' | 'categories' | 'title' | 'date' | 'excerpt'
-        > & { objectID: string; authors: Pick<AuthorData, 'name' | 'username'>[] }
+        > & { objectID: string; authorUsernames: string[]; authorNames: string[] }
       >
     >((currentPosts, post) => {
       const objectID = `${post.slug}-${post.lang}`;
+      const authorsByPost = authors
+        .filter(author => post.authors.includes(author.username));
       currentPosts[objectID] = {
         objectID,
         lang: post.lang,
         slug: post.slug,
         categories: post.categories,
-        authors: authors
-          .filter(author => post.authors.includes(author.username))
-          .map(author => ({
-            name: author.name,
-            username: author.username,
-          })),
+        authorUsernames: authorsByPost
+          .map(author => author.username),
+        authorNames: authorsByPost
+          .map(author => author.name),
         title: post.title,
         date: post.date,
         excerpt: post.excerpt,
@@ -47,7 +47,13 @@ const indexationOnAlglolia = async () => {
     console.info(`Number of posts indexed on algolia: ${objectIDs.length}`);
 
     await algoliaSearchIndex.setSettings({
-      searchableAttributes: ['title', 'categories', 'authors', 'excerpt'],
+      searchableAttributes: [
+        'title',
+        'categories',
+        'authorUsernames',
+        'authorNames',
+        'excerpt'
+      ],
       attributesForFaceting: ['lang']
     });
   } catch (error) {

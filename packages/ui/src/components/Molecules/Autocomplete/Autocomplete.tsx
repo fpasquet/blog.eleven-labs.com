@@ -21,33 +21,31 @@ export interface AutocompleteProps
   buttonSearchProps?: React.ButtonHTMLAttributes<HTMLButtonElement>;
 }
 
-export const Autocomplete: React.FC<AutocompleteProps> = ({
-  inputProps,
-  items = [],
-  searchNotFoundProps,
-  seeAllSearchLinkProps,
-  isOpen = false,
-  highlightedIndex,
-  buttonCloseProps = {},
-  buttonSearchProps = {},
-  ...boxProps
-}) => {
-  return (
-    <Box className="autocomplete" {...boxProps}>
-      <AutocompleteSearch
-        inputProps={inputProps}
-        buttonCloseProps={buttonCloseProps}
-        buttonSearchProps={buttonSearchProps}
+export const Autocomplete = React.forwardRef<HTMLDivElement, AutocompleteProps>(({
+     inputProps,
+     items = [],
+     searchNotFoundProps,
+     seeAllSearchLinkProps,
+     isOpen = false,
+     highlightedIndex,
+     buttonCloseProps = {},
+     buttonSearchProps = {},
+     ...boxProps
+}, ref) => (
+  <Box {...boxProps} ref={ref} className="autocomplete">
+    <AutocompleteSearch
+      inputProps={inputProps}
+      buttonCloseProps={buttonCloseProps}
+      buttonSearchProps={buttonSearchProps}
+    />
+    {isOpen && (
+      <AutocompleteResult
+        items={items}
+        highlightedIndex={highlightedIndex}
+        searchValue={inputProps?.value as string | undefined}
+        searchNotFoundProps={searchNotFoundProps}
+        seeAllSearchLinkProps={seeAllSearchLinkProps}
       />
-      {isOpen && (
-        <AutocompleteResult
-          items={items}
-          highlightedIndex={highlightedIndex}
-          searchValue={inputProps?.value as string | undefined}
-          searchNotFoundProps={searchNotFoundProps}
-          seeAllSearchLinkProps={seeAllSearchLinkProps}
-        />
-      )}
-    </Box>
-  );
-};
+    )}
+  </Box>
+));

@@ -1,14 +1,10 @@
 import React from 'react';
 
 export interface HtmlTemplateProps {
-  inlineCss?: string;
-  inlineScript?: string;
   children: React.ReactNode;
 }
 
 export const HtmlTemplate: React.FC<HtmlTemplateProps> = ({
-  inlineCss,
-  inlineScript,
   children
 }) => {
   return (
@@ -23,15 +19,14 @@ export const HtmlTemplate: React.FC<HtmlTemplateProps> = ({
       }).map(([key, url]) => (
         <link key={key} rel="preload" href={url} as="font" type="font/woff2" />
       ))}
-      {inlineCss && <style dangerouslySetInnerHTML={{ __html: inlineCss }} />}
+      <link href="/style.css" rel="stylesheet" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Blog Eleven Labs</title>
     </head>
-    <body>{children}</body>
-    {inlineScript && (
-      <script dangerouslySetInnerHTML={{ __html: inlineScript }} />
-    )}
-    <script type="text/javascript" defer src="/js/main.min.js" />
+    <body>
+      <div id="root">{children}</div>
+      <script type="module" src="/src/main.tsx"></script>
+    </body>
     </html>
   );
 }

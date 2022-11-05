@@ -4,13 +4,6 @@ import React from 'react';
 import { useAuthorPageProps } from './useAuthorPageProps';
 
 export const AuthorPage: React.FC = () => {
-  const { staticCache, ...authorPageProps } = useAuthorPageProps();
-  return (
-    <>
-      <AuthorPageUI {...authorPageProps} />
-      <script
-        dangerouslySetInnerHTML={{ __html: `window.staticCache = ${JSON.stringify(staticCache)};` }}
-      />
-    </>
-  );
+  const authorPageProps = useAuthorPageProps();
+  return (<AuthorPageUI {...authorPageProps} />);
 };

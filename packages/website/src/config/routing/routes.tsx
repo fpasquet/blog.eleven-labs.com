@@ -5,6 +5,7 @@ import { PATHS } from '../../constants';
 import { AuthorPage } from '../../pages/Author';
 import { PostPage } from '../../pages/Post';
 import { PostListPage } from '../../pages/PostList';
+import { SearchPage } from '../../pages/Search';
 
 export const routes: RouteObject[] = [
   {
@@ -29,7 +30,11 @@ export const routes: RouteObject[] = [
       {
         path: PATHS.CATEGORY,
         element: <PostListPage />
-      }
+      },
+      {
+        path: PATHS.SEARCH,
+        element: <SearchPage />
+      },
     ]
   }
 ];
