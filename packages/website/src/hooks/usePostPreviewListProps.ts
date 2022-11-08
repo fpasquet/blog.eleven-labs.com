@@ -1,27 +1,18 @@
 import { PostPreviewListProps } from '@eleven-labs/blog-ui';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { NUMBER_OF_ITEMS_PER_PAGE } from '../constants';
-import { StaticCache } from '../types';
+import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { DataContextInterface } from '../contexts/data/context';
 
 export interface UsePostPreviewListOptions {
-  allPosts: StaticCache['posts'];
-  translateTextNumberOfItems: (options: {
-    numberOfPostsDisplayed: number;
-    numberOfPosts: number;
-  }) => string;
-  loadMoreButtonLabel: string;
-  postLinkProps: (options: {
-    path: string;
-  }) => PostPreviewListProps['posts'][0]['postLinkProps'];
+  allPosts: DataContextInterface['posts'];
 }
 
-export const usePostPreviewListProps = ({
-  allPosts,
-  translateTextNumberOfItems,
-  loadMoreButtonLabel,
-  postLinkProps
-}: UsePostPreviewListOptions): PostPreviewListProps => {
+export const usePostPreviewListProps = ({ allPosts }: UsePostPreviewListOptions):
+  PostPreviewListProps => {
+  const { t } = useTranslation();
   const numberOfPosts = allPosts.length;
   const [posts, setPosts] = React.useState<
     UsePostPreviewListOptions['allPosts']
@@ -35,47 +26,51 @@ export const usePostPreviewListProps = ({
   );
 
   React.useEffect(() => {
+    setHasPagination(numberOfPosts > NUMBER_OF_ITEMS_PER_PAGE);
     setPosts(allPosts.slice(0, NUMBER_OF_ITEMS_PER_PAGE + 1));
   }, [allPosts]);
 
-  let paginationProps: Pick<
+  const paginationProps = useMemo<Pick<
     PostPreviewListProps,
     'textNumberOfItems' | 'percentageOfItemDisplayed' | 'loadMoreButtonLabel'
-  > = {};
-  if (hasPagination) {
-    paginationProps = {
-      textNumberOfItems: translateTextNumberOfItems({
-        numberOfPostsDisplayed: numberOfPostsDisplayed - 1,
-        numberOfPosts
-      }),
-      percentageOfItemDisplayed,
-      loadMoreButtonLabel
-    };
-  }
+    >>(() => (hasPagination ? {
+    textNumberOfItems: t('pages.post_list.number_of_posts_displayed_label', {
+      numberOfPosts,
+      numberOfPostsDisplayed: numberOfPostsDisplayed - 1
+    }),
+    percentageOfItemDisplayed,
+    loadMoreButtonLabel: t('pages.post_list.load_more_button_label')
+  }: {}), [hasPagination, numberOfPosts, percentageOfItemDisplayed]);
 
   const onLoadMore = React.useCallback(() => {
-    if (numberOfPostsDisplayed === allPosts.length) {
-      setHasPagination(false);
-      return;
-    }
-    setPosts((prevPosts) => [
-      ...prevPosts,
+    const nextAllPosts = [
+      ...posts,
       ...allPosts.slice(
         numberOfPostsDisplayed,
         numberOfPostsDisplayed + NUMBER_OF_ITEMS_PER_PAGE
       )
-    ]);
+    ];
+    setPosts(nextAllPosts);
+    if (allPosts.length === nextAllPosts.length) {
+      setHasPagination(false);
+    }
   }, [allPosts, numberOfPostsDisplayed, setPosts, setHasPagination]);
 
   return {
     percentageOfItemDisplayed,
-    posts: posts.map(({ path, ...post }) => {
-      return {
-        ...post,
-        postLinkProps: postLinkProps({ path })
-      };
-    }),
+    posts: posts.map((post) => ({
+      slug: post.slug,
+      title: post.title,
+      excerpt: post.excerpt,
+      date: post.date,
+      readingTime: post.readingTime,
+      authors: post.authors,
+      postLinkProps: {
+        as: Link,
+        to: post.path,
+      }
+    })),
     ...paginationProps,
-    onLoadMore
+    onLoadMore,
   };
 };

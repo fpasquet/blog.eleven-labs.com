@@ -5,6 +5,5 @@ import { usePostPageProps } from './usePostPageProps';
 
 export const PostPage: React.FC = () => {
   const postPageProps = usePostPageProps();
-
-  return <PostPageUI {...postPageProps} />;
+  return (<PostPageUI {...postPageProps} />);
 };

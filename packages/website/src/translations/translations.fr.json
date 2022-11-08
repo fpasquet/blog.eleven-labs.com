@@ -33,6 +33,14 @@
     },
     "link_to_eleven_labs_site": "J'y vais"
   },
+  "autocomplete": {
+    "placeholder": "Rechercher par nom d’article ou d’auteur",
+    "see_all_search_label": "Voir tous les résultats"
+  },
+  "search_not_found": {
+    "title": "Aucun résultat en vue...",
+    "description": "Vérifiez les termes de votre recherche avant de réessayer"
+  },
   "newsletter": {
     "title": "En quête d’un outil de veille ?",
     "description": "Abonne-toi à notre newsletter",
@@ -51,6 +59,12 @@
     },
     "author": {
       "post_preview_list_title": "Article de l'auteur"
+    },
+    "search": {
+      "number_of_search_label": "{{ numberOfHits }} résultats",
+      "description": "triés par pertinence",
+      "search_not_found_title": "Aucun résultat en vue...",
+      "search_not_found_description": "Vérifiez les termes de votre recherche avant de réessayer"
     }
   }
 }

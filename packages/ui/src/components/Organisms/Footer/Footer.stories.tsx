@@ -2,8 +2,8 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 import React from 'react';
 
 import config from '../../../fixtures/config.json';
-import { Footer } from './Footer';
 import SocialIconsStories from '../../Molecules/SocialIcons/SocialIcons.stories';
+import { Footer } from './Footer';
 
 export default {
   title: 'Components/Organisms/Footer',

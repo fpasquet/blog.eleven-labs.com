@@ -1,99 +1,50 @@
 import { AuthorPageProps } from '@eleven-labs/blog-ui';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { generatePath, Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
-import { PATHS } from '../../constants';
-import authorsData from '../../data/authors.json';
-import postsData from '../../data/posts.json';
-import { transformAuthorData } from '../../helpers/transformAuthorData';
-import { transformPostData } from '../../helpers/transformPostData';
 import { useNewsletterBlockProps } from '../../hooks/useNewsletterBlockProps';
-import { useLayoutTemplateProps } from '../../hooks/useTemplateProps';
-import { AuthorData, PostData } from '../../types';
 import { usePostPreviewListProps } from '../../hooks/usePostPreviewListProps';
-import { useMemo } from 'react';
-import { pick } from '../../helpers/objectHelper';
+import { useLayoutTemplateProps } from '../../hooks/useTemplateProps';
+import { useBackLinkProps } from '../../hooks/useBackLinkProps';
+import { useDataContext } from '../../contexts/data';
+import { DataContextInterface } from '../../contexts/data/context';
 
-export const useAuthorPageProps = (): AuthorPageProps & { inlineScript: string; } => {
+export const useAuthorPageProps = (): AuthorPageProps => {
   const { lang = 'fr', authorUsername } = useParams<{
     lang: string;
     authorUsername: string;
   }>();
   const { t } = useTranslation();
+  const { posts, authors } = useDataContext();
   const layoutTemplateProps = useLayoutTemplateProps();
+  const backLinkProps = useBackLinkProps();
   const newsletterBlockProps = useNewsletterBlockProps();
 
-  const authorData = (authorsData as AuthorData[]).find(
-    (currentAuthor) => currentAuthor.username === authorUsername
-  ) as AuthorData;
-
-  const postsByAuthorAndLang = useMemo(
+  const postsByAuthorAndLang = React.useMemo(
     () =>
-      (postsData as PostData[])
+      posts
         .filter(
           (post) =>
             post.lang === lang &&
             authorUsername &&
-            post.authors.includes(authorUsername)
-        )
-        .map((postData) =>
-          pick(transformPostData(postData, lang), [
-            'path',
-            'slug',
-            'title',
-            'excerpt',
-            'date',
-            'readingTime',
-            'authors'
-          ])
+            post.authors.find(author => author.username == authorUsername)
         ),
     [lang, authorUsername]
   );
 
   const postPreviewListProps = usePostPreviewListProps({
     allPosts: postsByAuthorAndLang,
-    loadMoreButtonLabel: t('pages.post_list.load_more_button_label'),
-    postLinkProps: ({ path }) => ({
-      as: Link,
-      to: path
-    }),
-    translateTextNumberOfItems: ({ numberOfPosts, numberOfPostsDisplayed }) =>
-      t('pages.post_list.number_of_posts_displayed_label', {
-        numberOfPosts,
-        numberOfPostsDisplayed
-      })
   });
 
   return {
     ...layoutTemplateProps,
-    backLinkLabel: t('common.back'),
-    backLinkProps: {
-      as: Link,
-      to: generatePath(PATHS.HOME, { lang })
-    },
-    author: transformAuthorData(authorData),
+    ...backLinkProps,
+    author: authors.find(
+      (currentAuthor) => currentAuthor.username === authorUsername
+    ) as DataContextInterface['authors'][0],
     newsletterBlockProps,
-    postPreviewListContainerProps: {
-      id: 'post-preview-list-container'
-    },
     postPreviewListTitle: t('pages.author.post_preview_list_title'),
     ...postPreviewListProps,
-    inlineScript: `window.staticCache = ${JSON.stringify({
-      posts: postsByAuthorAndLang,
-      translations: {
-        pages: {
-          post_list: {
-            load_more_button_label: postPreviewListProps.loadMoreButtonLabel,
-            number_of_posts_displayed_label: t(
-              'pages.post_list.number_of_posts_displayed_label',
-              {
-                numberOfPosts: 'numberOfPosts',
-                numberOfPostsDisplayed: 'numberOfPostsDisplayed'
-              }
-            )
-          }
-        }
-      }
-    })}`
   };
 };

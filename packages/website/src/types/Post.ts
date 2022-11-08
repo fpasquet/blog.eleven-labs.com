@@ -1,11 +1,12 @@
-import { Author } from './Author';
-import { PostData } from './PostData';
-
-export type Post = Pick<
-  PostData,
-  'slug' | 'title' | 'excerpt' | 'date' | 'categories'
-> & {
-  readingTime: string;
-  authors: Author[];
-  content: string;
-};
+export interface Post {
+  lang: string;
+  slug: string;
+  date: string;
+  title: string;
+  excerpt: string;
+  authors: string[];
+  categories: string[];
+  numberOfWords: number;
+  readingTimeInMinutes: number;
+  contentBase64: string;
+}

@@ -1,6 +1,7 @@
 @import '../../../styles/breakpoints';
 
 .header {
+  position: relative;
   --size-logo-header: 30px;
   &__logo {
     height: var(--size-logo-header);
@@ -9,10 +10,11 @@
       --size-logo-header: 46px;
     }
   }
-  &__icon-search {
-    display: var(--icon-search-visibility-header, block);
+  &__icon-for-mobile {
+    cursor: pointer;
+    display: var(--icon-for-mobile-visibility-header, block);
     @include createMediaQueries(map_get($breakpointPropList, 'md'), 'min') {
-      --icon-search-visibility-header: none;
+      --icon-for-mobile-visibility-header: none;
     }
   }
   &__input-search {

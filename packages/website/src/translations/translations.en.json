@@ -19,7 +19,7 @@
     "subtitle": "The blog",
     "intro_block": {
       "title": "Nice to see you",
-      "description": "Let's explore<br />new knowledge"
+      "description": "Let's explore new knowledge"
     },
     "choice_category_label": "Which articles do you want to read ?"
   },
@@ -32,6 +32,14 @@
       "title": "Contact"
     },
     "link_to_eleven_labs_site": "Let's go"
+  },
+  "autocomplete": {
+    "placeholder": "Search by article or author name",
+    "see_all_search_label": "See all results"
+  },
+  "search_not_found": {
+    "title": "No results in sight...",
+    "description": "Check your search terms before trying again"
   },
   "newsletter": {
     "title": "Want to know more ?",
@@ -51,6 +59,12 @@
     },
     "author": {
       "post_preview_list_title": "Author's article"
+    },
+    "search": {
+      "number_of_search_label": "{{ numberOfHits }} hits",
+      "description": "sorted by relevance",
+      "search_not_found_title": "No results in sight...",
+      "search_not_found_description": "Check your search terms before trying again"
     }
   }
 }

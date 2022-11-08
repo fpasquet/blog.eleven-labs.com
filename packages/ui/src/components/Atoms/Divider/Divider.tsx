@@ -7,10 +7,11 @@ import {
   omitSystemProps,
   systemClassName
 } from '../../../helpers/systemPropsHelper';
-import { SpacingSystemProps } from '../../../types';
+import { HiddenSystemProps, SpacingSystemProps } from '../../../types';
 
 export interface DividerProps
   extends SpacingSystemProps,
+    HiddenSystemProps,
     React.HTMLAttributes<HTMLHRElement> {
   variant?: 'primary' | 'secondary' | 'neutral' | 'search';
 }

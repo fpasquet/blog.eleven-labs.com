@@ -15,5 +15,6 @@ export const PATHS = {
   PAGINATED_HOME: '/:lang/page/:page',
   POST: '/:lang/:slug',
   AUTHOR: '/:lang/authors/:authorUsername',
-  CATEGORY: '/:lang/categories/:categoryName'
+  CATEGORY: '/:lang/categories/:categoryName',
+  SEARCH: '/:lang/search/:search'
 };

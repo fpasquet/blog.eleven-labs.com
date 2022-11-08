@@ -12,7 +12,6 @@ export default {
   component: AuthorPage,
   args: {
     author: AuthorFixture.author,
-
     backLinkLabel: 'Retour',
     backLinkProps: {},
     postPreviewListTitle: 'Articles de l’autrice',

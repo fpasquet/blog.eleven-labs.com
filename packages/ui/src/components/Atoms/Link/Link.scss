@@ -2,7 +2,7 @@
   border: none;
   background: transparent;
   color: var(--color-link, var(--color-amaranth));
-  &--active {
+  &--neutral {
     font-weight: bold;
     --color-link: var(--color-white);
   }
