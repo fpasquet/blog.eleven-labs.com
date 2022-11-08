@@ -8,10 +8,7 @@ import { UsePostPreviewListOptions, usePostPreviewListProps } from '../../hooks/
 import { useLayoutTemplateProps } from '../../hooks/useTemplateProps';
 import { useBackLinkProps } from '../../hooks/useBackLinkProps';
 import { algoliaSearchIndex } from '../../helpers/algolia';
-import postsData from '../../data/posts.json';
-import { PostData } from '../../types';
-import { pick } from '../../helpers/objectHelper';
-import { transformPostData } from '../../helpers/transformPostData';
+import { useDataContext } from '../../contexts/data';
 
 export const useSearchPageProps = (): SearchPageProps => {
   const { lang = 'fr', search } = useParams<{
@@ -19,6 +16,7 @@ export const useSearchPageProps = (): SearchPageProps => {
     search?: string;
   }>();
   const { t } = useTranslation();
+  const { posts } = useDataContext();
   const layoutTemplateProps = useLayoutTemplateProps({ search });
   const backLinkProps = useBackLinkProps();
   const newsletterBlockProps = useNewsletterBlockProps();
@@ -32,19 +30,8 @@ export const useSearchPageProps = (): SearchPageProps => {
         )
         .then(({ hits }) => {
           const slugs = hits.map(hit => hit.slug);
-          const currentPostBySearch = (postsData as PostData[])
-            .filter((post) => slugs.includes(post.slug))
-            .map((postData) =>
-              pick(transformPostData(postData, lang), [
-                'path',
-                'slug',
-                'title',
-                'excerpt',
-                'date',
-                'readingTime',
-                'authors'
-              ])
-            );
+          const currentPostBySearch = posts
+            .filter((post) => slugs.includes(post.slug));
           setPostsBySearch(currentPostBySearch);
         });
   }, [search]);

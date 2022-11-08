@@ -1,7 +1,9 @@
-import { AuthorData } from './AuthorData';
-
-export type Author = Pick<AuthorData, 'username' | 'name'> & {
+export interface Author {
+  username: string;
+  name: string;
   nameWithInitial: string;
+  contentBase64: string;
   avatarImageUrl?: string;
-  description: string;
-};
+  twitter?: string;
+  github?: string;
+}

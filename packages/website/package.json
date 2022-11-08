@@ -5,24 +5,19 @@
   "type": "module",
   "scripts": {
     "ts-node": "ts-node --project ./tsconfig.node.json -r dotenv/config",
-    "preinstall": "yarn ts-node bin/copyAssets",
-    "test": "jest",
+    "preinstall": "yarn ts-node bin/preinstall",
     "migrate": "yarn ts-node bin/migrate",
-    "generate:posts-data": "yarn ts-node bin/generatePostsData",
-    "generate:authors-data": "yarn ts-node bin/generateAuthorsData",
-    "generate:urls-data": "yarn ts-node bin/generateUrlsData",
-    "generate:data": "yarn migrate && yarn generate:posts-data && yarn generate:authors-data && yarn generate:urls-data",
     "indexation:algolia": "yarn ts-node bin/indexationOnAlgolia",
-    "generate:website": "yarn ts-node bin/pagesGenerator",
-    "generate": "yarn build:staticRender && yarn generate:website && yarn generate:js",
-
+    "start": "yarn ts-node server.ts",
     "build:client": "vite build --outDir dist/client --manifest",
-    "build:server": "vite build --ssr src/render.tsx --outDir dist/server",
-    "start": "yarn ts-node server.ts"
+    "build:server": "vite build --ssr src/render --outDir dist/server",
+    "prerender": "yarn ts-node bin/prerender",
+    "test": "jest"
   },
   "dependencies": {
     "@eleven-labs/blog-ui": "0.0.1",
     "algoliasearch": "^4.14.2",
+    "hoofd": "^1.5.2",
     "html-react-parser": "^3.0.4",
     "i18next": "^21.9.0",
     "react": "^18.2.0",
@@ -53,6 +48,7 @@
     "ts-node": "^10.9.1",
     "typescript": "^4.7.4",
     "vite": "^3.0.5",
+    "vite-plugin-markdown": "^2.1.0",
     "yup": "^0.32.11"
   }
 }

@@ -1,7 +1,12 @@
-import fs from 'fs';
-import path from 'path';
+import fs from 'node:fs';
+import path from 'node:path';
 
-import { blogUIRootDir, rootDir } from './constants';
+const rootDir = process.cwd();
+export const monoRepoRootDir = path.resolve(rootDir, '../..');
+const blogUIRootDir = path.resolve(
+  monoRepoRootDir,
+  'node_modules/@eleven-labs/blog-ui'
+);
 
 const copyFonts = (): void => {
   const srcDir = path.resolve(blogUIRootDir, 'public/fonts');
@@ -21,10 +26,14 @@ const copyStyle = (): void => {
   fs.cpSync(srcDir, outputDir, { recursive: true });
 };
 
-export const copyAssets = (): void => {
+const copyAssets = (): void => {
   copyFonts();
   copyImgs();
   copyStyle();
 };
 
-copyAssets();
+const preinstall = async () => {
+  copyAssets();
+}
+
+preinstall();

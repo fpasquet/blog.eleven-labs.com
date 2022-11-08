@@ -18,12 +18,19 @@ async function createServer() {
 
     try {
       const { render } = await vite.ssrLoadModule('/src/render.tsx');
-      const html = await render({ url, lang });
+      const { getPosts, getAuthors } = await vite.ssrLoadModule('/src/helpers/getData.ts');
+
+      const html = await render({
+        url,
+        lang,
+        posts: getPosts(),
+        authors: getAuthors()
+      });
+
       const htmlWithViteHMRClient = await vite.transformIndexHtml(url, html);
+
       res.status(200).set({ 'Content-Type': 'text/html' }).end(htmlWithViteHMRClient);
     } catch (e) {
-      // If an error is caught, let Vite fix the stack trace so it maps back to
-      // your actual source code.
       vite.ssrFixStacktrace(e as Error);
       next(e);
     }
@@ -31,7 +38,7 @@ async function createServer() {
 
   const PORT = process.env.PORT || 5173;
   app.listen(PORT, () => {
-    console.log(`http://localhost:${PORT}`);
+    console.log(`Your site is now being served at: http://localhost:${PORT}`);
   });
 }
 

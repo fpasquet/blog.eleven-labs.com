@@ -4,13 +4,11 @@ import { useTranslation } from 'react-i18next';
 import { generatePath, Link, useParams } from 'react-router-dom';
 
 import { CATEGORIES, PATHS } from '../../constants';
-import postsData from '../../data/posts.json';
-import { pick } from '../../helpers/objectHelper';
-import { transformPostData } from '../../helpers/transformPostData';
 import { useNewsletterBlockProps } from '../../hooks/useNewsletterBlockProps';
 import { usePostPreviewListProps } from '../../hooks/usePostPreviewListProps';
 import { useLayoutTemplateProps } from '../../hooks/useTemplateProps';
-import { PostData } from '../../types';
+import { useDataContext } from '../../contexts/data';
+import { DataContextInterface } from '../../contexts/data/context';
 
 export const usePostListPageProps = (): PostListPageProps => {
   const { lang = 'fr', categoryName } = useParams<{
@@ -18,27 +16,16 @@ export const usePostListPageProps = (): PostListPageProps => {
     categoryName?: string;
   }>();
   const { t } = useTranslation();
+  const { posts } = useDataContext();
   const layoutTemplateProps = useLayoutTemplateProps();
   const newsletterBlockProps = useNewsletterBlockProps();
 
-  const postsByLang = React.useMemo(
-    () =>
-      (postsData as PostData[])
+  const postsByLang = React.useMemo<DataContextInterface['posts']>(() =>
+      posts
         .filter(
           (post) =>
             post.lang === lang &&
             (categoryName ? post.categories.includes(categoryName) : true)
-        )
-        .map((postData) =>
-          pick(transformPostData(postData, lang), [
-            'path',
-            'slug',
-            'title',
-            'excerpt',
-            'date',
-            'readingTime',
-            'authors'
-          ])
         ),
     [lang, categoryName]
   );
@@ -61,7 +48,7 @@ export const usePostListPageProps = (): PostListPageProps => {
         to: generatePath(PATHS.HOME, { lang })
       },
       ...CATEGORIES.filter((currentCategoryName) =>
-        (postsData as PostData[]).find(
+        posts.find(
           (post) =>
             post.lang === lang && post.categories.includes(currentCategoryName)
         )

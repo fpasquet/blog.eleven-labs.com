@@ -4,12 +4,10 @@ import React, { useMemo } from 'react';
 import { NUMBER_OF_ITEMS_PER_PAGE } from '../constants';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { DataContextInterface } from '../contexts/data/context';
 
 export interface UsePostPreviewListOptions {
-  allPosts: ({ path: string } & Pick<
-    PostPreviewListProps['posts'][0],
-    'slug' | 'title' | 'excerpt' | 'date' | 'readingTime' | 'authors'
-    >)[];
+  allPosts: DataContextInterface['posts'];
 }
 
 export const usePostPreviewListProps = ({ allPosts }: UsePostPreviewListOptions):
@@ -60,11 +58,16 @@ export const usePostPreviewListProps = ({ allPosts }: UsePostPreviewListOptions)
 
   return {
     percentageOfItemDisplayed,
-    posts: posts.map(({ path, ...post }) => ({
-      ...post,
+    posts: posts.map((post) => ({
+      slug: post.slug,
+      title: post.title,
+      excerpt: post.excerpt,
+      date: post.date,
+      readingTime: post.readingTime,
+      authors: post.authors,
       postLinkProps: {
         as: Link,
-        to: path
+        to: post.path,
       }
     })),
     ...paginationProps,

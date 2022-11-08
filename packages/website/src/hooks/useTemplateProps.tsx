@@ -5,7 +5,7 @@ import { useFooterProps } from './useFooterProps';
 
 export interface UseTemplateProps extends UseHeaderProps {}
 
-export const useLayoutTemplateProps = (options: UseTemplateProps): Pick<
+export const useLayoutTemplateProps = (options?: UseTemplateProps): Pick<
   LayoutTemplateProps,
   'headerProps' | 'footerProps'
 > => {
